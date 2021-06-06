@@ -41,6 +41,9 @@
     "packageFolder": "com/urservices",
     "jwtSecretKey": "NjMwYmVjNGUzODViZmY0YjRiZDJkNjAwNDVhZGQ3ODllY2YzNjFiZTFkYmZhMzZhNDdlMWQ1M2QxMzFmOTVhZGRkNDE4ZjBjM2U3YzM0NGM0MWZjM2U1NzQwN2NjNDlhYmI4MmE2N2NkYjNiYjdlMzIxNjQxMmFhMjlhYjJhZWM=",
     "clientPackageManager": "npm",
-    "languages": ["fr", "en"]
+    "languages": ["fr", "en"],
+    "herokuAppName": "pedag",
+    "herokuDeployType": "jar",
+    "herokuJavaVersion": "11"
   }
 }
