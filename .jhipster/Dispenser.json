@@ -1,0 +1,41 @@
+{
+  "name": "Dispenser",
+  "fields": [
+    {
+      "fieldName": "semestre",
+      "fieldType": "Semestre",
+      "fieldValues": "SEMESTRE1,SEMESTRE2,SEMESTRE3,SEMESTRE4,SEMESTRE6",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "anneeAcademique",
+      "otherEntityRelationshipName": "dispenser",
+      "relationshipName": "anneeAcademique"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "enseignant",
+      "otherEntityRelationshipName": "dispenser",
+      "relationshipName": "enseignant"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "matiere",
+      "otherEntityRelationshipName": "dispenser",
+      "relationshipName": "matiere"
+    }
+  ],
+  "entityTableName": "dispenser",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210606070807"
+}

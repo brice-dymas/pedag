@@ -1,0 +1,45 @@
+{
+  "name": "Administrateur",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength"],
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "grade",
+      "fieldType": "Grade",
+      "fieldValues": "M (Monsieur),Mme (Madame),Mlle (Mademoiselle),Ing (Ingenieur),Dr (Docteur),Pr (Professeur)",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "administrateur",
+      "relationshipName": "user",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "administrateur",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210606070757"
+}

@@ -1,0 +1,100 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-examen-heading" data-cy="ExamenCreateUpdateHeading" jhiTranslate="pedagApp.examen.home.createOrEditLabel">
+        Create or edit a Examen
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pedagApp.examen.dateExamen" for="field_dateExamen">Date Examen</label>
+          <div class="input-group">
+            <input
+              id="field_dateExamen"
+              data-cy="dateExamen"
+              type="text"
+              class="form-control"
+              name="dateExamen"
+              ngbDatepicker
+              #dateExamenDp="ngbDatepicker"
+              formControlName="dateExamen"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateExamenDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('dateExamen')!.invalid && (editForm.get('dateExamen')!.dirty || editForm.get('dateExamen')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateExamen')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pedagApp.examen.type" for="field_type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null">{{ 'pedagApp.TypeExamen.null' | translate }}</option>
+            <option value="CONTROLE">{{ 'pedagApp.TypeExamen.CONTROLE' | translate }}</option>
+            <option value="SEMESTRIEL">{{ 'pedagApp.TypeExamen.SEMESTRIEL' | translate }}</option>
+            <option value="RATTRAPAGE">{{ 'pedagApp.TypeExamen.RATTRAPAGE' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('type')!.invalid && (editForm.get('type')!.dirty || editForm.get('type')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('type')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pedagApp.examen.semestre" for="field_semestre">Semestre</label>
+          <select class="form-control" name="semestre" formControlName="semestre" id="field_semestre" data-cy="semestre">
+            <option [ngValue]="null">{{ 'pedagApp.Semestre.null' | translate }}</option>
+            <option value="SEMESTRE1">{{ 'pedagApp.Semestre.SEMESTRE1' | translate }}</option>
+            <option value="SEMESTRE2">{{ 'pedagApp.Semestre.SEMESTRE2' | translate }}</option>
+            <option value="SEMESTRE3">{{ 'pedagApp.Semestre.SEMESTRE3' | translate }}</option>
+            <option value="SEMESTRE4">{{ 'pedagApp.Semestre.SEMESTRE4' | translate }}</option>
+            <option value="SEMESTRE6">{{ 'pedagApp.Semestre.SEMESTRE6' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('semestre')!.invalid && (editForm.get('semestre')!.dirty || editForm.get('semestre')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('semestre')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

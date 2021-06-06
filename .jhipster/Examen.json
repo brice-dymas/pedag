@@ -1,0 +1,33 @@
+{
+  "name": "Examen",
+  "fields": [
+    {
+      "fieldName": "dateExamen",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "TypeExamen",
+      "fieldValues": "CONTROLE,SEMESTRIEL,RATTRAPAGE",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "semestre",
+      "fieldType": "Semestre",
+      "fieldValues": "SEMESTRE1,SEMESTRE2,SEMESTRE3,SEMESTRE4,SEMESTRE6",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "examen",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210606070803"
+}

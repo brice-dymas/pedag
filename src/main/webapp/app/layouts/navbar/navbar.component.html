@@ -42,6 +42,162 @@
           </span>
         </a>
         <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="administrateur"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.entities.administrateur">Administrateur</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="etudiant"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.entities.etudiant">Etudiant</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="enseignant"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.entities.enseignant">Enseignant</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="filiere"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.entities.filiere">Filiere</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="matiere"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.entities.matiere">Matiere</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="piece-jointe"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.entities.pieceJointe">Piece Jointe</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="examen"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.entities.examen">Examen</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="note"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.entities.note">Note</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="requete"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.entities.requete">Requete</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="courriel"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.entities.courriel">Courriel</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="dispenser"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.entities.dispenser">Dispenser</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="inscription"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.entities.inscription">Inscription</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="annee-academique"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.entities.anneeAcademique">Annee Academique</span>
+            </a>
+          </li>
           <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
         </ul>
       </li>

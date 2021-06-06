@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="requete">
+      <h2 data-cy="requeteDetailsHeading"><span jhiTranslate="pedagApp.requete.detail.title">Requete</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ requete.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.requete.objet">Objet</span></dt>
+        <dd>
+          <span>{{ requete.objet }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.requete.description">Description</span></dt>
+        <dd>
+          <span>{{ requete.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.requete.statut">Statut</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}">{{ requete.statut }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.requete.traiter">Traiter</span></dt>
+        <dd>
+          <span>{{ requete.traiter }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.requete.dateCreation">Date Creation</span></dt>
+        <dd>
+          <span>{{ requete.dateCreation | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.requete.dateModification">Date Modification</span></dt>
+        <dd>
+          <span>{{ requete.dateModification | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.requete.etudiant">Etudiant</span></dt>
+        <dd>
+          <div *ngIf="requete.etudiant">
+            <a [routerLink]="['/inscription', requete.etudiant?.id, 'view']">{{ requete.etudiant?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.requete.validateur">Validateur</span></dt>
+        <dd>
+          <div *ngIf="requete.validateur">
+            <a [routerLink]="['/administrateur', requete.validateur?.id, 'view']">{{ requete.validateur?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/requete', requete.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

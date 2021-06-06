@@ -1,0 +1,40 @@
+{
+  "name": "Inscription",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "etudiant",
+      "otherEntityRelationshipName": "inscription",
+      "relationshipName": "etudiant"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "filiere",
+      "otherEntityRelationshipName": "inscription",
+      "relationshipName": "filiere"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "anneeAcademique",
+      "otherEntityRelationshipName": "inscription",
+      "relationshipName": "anneeAcademique"
+    }
+  ],
+  "entityTableName": "inscription",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210606070808"
+}

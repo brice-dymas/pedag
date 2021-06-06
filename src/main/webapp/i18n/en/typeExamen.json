@@ -1,0 +1,10 @@
+{
+  "pedagApp": {
+    "TypeExamen": {
+      "null": "",
+      "CONTROLE": "CONTROLE",
+      "SEMESTRIEL": "SEMESTRIEL",
+      "RATTRAPAGE": "RATTRAPAGE"
+    }
+  }
+}
