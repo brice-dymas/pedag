@@ -1,0 +1,140 @@
+
+enum Statut {
+	VACATAIRE, PERMANENT
+}
+
+enum Grade {
+	M(Monsieur),
+    Mme(Madame),
+    Mlle(Mademoiselle),
+    Ing(Ingenieur),
+    Dr(Docteur),
+    Pr(Professeur)
+}
+
+enum TypeExamen {
+	CONTROLE, SEMESTRIEL, RATTRAPAGE
+}
+
+enum Semestre {
+	SEMESTRE1, SEMESTRE2, SEMESTRE3, SEMESTRE4, SEMESTRE6, SEMESTRE6
+}
+
+enum StatutRequete {
+	EN_ATTENTE, FONDE, NON_FONDE
+}
+
+
+entity Administrateur {
+    nom String required minlength(2)
+    prenom String
+    email String required
+    grade Grade required
+}
+
+entity Etudiant {
+    matricule String required minlength(10) maxlength(12)
+    nom String required minlength(2)
+    dateNaissance LocalDate required
+    prenom String
+    email String required
+    telephone String required minlength(9) maxlength(15)
+    photo ImageBlob
+}
+
+entity Enseignant {
+    diplome String required minlength(4) maxlength(70)
+    nom String required minlength(2)
+    prenom String
+    grade Grade required
+    email String required
+    telephone String required minlength(10) maxlength(15)
+    statut Statut required
+    photo ImageBlob
+}
+
+entity Filiere {
+    libelle String required minlength(7) maxlength(50)
+    sigle String required minlength(2) maxlength(4)
+}
+
+entity Matiere {
+    libelle String required minlength(3) maxlength(50)
+    code String required minlength(2) maxlength(10)
+}
+
+entity PieceJointe {
+    libelle String required minlength(3) maxlength(50)
+    contenu Blob required
+    dateCreation LocalDate
+}
+
+entity Examen {
+    dateExamen LocalDate required
+    type TypeExamen required
+    semestre Semestre required
+}
+
+entity Note {
+    moyenne Float required
+    observation String
+}
+
+entity Requete {
+    objet String required minlength(4) maxlength(70)
+    description String required minlength(2)
+    statut StatutRequete
+    traiter Boolean
+    dateCreation LocalDate
+    dateModification LocalDate
+}
+
+entity Courriel {
+	sender String required
+    receiver String required
+    objet String required minlength(4) maxlength(70)
+    message String required minlength(2)
+    dateCreation LocalDate
+}
+
+entity Dispenser {
+    semestre Semestre required
+}
+
+entity Inscription {
+    date LocalDate required
+}
+
+entity AnneeAcademique {
+    libelle String required
+    current Boolean
+}
+
+relationship ManyToOne {
+  Inscription{etudiant} to Etudiant
+  Inscription{filiere} to Filiere
+  Inscription{anneeAcademique} to AnneeAcademique
+  Requete{etudiant} to Inscription
+  Requete{validateur} to Administrateur
+  Courriel{etudiant} to Inscription
+  Note{etudiant} to Inscription
+  Note{examen} to Examen
+  Note{matiere} to Matiere
+  Note{Enseignant} to Enseignant
+  Dispenser{anneeAcademique} to AnneeAcademique
+  Dispenser{Enseignant} to Enseignant
+  Dispenser{matiere} to Matiere
+  PieceJointe{matiere} to Matiere
+}
+
+relationship OneToOne {
+	Administrateur to User
+	Enseignant to User
+	Etudiant to User
+}
+
+paginate all with pagination
+service all with serviceImpl
+
+
+
