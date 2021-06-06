@@ -173,7 +173,6 @@ checkstyle {
 nohttp {
     source.include "build.gradle", "README.md"
 }
-
 configurations {
     providedRuntime
     implementation.exclude module: "spring-boot-starter-tomcat"

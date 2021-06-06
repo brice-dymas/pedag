@@ -6,6 +6,9 @@
 /src/test/javascript/coverage/
 /.env
 /docker-postgres
+/Dockerfile
+/.gitignore
+/docker-compose.yaml
 
 ######################
 # Node

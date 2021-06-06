@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+    database:
+        image: library/postgres:alpine
+        environment:
+            - POSTGRES_PASSWORD=${DB_PASS}
+            - POSTGRES_USER=${DB_USER}
+            - POSTGRES_DB=${DB_NAME}
+        volumes:
+            - ./docker-postgres:/var/lib/postgresql/data
+        container_name: postgres_server
+        network_mode: host
+
+    application:
+        depends_on:
+            - database
+        build:
+            context: .
+            target: development
+        links:
+            - database:${DB_HOST}
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://${DB_HOST}:5432/${DB_NAME}
+            - SPRING_DATASOURCE_USERNAME={DB_USER}
+            - SPRING_DATASOURCE_PASSWORD={DB_PASS}
+        ports:
+            - 8080:8080
+        volumes:
+            - /opt/app/build
+            - .:/opt/app
+        container_name: pedag
