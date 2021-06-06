@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Requete.
+    -->
+    <changeSet id="20210606070805-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="etudiant_id"
+                                 baseTableName="requete"
+                                 constraintName="fk_requete__etudiant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="inscription"/>
+
+        <addForeignKeyConstraint baseColumnNames="validateur_id"
+                                 baseTableName="requete"
+                                 constraintName="fk_requete__validateur_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="administrateur"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,27 @@
+{
+  "pedagApp": {
+    "dispenser": {
+      "home": {
+        "title": "Dispensers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Dispenser",
+        "createOrEditLabel": "Create or edit a Dispenser",
+        "notFound": "No Dispensers found"
+      },
+      "created": "A new Dispenser is created with identifier {{ param }}",
+      "updated": "A Dispenser is updated with identifier {{ param }}",
+      "deleted": "A Dispenser is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Dispenser {{ id }}?"
+      },
+      "detail": {
+        "title": "Dispenser"
+      },
+      "id": "ID",
+      "semestre": "Semestre",
+      "anneeAcademique": "Annee Academique",
+      "enseignant": "Enseignant",
+      "matiere": "Matiere"
+    }
+  }
+}

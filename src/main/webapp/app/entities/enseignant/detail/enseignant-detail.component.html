@@ -1,0 +1,73 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="enseignant">
+      <h2 data-cy="enseignantDetailsHeading"><span jhiTranslate="pedagApp.enseignant.detail.title">Enseignant</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ enseignant.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.enseignant.diplome">Diplome</span></dt>
+        <dd>
+          <span>{{ enseignant.diplome }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.enseignant.nom">Nom</span></dt>
+        <dd>
+          <span>{{ enseignant.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.enseignant.prenom">Prenom</span></dt>
+        <dd>
+          <span>{{ enseignant.prenom }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.enseignant.grade">Grade</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'pedagApp.Grade.' + enseignant.grade }}">{{ enseignant.grade }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.enseignant.email">Email</span></dt>
+        <dd>
+          <span>{{ enseignant.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.enseignant.telephone">Telephone</span></dt>
+        <dd>
+          <span>{{ enseignant.telephone }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.enseignant.statut">Statut</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'pedagApp.Statut.' + enseignant.statut }}">{{ enseignant.statut }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.enseignant.photo">Photo</span></dt>
+        <dd>
+          <div *ngIf="enseignant.photo">
+            <a (click)="openFile(enseignant.photo, enseignant.photoContentType)">
+              <img
+                [src]="'data:' + enseignant.photoContentType + ';base64,' + enseignant.photo"
+                style="max-width: 100%"
+                alt="enseignant image"
+              />
+            </a>
+            {{ enseignant.photoContentType }}, {{ byteSize(enseignant.photo) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.enseignant.user">User</span></dt>
+        <dd>
+          <span>{{ enseignant.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/enseignant', enseignant.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

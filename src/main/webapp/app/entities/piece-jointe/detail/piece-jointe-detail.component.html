@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="pieceJointe">
+      <h2 data-cy="pieceJointeDetailsHeading"><span jhiTranslate="pedagApp.pieceJointe.detail.title">Piece Jointe</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ pieceJointe.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.pieceJointe.libelle">Libelle</span></dt>
+        <dd>
+          <span>{{ pieceJointe.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.pieceJointe.contenu">Contenu</span></dt>
+        <dd>
+          <div *ngIf="pieceJointe.contenu">
+            <a (click)="openFile(pieceJointe.contenu, pieceJointe.contenuContentType)" jhiTranslate="entity.action.open">open</a>
+            {{ pieceJointe.contenuContentType }}, {{ byteSize(pieceJointe.contenu) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.pieceJointe.dateCreation">Date Creation</span></dt>
+        <dd>
+          <span>{{ pieceJointe.dateCreation | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.pieceJointe.matiere">Matiere</span></dt>
+        <dd>
+          <div *ngIf="pieceJointe.matiere">
+            <a [routerLink]="['/matiere', pieceJointe.matiere?.id, 'view']">{{ pieceJointe.matiere?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/piece-jointe', pieceJointe.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

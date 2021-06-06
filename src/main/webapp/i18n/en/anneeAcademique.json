@@ -1,0 +1,25 @@
+{
+  "pedagApp": {
+    "anneeAcademique": {
+      "home": {
+        "title": "Annee Academiques",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Annee Academique",
+        "createOrEditLabel": "Create or edit a Annee Academique",
+        "notFound": "No Annee Academiques found"
+      },
+      "created": "A new Annee Academique is created with identifier {{ param }}",
+      "updated": "A Annee Academique is updated with identifier {{ param }}",
+      "deleted": "A Annee Academique is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Annee Academique {{ id }}?"
+      },
+      "detail": {
+        "title": "Annee Academique"
+      },
+      "id": "ID",
+      "libelle": "Libelle",
+      "current": "Current"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "name": "Requete",
+  "fields": [
+    {
+      "fieldName": "objet",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMinlength": "4",
+      "fieldValidateRulesMaxlength": "70"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength"],
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "StatutRequete",
+      "fieldValues": "EN_ATTENTE,FONDE,NON_FONDE"
+    },
+    {
+      "fieldName": "traiter",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "dateCreation",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateModification",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "inscription",
+      "otherEntityRelationshipName": "requete",
+      "relationshipName": "etudiant"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "administrateur",
+      "otherEntityRelationshipName": "requete",
+      "relationshipName": "validateur"
+    }
+  ],
+  "entityTableName": "requete",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210606070805"
+}

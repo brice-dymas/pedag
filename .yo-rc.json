@@ -44,6 +44,22 @@
     "languages": ["fr", "en"],
     "herokuAppName": "pedag",
     "herokuDeployType": "jar",
-    "herokuJavaVersion": "11"
+    "herokuJavaVersion": "11",
+    "entities": [
+      "Administrateur",
+      "Etudiant",
+      "Enseignant",
+      "Filiere",
+      "Matiere",
+      "PieceJointe",
+      "Examen",
+      "Note",
+      "Requete",
+      "Courriel",
+      "Dispenser",
+      "Inscription",
+      "AnneeAcademique"
+    ],
+    "lastLiquibaseTimestamp": 1622963289000
   }
 }

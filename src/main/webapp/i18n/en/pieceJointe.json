@@ -1,0 +1,27 @@
+{
+  "pedagApp": {
+    "pieceJointe": {
+      "home": {
+        "title": "Piece Jointes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Piece Jointe",
+        "createOrEditLabel": "Create or edit a Piece Jointe",
+        "notFound": "No Piece Jointes found"
+      },
+      "created": "A new Piece Jointe is created with identifier {{ param }}",
+      "updated": "A Piece Jointe is updated with identifier {{ param }}",
+      "deleted": "A Piece Jointe is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Piece Jointe {{ id }}?"
+      },
+      "detail": {
+        "title": "Piece Jointe"
+      },
+      "id": "ID",
+      "libelle": "Libelle",
+      "contenu": "Contenu",
+      "dateCreation": "Date Creation",
+      "matiere": "Matiere"
+    }
+  }
+}

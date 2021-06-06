@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="inscription">
+      <h2 data-cy="inscriptionDetailsHeading"><span jhiTranslate="pedagApp.inscription.detail.title">Inscription</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ inscription.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.inscription.date">Date</span></dt>
+        <dd>
+          <span>{{ inscription.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.inscription.etudiant">Etudiant</span></dt>
+        <dd>
+          <div *ngIf="inscription.etudiant">
+            <a [routerLink]="['/etudiant', inscription.etudiant?.id, 'view']">{{ inscription.etudiant?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.inscription.filiere">Filiere</span></dt>
+        <dd>
+          <div *ngIf="inscription.filiere">
+            <a [routerLink]="['/filiere', inscription.filiere?.id, 'view']">{{ inscription.filiere?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.inscription.anneeAcademique">Annee Academique</span></dt>
+        <dd>
+          <div *ngIf="inscription.anneeAcademique">
+            <a [routerLink]="['/annee-academique', inscription.anneeAcademique?.id, 'view']">{{ inscription.anneeAcademique?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/inscription', inscription.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

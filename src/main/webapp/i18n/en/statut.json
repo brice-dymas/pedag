@@ -1,0 +1,9 @@
+{
+  "pedagApp": {
+    "Statut": {
+      "null": "",
+      "VACATAIRE": "VACATAIRE",
+      "PERMANENT": "PERMANENT"
+    }
+  }
+}
