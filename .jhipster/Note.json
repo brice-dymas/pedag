@@ -1,0 +1,50 @@
+{
+  "name": "Note",
+  "fields": [
+    {
+      "fieldName": "moyenne",
+      "fieldType": "Float",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "observation",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "inscription",
+      "otherEntityRelationshipName": "note",
+      "relationshipName": "etudiant"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "examen",
+      "otherEntityRelationshipName": "note",
+      "relationshipName": "examen"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "matiere",
+      "otherEntityRelationshipName": "note",
+      "relationshipName": "matiere"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "enseignant",
+      "otherEntityRelationshipName": "note",
+      "relationshipName": "enseignant"
+    }
+  ],
+  "entityTableName": "note",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210606070804"
+}

@@ -1,0 +1,13 @@
+{
+  "pedagApp": {
+    "Grade": {
+      "null": "",
+      "M": "Monsieur",
+      "Mme": "Madame",
+      "Mlle": "Mademoiselle",
+      "Ing": "Ingenieur",
+      "Dr": "Docteur",
+      "Pr": "Professeur"
+    }
+  }
+}

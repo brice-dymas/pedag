@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="etudiant">
+      <h2 data-cy="etudiantDetailsHeading"><span jhiTranslate="pedagApp.etudiant.detail.title">Etudiant</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ etudiant.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.etudiant.matricule">Matricule</span></dt>
+        <dd>
+          <span>{{ etudiant.matricule }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.etudiant.nom">Nom</span></dt>
+        <dd>
+          <span>{{ etudiant.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.etudiant.dateNaissance">Date Naissance</span></dt>
+        <dd>
+          <span>{{ etudiant.dateNaissance | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.etudiant.prenom">Prenom</span></dt>
+        <dd>
+          <span>{{ etudiant.prenom }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.etudiant.email">Email</span></dt>
+        <dd>
+          <span>{{ etudiant.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.etudiant.telephone">Telephone</span></dt>
+        <dd>
+          <span>{{ etudiant.telephone }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.etudiant.photo">Photo</span></dt>
+        <dd>
+          <div *ngIf="etudiant.photo">
+            <a (click)="openFile(etudiant.photo, etudiant.photoContentType)">
+              <img [src]="'data:' + etudiant.photoContentType + ';base64,' + etudiant.photo" style="max-width: 100%" alt="etudiant image" />
+            </a>
+            {{ etudiant.photoContentType }}, {{ byteSize(etudiant.photo) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.etudiant.user">User</span></dt>
+        <dd>
+          <span>{{ etudiant.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/etudiant', etudiant.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

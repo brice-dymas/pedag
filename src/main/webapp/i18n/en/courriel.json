@@ -1,0 +1,29 @@
+{
+  "pedagApp": {
+    "courriel": {
+      "home": {
+        "title": "Courriels",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Courriel",
+        "createOrEditLabel": "Create or edit a Courriel",
+        "notFound": "No Courriels found"
+      },
+      "created": "A new Courriel is created with identifier {{ param }}",
+      "updated": "A Courriel is updated with identifier {{ param }}",
+      "deleted": "A Courriel is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Courriel {{ id }}?"
+      },
+      "detail": {
+        "title": "Courriel"
+      },
+      "id": "ID",
+      "sender": "Sender",
+      "receiver": "Receiver",
+      "objet": "Objet",
+      "message": "Message",
+      "dateCreation": "Date Creation",
+      "etudiant": "Etudiant"
+    }
+  }
+}

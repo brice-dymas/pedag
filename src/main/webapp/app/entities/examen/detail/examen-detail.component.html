@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="examen">
+      <h2 data-cy="examenDetailsHeading"><span jhiTranslate="pedagApp.examen.detail.title">Examen</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ examen.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.examen.dateExamen">Date Examen</span></dt>
+        <dd>
+          <span>{{ examen.dateExamen | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.examen.type">Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'pedagApp.TypeExamen.' + examen.type }}">{{ examen.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.examen.semestre">Semestre</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'pedagApp.Semestre.' + examen.semestre }}">{{ examen.semestre }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/examen', examen.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+export enum TypeExamen {
+  CONTROLE = 'CONTROLE',
+
+  SEMESTRIEL = 'SEMESTRIEL',
+
+  RATTRAPAGE = 'RATTRAPAGE',
+}

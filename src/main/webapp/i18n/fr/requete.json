@@ -1,0 +1,31 @@
+{
+  "pedagApp": {
+    "requete": {
+      "home": {
+        "title": "Requetes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Requete",
+        "createOrEditLabel": "Créer ou éditer un Requete",
+        "notFound": "Aucun Requete trouvé"
+      },
+      "created": "Un nouveau Requete a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Requete avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Requete avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Requete {{ id }} ?"
+      },
+      "detail": {
+        "title": "Requete"
+      },
+      "id": "ID",
+      "objet": "Objet",
+      "description": "Description",
+      "statut": "Statut",
+      "traiter": "Traiter",
+      "dateCreation": "Date Creation",
+      "dateModification": "Date Modification",
+      "etudiant": "Etudiant",
+      "validateur": "Validateur"
+    }
+  }
+}

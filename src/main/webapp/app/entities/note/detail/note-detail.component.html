@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="note">
+      <h2 data-cy="noteDetailsHeading"><span jhiTranslate="pedagApp.note.detail.title">Note</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ note.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.note.moyenne">Moyenne</span></dt>
+        <dd>
+          <span>{{ note.moyenne }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.note.observation">Observation</span></dt>
+        <dd>
+          <span>{{ note.observation }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.note.etudiant">Etudiant</span></dt>
+        <dd>
+          <div *ngIf="note.etudiant">
+            <a [routerLink]="['/inscription', note.etudiant?.id, 'view']">{{ note.etudiant?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.note.examen">Examen</span></dt>
+        <dd>
+          <div *ngIf="note.examen">
+            <a [routerLink]="['/examen', note.examen?.id, 'view']">{{ note.examen?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.note.matiere">Matiere</span></dt>
+        <dd>
+          <div *ngIf="note.matiere">
+            <a [routerLink]="['/matiere', note.matiere?.id, 'view']">{{ note.matiere?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.note.enseignant">Enseignant</span></dt>
+        <dd>
+          <div *ngIf="note.enseignant">
+            <a [routerLink]="['/enseignant', note.enseignant?.id, 'view']">{{ note.enseignant?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/note', note.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
