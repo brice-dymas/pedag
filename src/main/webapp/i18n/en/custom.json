@@ -1,0 +1,28 @@
+{
+  "dashboard": {
+    "profil": {
+      "title": "My Profile",
+      "content": "Vous trouverez ici les informations disponible au sujet de votre compte"
+    },
+    "requete": {
+      "title": "My requests",
+      "content": "For complaints about your notes and administrative issues"
+    },
+    "notes": {
+      "title": "My notes",
+      "content": "To manage averages, observations and exam results"
+    },
+    "cours": {
+      "title": "My Profile",
+      "content": "Registered and assigned teaching units"
+    },
+    "courriel": {
+      "title": "Emails",
+      "content": "Compose and send e-mail messages"
+    },
+    "other": {
+      "title": "Other",
+      "content": "Other things and stuffs . . ."
+    }
+  }
+}
