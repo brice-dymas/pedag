@@ -110,7 +110,13 @@ entity AnneeAcademique {
     current Boolean
 }
 
+entity CoursFiliere {
+    quotaHoraire Integer
+}
+
 relationship ManyToOne {
+  CoursFiliere{filiere} to Filiere
+  CoursFiliere{matiere} to Matiere
   Inscription{etudiant} to Etudiant
   Inscription{filiere} to Filiere
   Inscription{anneeAcademique} to AnneeAcademique

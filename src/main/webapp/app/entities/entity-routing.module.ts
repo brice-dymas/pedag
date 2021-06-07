@@ -69,6 +69,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'pedagApp.anneeAcademique.home.title' },
         loadChildren: () => import('./annee-academique/annee-academique.module').then(m => m.AnneeAcademiqueModule),
       },
+      {
+        path: 'cours-filiere',
+        data: { pageTitle: 'pedagApp.coursFiliere.home.title' },
+        loadChildren: () => import('./cours-filiere/cours-filiere.module').then(m => m.CoursFiliereModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

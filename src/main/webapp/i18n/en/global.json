@@ -20,6 +20,7 @@
         "dispenser": "Dispenser",
         "inscription": "Inscription",
         "anneeAcademique": "Annee Academique",
+        "coursFiliere": "Cours Filiere",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
