@@ -33,11 +33,11 @@
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
           <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="semestre">
-            <span jhiTranslate="pedagApp.dispenser.semestre">Semestre</span> <fa-icon icon="sort"></fa-icon>
-          </th>
           <th scope="col" jhiSortBy="anneeAcademique.id">
             <span jhiTranslate="pedagApp.dispenser.anneeAcademique">Annee Academique</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="semestre">
+            <span jhiTranslate="pedagApp.dispenser.semestre">Semestre</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="enseignant.id">
             <span jhiTranslate="pedagApp.dispenser.enseignant">Enseignant</span> <fa-icon icon="sort"></fa-icon>
@@ -53,20 +53,22 @@
           <td>
             <a [routerLink]="['/dispenser', dispenser.id, 'view']">{{ dispenser.id }}</a>
           </td>
-          <td jhiTranslate="{{ 'pedagApp.Semestre.' + dispenser.semestre }}">{{ dispenser.semestre }}</td>
           <td>
             <div *ngIf="dispenser.anneeAcademique">
-              <a [routerLink]="['/annee-academique', dispenser.anneeAcademique?.id, 'view']">{{ dispenser.anneeAcademique?.id }}</a>
+              <a [routerLink]="['/annee-academique', dispenser.anneeAcademique?.id, 'view']">{{ dispenser.anneeAcademique?.libelle }}</a>
             </div>
           </td>
+          <td jhiTranslate="{{ 'pedagApp.Semestre.' + dispenser.semestre }}">{{ dispenser.semestre }}</td>
           <td>
             <div *ngIf="dispenser.enseignant">
-              <a [routerLink]="['/enseignant', dispenser.enseignant?.id, 'view']">{{ dispenser.enseignant?.id }}</a>
+              <a [routerLink]="['/enseignant', dispenser.enseignant?.id, 'view']"
+                >{{ dispenser.enseignant?.grade }} {{ dispenser.enseignant?.nom }}</a
+              >
             </div>
           </td>
           <td>
             <div *ngIf="dispenser.matiere">
-              <a [routerLink]="['/matiere', dispenser.matiere?.id, 'view']">{{ dispenser.matiere?.id }}</a>
+              <a [routerLink]="['/matiere', dispenser.matiere?.id, 'view']">{{ dispenser.matiere?.libelle }}</a>
             </div>
           </td>
           <td class="text-right">
@@ -78,8 +80,8 @@
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
+                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>--></button
+              >&nbsp;
 
               <button
                 type="submit"
@@ -88,12 +90,12 @@
                 data-cy="entityEditButton"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </button>
+                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>--></button
+              >&nbsp;
 
               <button type="submit" (click)="delete(dispenser)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
               </button>
             </div>
           </td>

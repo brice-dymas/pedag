@@ -1,8 +1,11 @@
 package com.urservices.service.impl;
 
+import static com.urservices.utils.UserAccountHelper.setUpAdminAccount;
+
 import com.urservices.domain.Administrateur;
 import com.urservices.repository.AdministrateurRepository;
 import com.urservices.service.AdministrateurService;
+import com.urservices.service.UserService;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,14 +24,18 @@ public class AdministrateurServiceImpl implements AdministrateurService {
     private final Logger log = LoggerFactory.getLogger(AdministrateurServiceImpl.class);
 
     private final AdministrateurRepository administrateurRepository;
+    private final UserService userService;
 
-    public AdministrateurServiceImpl(AdministrateurRepository administrateurRepository) {
+    public AdministrateurServiceImpl(AdministrateurRepository administrateurRepository, UserService userService) {
         this.administrateurRepository = administrateurRepository;
+        this.userService = userService;
     }
 
     @Override
     public Administrateur save(Administrateur administrateur) {
         log.debug("Request to save Administrateur : {}", administrateur);
+        var user = setUpAdminAccount(administrateur);
+        administrateur.setUser(userService.createNewUser(user, user.getLogin()));
         return administrateurRepository.save(administrateur);
     }
 

@@ -1,11 +1,14 @@
 package com.urservices.web.rest;
 
+import com.urservices.domain.Authority;
 import com.urservices.domain.Etudiant;
+import com.urservices.domain.User;
 import com.urservices.repository.EtudiantRepository;
 import com.urservices.service.EtudiantService;
 import com.urservices.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;

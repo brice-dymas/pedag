@@ -1,8 +1,11 @@
 package com.urservices.service.impl;
 
+import static com.urservices.utils.UserAccountHelper.setUpStudentrAccount;
+
 import com.urservices.domain.Etudiant;
 import com.urservices.repository.EtudiantRepository;
 import com.urservices.service.EtudiantService;
+import com.urservices.service.UserService;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,14 +24,17 @@ public class EtudiantServiceImpl implements EtudiantService {
     private final Logger log = LoggerFactory.getLogger(EtudiantServiceImpl.class);
 
     private final EtudiantRepository etudiantRepository;
+    private final UserService userService;
 
-    public EtudiantServiceImpl(EtudiantRepository etudiantRepository) {
+    public EtudiantServiceImpl(EtudiantRepository etudiantRepository, UserService userService) {
         this.etudiantRepository = etudiantRepository;
+        this.userService = userService;
     }
 
     @Override
     public Etudiant save(Etudiant etudiant) {
         log.debug("Request to save Etudiant : {}", etudiant);
+        etudiant.setUser(userService.createNewUser(setUpStudentrAccount(etudiant), etudiant.getMatricule().toUpperCase()));
         return etudiantRepository.save(etudiant);
     }
 
