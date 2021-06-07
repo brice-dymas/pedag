@@ -11,5 +11,6 @@ import { EtudiantRoutingModule } from './route/etudiant-routing.module';
   imports: [SharedModule, EtudiantRoutingModule],
   declarations: [EtudiantComponent, EtudiantDetailComponent, EtudiantUpdateComponent, EtudiantDeleteDialogComponent],
   entryComponents: [EtudiantDeleteDialogComponent],
+  exports: [],
 })
 export class EtudiantModule {}

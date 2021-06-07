@@ -29,9 +29,9 @@
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="administrateurs && administrateurs.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
+    <table class="table table-hover table-bordered" aria-describedby="page-heading">
       <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+        <tr class="table-primary" jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
           <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="nom"><span jhiTranslate="pedagApp.administrateur.nom">Nom</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="prenom">
@@ -70,8 +70,8 @@
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
+                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>--></button
+              >&nbsp;
 
               <button
                 type="submit"
@@ -80,12 +80,12 @@
                 data-cy="entityEditButton"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </button>
+                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>--></button
+              >&nbsp;
 
               <button type="submit" (click)="delete(administrateur)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
               </button>
             </div>
           </td>
@@ -97,9 +97,9 @@
   <div *ngIf="administrateurs && administrateurs.length > 0">
     <div class="row justify-content-center">
       <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
-    </div>
+      <!--    </div>-->
 
-    <div class="row justify-content-center">
+      <!--    <div class="row justify-content-center">-->
       <ngb-pagination
         [collectionSize]="totalItems"
         [(page)]="ngbPaginationPage"

@@ -1,8 +1,12 @@
 package com.urservices.service.impl;
 
+import static com.urservices.utils.UserAccountHelper.setUpAdminAccount;
+import static com.urservices.utils.UserAccountHelper.setUpTeacherAccount;
+
 import com.urservices.domain.Enseignant;
 import com.urservices.repository.EnseignantRepository;
 import com.urservices.service.EnseignantService;
+import com.urservices.service.UserService;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,14 +25,18 @@ public class EnseignantServiceImpl implements EnseignantService {
     private final Logger log = LoggerFactory.getLogger(EnseignantServiceImpl.class);
 
     private final EnseignantRepository enseignantRepository;
+    private final UserService userService;
 
-    public EnseignantServiceImpl(EnseignantRepository enseignantRepository) {
+    public EnseignantServiceImpl(EnseignantRepository enseignantRepository, UserService userService) {
         this.enseignantRepository = enseignantRepository;
+        this.userService = userService;
     }
 
     @Override
     public Enseignant save(Enseignant enseignant) {
         log.debug("Request to save Enseignant : {}", enseignant);
+        var user = setUpTeacherAccount(enseignant);
+        enseignant.setUser(userService.createNewUser(user, user.getLogin()));
         return enseignantRepository.save(enseignant);
     }
 

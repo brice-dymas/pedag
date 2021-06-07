@@ -1,0 +1,28 @@
+{
+  "dashboard": {
+    "profil": {
+      "title": "Mon profil",
+      "content": "Vous trouverez ici les informations disponible au sujet de votre compte"
+    },
+    "requete": {
+      "title": "Mes requêtes",
+      "content": "Pour les réclamations au sujet de vos notes et problèmes administratifs"
+    },
+    "notes": {
+      "title": "Mes Notes",
+      "content": "Pour gerer les moyennes, observations et résultats d'examens"
+    },
+    "cours": {
+      "title": "Mes Cours",
+      "content": "Les unités d'enseignement enregistrées et assignées"
+    },
+    "courriel": {
+      "title": "Les courriels",
+      "content": "Rédiger des messages électroniques et les envoyer"
+    },
+    "other": {
+      "title": "Autres",
+      "content": "Autres choses . . ."
+    }
+  }
+}

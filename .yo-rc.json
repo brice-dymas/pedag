@@ -58,8 +58,9 @@
       "Courriel",
       "Dispenser",
       "Inscription",
-      "AnneeAcademique"
+      "AnneeAcademique",
+      "CoursFiliere"
     ],
-    "lastLiquibaseTimestamp": 1622963289000
+    "lastLiquibaseTimestamp": 1623086804000
   }
 }

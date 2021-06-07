@@ -30,7 +30,7 @@
 
   <div class="table-responsive" id="entities" *ngIf="enseignants && enseignants.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
+      <thead class="table-primary">
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
           <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="diplome">
@@ -48,8 +48,6 @@
           <th scope="col" jhiSortBy="statut">
             <span jhiTranslate="pedagApp.enseignant.statut">Statut</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="photo"><span jhiTranslate="pedagApp.enseignant.photo">Photo</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="user.id"><span jhiTranslate="pedagApp.enseignant.user">User</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -65,19 +63,7 @@
           <td>{{ enseignant.email }}</td>
           <td>{{ enseignant.telephone }}</td>
           <td jhiTranslate="{{ 'pedagApp.Statut.' + enseignant.statut }}">{{ enseignant.statut }}</td>
-          <td>
-            <a *ngIf="enseignant.photo" (click)="openFile(enseignant.photo, enseignant.photoContentType)">
-              <img
-                [src]="'data:' + enseignant.photoContentType + ';base64,' + enseignant.photo"
-                style="max-height: 30px"
-                alt="enseignant image"
-              />
-            </a>
-            <span *ngIf="enseignant.photo">{{ enseignant.photoContentType }}, {{ byteSize(enseignant.photo) }}</span>
-          </td>
-          <td>
-            {{ enseignant.user?.id }}
-          </td>
+
           <td class="text-right">
             <div class="btn-group">
               <button
@@ -87,8 +73,8 @@
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
+                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>--></button
+              >&nbsp;
 
               <button
                 type="submit"
@@ -97,12 +83,12 @@
                 data-cy="entityEditButton"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </button>
+                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>--></button
+              >&nbsp;
 
               <button type="submit" (click)="delete(enseignant)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
               </button>
             </div>
           </td>

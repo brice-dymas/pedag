@@ -13,6 +13,7 @@ import { LANGUAGES } from 'app/config/language.constants';
 export class SettingsComponent implements OnInit {
   account!: Account;
   success = false;
+  pls: any;
   languages = LANGUAGES;
   settingsForm = this.fb.group({
     firstName: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
@@ -25,6 +26,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountService.identity().subscribe(account => {
+      this.pls = account;
       if (account) {
         this.settingsForm.patchValue({
           firstName: account.firstName,
