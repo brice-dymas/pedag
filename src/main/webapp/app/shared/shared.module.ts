@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { DashboardComponent } from 'app/entities/etudiant/dashboard/dashboard.component';
 import { SharedLibsModule } from './shared-libs.module';
 import { FindLanguageFromKeyPipe } from './language/find-language-from-key.pipe';
 import { TranslateDirective } from './language/translate.directive';
@@ -26,6 +27,7 @@ import { ItemCountComponent } from './pagination/item-count.component';
     SortByDirective,
     SortDirective,
     ItemCountComponent,
+    DashboardComponent,
   ],
   exports: [
     SharedLibsModule,
@@ -40,6 +42,7 @@ import { ItemCountComponent } from './pagination/item-count.component';
     SortByDirective,
     SortDirective,
     ItemCountComponent,
+    DashboardComponent,
   ],
 })
 export class SharedModule {}

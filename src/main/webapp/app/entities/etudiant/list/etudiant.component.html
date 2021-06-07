@@ -30,7 +30,7 @@
 
   <div class="table-responsive" id="entities" *ngIf="etudiants && etudiants.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
+      <thead class="table-primary">
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
           <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="matricule">
@@ -47,8 +47,6 @@
           <th scope="col" jhiSortBy="telephone">
             <span jhiTranslate="pedagApp.etudiant.telephone">Telephone</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="photo"><span jhiTranslate="pedagApp.etudiant.photo">Photo</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="user.id"><span jhiTranslate="pedagApp.etudiant.user">User</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -63,19 +61,6 @@
           <td>{{ etudiant.prenom }}</td>
           <td>{{ etudiant.email }}</td>
           <td>{{ etudiant.telephone }}</td>
-          <td>
-            <a *ngIf="etudiant.photo" (click)="openFile(etudiant.photo, etudiant.photoContentType)">
-              <img
-                [src]="'data:' + etudiant.photoContentType + ';base64,' + etudiant.photo"
-                style="max-height: 30px"
-                alt="etudiant image"
-              />
-            </a>
-            <span *ngIf="etudiant.photo">{{ etudiant.photoContentType }}, {{ byteSize(etudiant.photo) }}</span>
-          </td>
-          <td>
-            {{ etudiant.user?.id }}
-          </td>
           <td class="text-right">
             <div class="btn-group">
               <button
@@ -85,8 +70,8 @@
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
+                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>--></button
+              >&nbsp;
 
               <button
                 type="submit"
@@ -95,12 +80,12 @@
                 data-cy="entityEditButton"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </button>
+                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>--></button
+              >&nbsp;
 
               <button type="submit" (click)="delete(etudiant)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
               </button>
             </div>
           </td>
@@ -109,21 +94,21 @@
     </table>
   </div>
 
-  <div *ngIf="etudiants && etudiants.length > 0">
-    <div class="row justify-content-center">
-      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
-    </div>
+  <div class="row" *ngIf="etudiants && etudiants.length > 0">
+    <!--    <div class="col-md-8 text-justify">-->
+    <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    <!--    </div>-->
 
-    <div class="row justify-content-center">
-      <ngb-pagination
-        [collectionSize]="totalItems"
-        [(page)]="ngbPaginationPage"
-        [pageSize]="itemsPerPage"
-        [maxSize]="5"
-        [rotate]="true"
-        [boundaryLinks]="true"
-        (pageChange)="loadPage($event)"
-      ></ngb-pagination>
-    </div>
+    <!--    <div class="col-md-4 text-justify">-->
+    <ngb-pagination
+      [collectionSize]="totalItems"
+      [(page)]="ngbPaginationPage"
+      [pageSize]="itemsPerPage"
+      [maxSize]="5"
+      [rotate]="true"
+      [boundaryLinks]="true"
+      (pageChange)="loadPage($event)"
+    ></ngb-pagination>
+    <!--    </div>-->
   </div>
 </div>

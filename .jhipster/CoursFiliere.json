@@ -1,0 +1,33 @@
+{
+  "name": "CoursFiliere",
+  "fields": [
+    {
+      "fieldName": "quotaHoraire",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "filiere",
+      "otherEntityRelationshipName": "coursFiliere",
+      "relationshipName": "filiere"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "matiere",
+      "otherEntityRelationshipName": "coursFiliere",
+      "relationshipName": "matiere"
+    }
+  ],
+  "entityTableName": "cours_filiere",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210607172644"
+}

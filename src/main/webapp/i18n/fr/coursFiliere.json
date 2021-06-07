@@ -1,0 +1,26 @@
+{
+  "pedagApp": {
+    "coursFiliere": {
+      "home": {
+        "title": "CoursFilieres",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Cours Filiere",
+        "createOrEditLabel": "Créer ou éditer un Cours Filiere",
+        "notFound": "Aucun Cours Filiere trouvé"
+      },
+      "created": "Un nouveau Cours Filiere a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Cours Filiere avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Cours Filiere avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Cours Filiere {{ id }} ?"
+      },
+      "detail": {
+        "title": "Cours Filiere"
+      },
+      "id": "ID",
+      "quotaHoraire": "Quota Horaire",
+      "filiere": "Filiere",
+      "matiere": "Matiere"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="coursFiliere">
+      <h2 data-cy="coursFiliereDetailsHeading"><span jhiTranslate="pedagApp.coursFiliere.detail.title">Cours Filiere</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ coursFiliere.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.coursFiliere.quotaHoraire">Quota Horaire</span></dt>
+        <dd>
+          <span>{{ coursFiliere.quotaHoraire }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.coursFiliere.filiere">Filiere</span></dt>
+        <dd>
+          <div *ngIf="coursFiliere.filiere">
+            <a [routerLink]="['/filiere', coursFiliere.filiere?.id, 'view']">{{ coursFiliere.filiere?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.coursFiliere.matiere">Matiere</span></dt>
+        <dd>
+          <div *ngIf="coursFiliere.matiere">
+            <a [routerLink]="['/matiere', coursFiliere.matiere?.id, 'view']">{{ coursFiliere.matiere?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/cours-filiere', coursFiliere.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

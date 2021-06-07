@@ -12,131 +12,166 @@
           <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.etudiant.matricule" for="field_matricule">Matricule</label>
-          <input type="text" class="form-control" name="matricule" id="field_matricule" data-cy="matricule" formControlName="matricule" />
-          <div *ngIf="editForm.get('matricule')!.invalid && (editForm.get('matricule')!.dirty || editForm.get('matricule')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('matricule')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('matricule')?.errors?.minlength"
-              jhiTranslate="entity.validation.minlength"
-              [translateValues]="{ min: 10 }"
-            >
-              This field is required to be at least 10 characters.
-            </small>
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('matricule')?.errors?.maxlength"
-              jhiTranslate="entity.validation.maxlength"
-              [translateValues]="{ max: 12 }"
-            >
-              This field cannot be longer than 12 characters.
-            </small>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.etudiant.matricule" for="field_matricule">Matricule</label>
+              <input
+                type="text"
+                class="form-control"
+                name="matricule"
+                id="field_matricule"
+                data-cy="matricule"
+                formControlName="matricule"
+              />
+              <div *ngIf="editForm.get('matricule')!.invalid && (editForm.get('matricule')!.dirty || editForm.get('matricule')!.touched)">
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('matricule')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('matricule')?.errors?.minlength"
+                  jhiTranslate="entity.validation.minlength"
+                  [translateValues]="{ min: 10 }"
+                >
+                  This field is required to be at least 10 characters.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('matricule')?.errors?.maxlength"
+                  jhiTranslate="entity.validation.maxlength"
+                  [translateValues]="{ max: 12 }"
+                >
+                  This field cannot be longer than 12 characters.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.etudiant.nom" for="field_nom">Nom</label>
+              <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+              <div *ngIf="editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)">
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('nom')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('nom')?.errors?.minlength"
+                  jhiTranslate="entity.validation.minlength"
+                  [translateValues]="{ min: 2 }"
+                >
+                  This field is required to be at least 2 characters.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.etudiant.dateNaissance" for="field_dateNaissance"
+                >Date Naissance</label
+              >
+              <div class="input-group">
+                <input
+                  id="field_dateNaissance"
+                  data-cy="dateNaissance"
+                  type="text"
+                  class="form-control"
+                  name="dateNaissance"
+                  ngbDatepicker
+                  #dateNaissanceDp="ngbDatepicker"
+                  formControlName="dateNaissance"
+                />
+                <span class="input-group-append">
+                  <button type="button" class="btn btn-secondary" (click)="dateNaissanceDp.toggle()">
+                    <fa-icon icon="calendar-alt"></fa-icon>
+                  </button>
+                </span>
+              </div>
+              <div
+                *ngIf="
+                  editForm.get('dateNaissance')!.invalid && (editForm.get('dateNaissance')!.dirty || editForm.get('dateNaissance')!.touched)
+                "
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('dateNaissance')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.etudiant.nom" for="field_nom">Nom</label>
-          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
-          <div *ngIf="editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('nom')?.errors?.required" jhiTranslate="entity.validation.required">
-              This field is required.
-            </small>
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('nom')?.errors?.minlength"
-              jhiTranslate="entity.validation.minlength"
-              [translateValues]="{ min: 2 }"
-            >
-              This field is required to be at least 2 characters.
-            </small>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.etudiant.prenom" for="field_prenom">Prenom</label>
+              <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+            </div>
           </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.etudiant.dateNaissance" for="field_dateNaissance">Date Naissance</label>
-          <div class="input-group">
-            <input
-              id="field_dateNaissance"
-              data-cy="dateNaissance"
-              type="text"
-              class="form-control"
-              name="dateNaissance"
-              ngbDatepicker
-              #dateNaissanceDp="ngbDatepicker"
-              formControlName="dateNaissance"
-            />
-            <span class="input-group-append">
-              <button type="button" class="btn btn-secondary" (click)="dateNaissanceDp.toggle()">
-                <fa-icon icon="calendar-alt"></fa-icon>
-              </button>
-            </span>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.etudiant.email" for="field_email">Email</label>
+              <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+              <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('email')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+              </div>
+            </div>
           </div>
-          <div
-            *ngIf="
-              editForm.get('dateNaissance')!.invalid && (editForm.get('dateNaissance')!.dirty || editForm.get('dateNaissance')!.touched)
-            "
-          >
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('dateNaissance')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.etudiant.prenom" for="field_prenom">Prenom</label>
-          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.etudiant.email" for="field_email">Email</label>
-          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
-          <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.required" jhiTranslate="entity.validation.required">
-              This field is required.
-            </small>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.etudiant.telephone" for="field_telephone">Telephone</label>
-          <input type="text" class="form-control" name="telephone" id="field_telephone" data-cy="telephone" formControlName="telephone" />
-          <div *ngIf="editForm.get('telephone')!.invalid && (editForm.get('telephone')!.dirty || editForm.get('telephone')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('telephone')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('telephone')?.errors?.minlength"
-              jhiTranslate="entity.validation.minlength"
-              [translateValues]="{ min: 9 }"
-            >
-              This field is required to be at least 9 characters.
-            </small>
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('telephone')?.errors?.maxlength"
-              jhiTranslate="entity.validation.maxlength"
-              [translateValues]="{ max: 15 }"
-            >
-              This field cannot be longer than 15 characters.
-            </small>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.etudiant.telephone" for="field_telephone">Telephone</label>
+              <input
+                type="text"
+                class="form-control"
+                name="telephone"
+                id="field_telephone"
+                data-cy="telephone"
+                formControlName="telephone"
+              />
+              <div *ngIf="editForm.get('telephone')!.invalid && (editForm.get('telephone')!.dirty || editForm.get('telephone')!.touched)">
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('telephone')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('telephone')?.errors?.minlength"
+                  jhiTranslate="entity.validation.minlength"
+                  [translateValues]="{ min: 9 }"
+                >
+                  This field is required to be at least 9 characters.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('telephone')?.errors?.maxlength"
+                  jhiTranslate="entity.validation.maxlength"
+                  [translateValues]="{ max: 15 }"
+                >
+                  This field cannot be longer than 15 characters.
+                </small>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -178,7 +213,7 @@
           />
         </div>
 
-        <div class="form-group">
+        <!--<div class="form-group">
           <label class="form-control-label" jhiTranslate="pedagApp.etudiant.user" for="field_user">User</label>
           <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
             <option [ngValue]="null"></option>
@@ -189,7 +224,7 @@
               {{ userOption.id }}
             </option>
           </select>
-        </div>
+        </div>-->
       </div>
 
       <div>
