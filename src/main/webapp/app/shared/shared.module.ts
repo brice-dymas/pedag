@@ -12,9 +12,13 @@ import { FormatMediumDatePipe } from './date/format-medium-date.pipe';
 import { SortByDirective } from './sort/sort-by.directive';
 import { SortDirective } from './sort/sort.directive';
 import { ItemCountComponent } from './pagination/item-count.component';
+import { RequeteEtudiantComponent } from './student/requete-etudiant/requete-etudiant.component';
+import { MatieresEtudiantComponent } from './student/matieres-etudiant/matieres-etudiant.component';
+import { NotesEtudiantComponent } from './student/notes-etudiant/notes-etudiant.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [SharedLibsModule],
+  imports: [SharedLibsModule, RouterModule],
   declarations: [
     FindLanguageFromKeyPipe,
     TranslateDirective,
@@ -28,6 +32,9 @@ import { ItemCountComponent } from './pagination/item-count.component';
     SortDirective,
     ItemCountComponent,
     DashboardComponent,
+    RequeteEtudiantComponent,
+    MatieresEtudiantComponent,
+    NotesEtudiantComponent,
   ],
   exports: [
     SharedLibsModule,
@@ -43,6 +50,9 @@ import { ItemCountComponent } from './pagination/item-count.component';
     SortDirective,
     ItemCountComponent,
     DashboardComponent,
+    RequeteEtudiantComponent,
+    MatieresEtudiantComponent,
+    NotesEtudiantComponent,
   ],
 })
 export class SharedModule {}

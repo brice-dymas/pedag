@@ -151,6 +151,20 @@ public class NoteResource {
     }
 
     /**
+     * {@code GET  /notes} : get all the notes.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of notes in body.
+     */
+    @GetMapping("/notes/student/{id}")
+    public ResponseEntity<List<Note>> findByEtudiantId(@PathVariable Long id, Pageable pageable) {
+        log.debug("REST request to get a page of Notes for student {}", id);
+        Page<Note> page = noteService.findByEtudiantId(id, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
      * {@code GET  /notes/:id} : get the "id" note.
      *
      * @param id the id of the note to retrieve.

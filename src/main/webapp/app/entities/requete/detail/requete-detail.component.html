@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div class="col-8">
     <div *ngIf="requete">
-      <h2 data-cy="requeteDetailsHeading"><span jhiTranslate="pedagApp.requete.detail.title">Requete</span></h2>
+      <h2 data-cy="requeteDetailsHeading"><span jhiTranslate="pedagApp.requete.detail.title">Requete</span> #{{ requete.id }}</h2>
 
       <hr />
 
@@ -10,10 +10,6 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ requete.id }}</span>
-        </dd>
         <dt><span jhiTranslate="pedagApp.requete.objet">Objet</span></dt>
         <dd>
           <span>{{ requete.objet }}</span>
@@ -24,15 +20,36 @@
         </dd>
         <dt><span jhiTranslate="pedagApp.requete.statut">Statut</span></dt>
         <dd>
-          <span jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}">{{ requete.statut }}</span>
-        </dd>
-        <dt><span jhiTranslate="pedagApp.requete.traiter">Traiter</span></dt>
-        <dd>
-          <span>{{ requete.traiter }}</span>
+          <span
+            *ngIf="requete.statut == 'NON_FONDE'"
+            class="badge badge-danger"
+            jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
+            >{{ requete.statut }}</span
+          >
+          <span
+            *ngIf="requete.statut == 'FONDE'"
+            class="badge badge-success"
+            jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
+            >{{ requete.statut }}</span
+          >
+          <span
+            *ngIf="requete.statut == 'EN_ATTENTE'"
+            class="badge badge-warning"
+            jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
+            >{{ requete.statut }}</span
+          >
         </dd>
         <dt><span jhiTranslate="pedagApp.requete.dateCreation">Date Creation</span></dt>
         <dd>
           <span>{{ requete.dateCreation | formatMediumDate }}</span>
+        </dd>
+      </dl>
+
+      <dl class="row-md jh-entity-details" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+        <dt><span jhiTranslate="pedagApp.requete.traiter">Traiter</span></dt>
+        <dd>
+          <span *ngIf="!requete.traiter" class="badge badge-sm badge-warning">{{ requete.traiter }}</span>
+          <span *ngIf="requete.traiter" class="badge badge-sm badge-success">{{ requete.traiter }}</span>
         </dd>
         <dt><span jhiTranslate="pedagApp.requete.dateModification">Date Modification</span></dt>
         <dd>

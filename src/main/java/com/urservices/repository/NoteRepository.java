@@ -1,6 +1,9 @@
 package com.urservices.repository;
 
 import com.urservices.domain.Note;
+import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +12,9 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface NoteRepository extends JpaRepository<Note, Long> {}
+public interface NoteRepository extends JpaRepository<Note, Long> {
+    @Query("SELECT N FROM Note N WHERE N.etudiant.etudiant.id= :id")
+    Page<Note> findByEtudiantId(Long id, Pageable pageable);
+
+    Page<Note> findByEtudiant_EtudiantId(Long id, Pageable pageable);
+}

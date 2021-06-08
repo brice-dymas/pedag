@@ -45,7 +45,7 @@
               [ngValue]="etudiantOption.id === editForm.get('etudiant')!.value?.id ? editForm.get('etudiant')!.value : etudiantOption"
               *ngFor="let etudiantOption of etudiantsSharedCollection; trackBy: trackEtudiantById"
             >
-              {{ etudiantOption.id }}
+              {{ etudiantOption.prenom + ' ' + etudiantOption.nom }}
             </option>
           </select>
         </div>
@@ -58,7 +58,7 @@
               [ngValue]="filiereOption.id === editForm.get('filiere')!.value?.id ? editForm.get('filiere')!.value : filiereOption"
               *ngFor="let filiereOption of filieresSharedCollection; trackBy: trackFiliereById"
             >
-              {{ filiereOption.id }}
+              {{ filiereOption.libelle }}
             </option>
           </select>
         </div>
@@ -83,7 +83,7 @@
               "
               *ngFor="let anneeAcademiqueOption of anneeAcademiquesSharedCollection; trackBy: trackAnneeAcademiqueById"
             >
-              {{ anneeAcademiqueOption.id }}
+              {{ anneeAcademiqueOption.libelle }}
             </option>
           </select>
         </div>

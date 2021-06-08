@@ -153,6 +153,32 @@ public class DispenserResource {
     }
 
     /**
+     * {@code GET  /dispensers} : get all the dispensers of a student.
+     *
+     * @param id the student's Id.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of dispensers in body.
+     */
+    @GetMapping("/dispensers/student/{id}")
+    public ResponseEntity<List<Dispenser>> getAllStudentMatieres(@PathVariable Long id) {
+        log.debug("REST request to get a Student Matieres");
+        List<Dispenser> page = dispenserService.findAllStudentMatieres(id);
+        return ResponseEntity.ok(page);
+    }
+
+    /**
+     * {@code GET  /dispensers} : get all the dispensers of a teacher.
+     *
+     * @param id the teacher's Id.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of dispensers in body.
+     */
+    @GetMapping("/dispensers/teacher/{id}")
+    public ResponseEntity<List<Dispenser>> findByEnseignant(@PathVariable Long id) {
+        log.debug("REST request to get a Teachers' Matieres");
+        List<Dispenser> page = dispenserService.findByEnseignantId(id);
+        return ResponseEntity.ok(page);
+    }
+
+    /**
      * {@code GET  /dispensers/:id} : get the "id" dispenser.
      *
      * @param id the id of the dispenser to retrieve.
