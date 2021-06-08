@@ -28,4 +28,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   openProfile(): void {
     this.router.navigate(['/account/settings']);
   }
+
+  openMesRequetes(): void {
+    this.router.navigate(['/etudiant/mes-requetes']);
+  }
 }

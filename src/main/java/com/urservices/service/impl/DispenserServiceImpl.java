@@ -1,8 +1,11 @@
 package com.urservices.service.impl;
 
 import com.urservices.domain.Dispenser;
+import com.urservices.domain.Enseignant;
+import com.urservices.domain.Etudiant;
 import com.urservices.repository.DispenserRepository;
 import com.urservices.service.DispenserService;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,5 +71,27 @@ public class DispenserServiceImpl implements DispenserService {
     public void delete(Long id) {
         log.debug("Request to delete Dispenser : {}", id);
         dispenserRepository.deleteById(id);
+    }
+
+    /**
+     * Fetch all {@link Dispenser} of a {@link Etudiant}
+     *
+     * @param idEtudiant The ID of the Student
+     */
+    @Override
+    public List<Dispenser> findAllStudentMatieres(Long idEtudiant) {
+        log.debug("Request to FIND_ALL_STUDENT_MATIERES  for Student: {}", idEtudiant);
+        return dispenserRepository.findAllStudentMatieres(idEtudiant);
+    }
+
+    /**
+     * Fetch all {@link Dispenser} assigned to a {@link Enseignant}
+     *
+     * @param idTeacher The ID of the Teacher
+     */
+    @Override
+    public List<Dispenser> findByEnseignantId(Long idTeacher) {
+        log.debug("Request to FIND_MATIERES_BY_ENSEIGNANT_ID  for Student: {}", idTeacher);
+        return dispenserRepository.findByEnseignantId(idTeacher);
     }
 }

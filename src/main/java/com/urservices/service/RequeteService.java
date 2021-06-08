@@ -1,6 +1,8 @@
 package com.urservices.service;
 
 import com.urservices.domain.Requete;
+import com.urservices.service.dto.NewRequeteDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +18,13 @@ public interface RequeteService {
      * @return the persisted entity.
      */
     Requete save(Requete requete);
+    /**
+     * Save a requete.
+     *
+     * @param requete the entity to save.
+     * @return the persisted entity.
+     */
+    Requete save(NewRequeteDTO requete);
 
     /**
      * Partially updates a requete.
@@ -47,4 +56,20 @@ public interface RequeteService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Get the all requete of a Student.
+     *
+     * @param id the id of the Student.
+     * @return all the request.
+     */
+    Page<Requete> findAllByEtudiant(Long id, Pageable pageable);
+
+    /**
+     * Get the all requete of a Student.
+     *
+     * @param id the id of the Student.
+     * @return all the request.
+     */
+    Page<Requete> findAllByEtudiant_id(Long id, Pageable pageable);
 }

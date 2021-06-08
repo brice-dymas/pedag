@@ -1,22 +1,20 @@
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
-import { StatutRequete } from 'app/entities/enumerations/statut-requete.model';
-import * as dayjs from 'dayjs';
-import { combineLatest } from 'rxjs';
-import { RequeteDeleteDialogComponent } from '../delete/requete-delete-dialog.component';
-
-import { IRequete, Requete } from '../requete.model';
-import { RequeteService } from '../service/requete.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { RequeteDeleteDialogComponent } from 'app/entities/requete/delete/requete-delete-dialog.component';
+import { IRequete } from 'app/entities/requete/requete.model';
+import { RequeteService } from 'app/entities/requete/service/requete.service';
+import { combineLatest, Subscription } from 'rxjs';
 
 @Component({
-  selector: 'jhi-requete',
-  templateUrl: './requete.component.html',
+  selector: 'jhi-requete-etudiant',
+  templateUrl: './requete-etudiant.component.html',
+  styleUrls: ['./requete-etudiant.component.scss'],
 })
-export class RequeteComponent implements OnInit {
+export class RequeteEtudiantComponent implements OnInit, OnDestroy {
   requetes?: IRequete[];
   isLoading = false;
   totalItems = 0;
@@ -25,20 +23,38 @@ export class RequeteComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  account: any | null = null;
+  authSubscription?: Subscription;
 
   constructor(
+    private accountService: AccountService,
     protected requeteService: RequeteService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected modalService: NgbModal
   ) {}
 
-  loadPage(page?: number, dontNavigate?: boolean): void {
+  ngOnInit(): void {
+    this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
+    this.handleNavigation(this.account.id);
+  }
+
+  ngOnDestroy(): void {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
+  }
+
+  refresh(): void {
+    this.loadPage(this.account.id);
+  }
+
+  loadPage(id: number, page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
 
     this.requeteService
-      .query({
+      .queryByStudent(id, {
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
@@ -55,45 +71,17 @@ export class RequeteComponent implements OnInit {
       );
   }
 
-  ngOnInit(): void {
-    this.handleNavigation();
-  }
-
   trackId(index: number, item: IRequete): number {
     return item.id!;
   }
 
-  valider(item: IRequete): void {
-    const req = this.getRequeteForValidation(item);
-    req.statut = StatutRequete.FONDE;
-    this.requeteService.partialUpdate(req).subscribe(x => this.loadPage());
-  }
-
-  rejeter(item: IRequete): void {
-    const req = this.getRequeteForValidation(item);
-    req.statut = StatutRequete.NON_FONDE;
-    this.requeteService.partialUpdate(req).subscribe(x => this.loadPage());
-  }
-
-  canValidate(item: IRequete): boolean {
-    return item.statut === StatutRequete.EN_ATTENTE;
-  }
-
-  getRequeteForValidation(item: IRequete): IRequete {
-    return {
-      ...new Requete(),
-      id: item.id,
-      traiter: true,
-      dateModification: dayjs(),
-    };
-  }
   delete(requete: IRequete): void {
     const modalRef = this.modalService.open(RequeteDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.requete = requete;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
-        this.loadPage();
+        this.loadPage(this.account.id);
       }
     });
   }
@@ -106,7 +94,7 @@ export class RequeteComponent implements OnInit {
     return result;
   }
 
-  protected handleNavigation(): void {
+  protected handleNavigation(id: number): void {
     combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
       const page = params.get('page');
       const pageNumber = page !== null ? +page : 1;
@@ -116,7 +104,7 @@ export class RequeteComponent implements OnInit {
       if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
         this.predicate = predicate;
         this.ascending = ascending;
-        this.loadPage(pageNumber, true);
+        this.loadPage(id, pageNumber, true);
       }
     });
   }
@@ -125,7 +113,7 @@ export class RequeteComponent implements OnInit {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
     if (navigate) {
-      this.router.navigate(['/requete'], {
+      this.router.navigate(['/etudiant/mes-requetes'], {
         queryParams: {
           page: this.page,
           size: this.itemsPerPage,

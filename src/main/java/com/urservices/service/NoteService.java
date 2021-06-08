@@ -1,6 +1,7 @@
 package com.urservices.service;
 
 import com.urservices.domain.Note;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,4 +48,12 @@ public interface NoteService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Get all notes of a Student.
+     *
+     * @param id the id of the Student.
+     * @return the list of notes.
+     */
+    Page<Note> findByEtudiantId(Long id, Pageable pageable);
 }

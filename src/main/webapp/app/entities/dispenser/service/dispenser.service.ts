@@ -36,6 +36,14 @@ export class DispenserService {
     return this.http.get<IDispenser>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findByStudent(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IDispenser[]>(`${this.resourceUrl}/student/${id}`, { observe: 'response' });
+  }
+
+  findByTeacher(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IDispenser[]>(`${this.resourceUrl}/teacher/${id}`, { observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IDispenser[]>(this.resourceUrl, { params: options, observe: 'response' });

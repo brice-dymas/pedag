@@ -3,6 +3,7 @@ package com.urservices.service.impl;
 import com.urservices.domain.Note;
 import com.urservices.repository.NoteRepository;
 import com.urservices.service.NoteService;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,5 +72,17 @@ public class NoteServiceImpl implements NoteService {
     public void delete(Long id) {
         log.debug("Request to delete Note : {}", id);
         noteRepository.deleteById(id);
+    }
+
+    /**
+     * Get all notes of a Student.
+     *
+     * @param id the id of the Student.
+     * @return the list of notes.
+     */
+    @Override
+    public Page<Note> findByEtudiantId(Long id, Pageable pageable) {
+        log.debug("Request to get all Motes of student : {}", id);
+        return noteRepository.findByEtudiantId(id, pageable);
     }
 }

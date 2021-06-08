@@ -53,12 +53,12 @@
           <td>{{ coursFiliere.quotaHoraire }}</td>
           <td>
             <div *ngIf="coursFiliere.filiere">
-              <a [routerLink]="['/filiere', coursFiliere.filiere?.id, 'view']">{{ coursFiliere.filiere?.id }}</a>
+              <a [routerLink]="['/filiere', coursFiliere.filiere?.id, 'view']">{{ coursFiliere.filiere?.libelle }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="coursFiliere.matiere">
-              <a [routerLink]="['/matiere', coursFiliere.matiere?.id, 'view']">{{ coursFiliere.matiere?.id }}</a>
+              <a [routerLink]="['/matiere', coursFiliere.matiere?.id, 'view']">{{ coursFiliere.matiere?.libelle }}</a>
             </div>
           </td>
           <td class="text-right">

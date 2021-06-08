@@ -1,6 +1,7 @@
 package com.urservices.service;
 
 import com.urservices.domain.Dispenser;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,4 +48,18 @@ public interface DispenserService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Fetch all {@link com.urservices.domain.Dispenser} of a {@link com.urservices.domain.Etudiant}
+     *
+     * @param idEtudiant The ID of the Student
+     * */
+    List<Dispenser> findAllStudentMatieres(Long idEtudiant);
+
+    /**
+     * Fetch all {@link com.urservices.domain.Dispenser} assigned to a {@link com.urservices.domain.Enseignant}
+     *
+     * @param idTeacher The ID of the Teacher
+     * */
+    List<Dispenser> findByEnseignantId(Long idTeacher);
 }
