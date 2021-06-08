@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IRequete } from '../requete.model';
-
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
-import { RequeteService } from '../service/requete.service';
+import { StatutRequete } from 'app/entities/enumerations/statut-requete.model';
+import * as dayjs from 'dayjs';
+import { combineLatest } from 'rxjs';
 import { RequeteDeleteDialogComponent } from '../delete/requete-delete-dialog.component';
+
+import { IRequete, Requete } from '../requete.model';
+import { RequeteService } from '../service/requete.service';
 
 @Component({
   selector: 'jhi-requete',
@@ -61,6 +63,30 @@ export class RequeteComponent implements OnInit {
     return item.id!;
   }
 
+  valider(item: IRequete): void {
+    const req = this.getRequeteForValidation(item);
+    req.statut = StatutRequete.FONDE;
+    this.requeteService.partialUpdate(req).subscribe(x => this.loadPage());
+  }
+
+  rejeter(item: IRequete): void {
+    const req = this.getRequeteForValidation(item);
+    req.statut = StatutRequete.NON_FONDE;
+    this.requeteService.partialUpdate(req).subscribe(x => this.loadPage());
+  }
+
+  canValidate(item: IRequete): boolean {
+    return item.statut === StatutRequete.EN_ATTENTE;
+  }
+
+  getRequeteForValidation(item: IRequete): IRequete {
+    return {
+      ...new Requete(),
+      id: item.id,
+      traiter: true,
+      dateModification: dayjs(),
+    };
+  }
   delete(requete: IRequete): void {
     const modalRef = this.modalService.open(RequeteDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.requete = requete;

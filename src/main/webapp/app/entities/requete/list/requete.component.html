@@ -80,26 +80,40 @@
           <td class="text-right">
             <div class="btn-group">
               <button
-                type="submit"
-                [routerLink]="['/requete', requete.id, 'view']"
-                class="btn btn-info btn-sm"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Valider la requete"
+                *ngIf="canValidate(requete)"
+                (click)="valider(requete)"
+                class="btn btn-success btn-sm"
                 data-cy="entityDetailsButton"
               >
-                <fa-icon icon="eye"></fa-icon>
+                <fa-icon icon="check"></fa-icon>
                 <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>--></button
               >&nbsp;
 
               <button
-                type="submit"
-                [routerLink]="['/requete', requete.id, 'edit']"
-                class="btn btn-primary btn-sm"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Rejeter la requete"
+                *ngIf="canValidate(requete)"
+                (click)="rejeter(requete)"
+                class="btn btn-warning btn-sm"
                 data-cy="entityEditButton"
               >
-                <fa-icon icon="pencil-alt"></fa-icon>
+                <fa-icon icon="ban"></fa-icon>
                 <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>--></button
               >&nbsp;
 
-              <button type="submit" (click)="delete(requete)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button
+                type="submit"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Supprimer la requete"
+                (click)="delete(requete)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
                 <fa-icon icon="times"></fa-icon>
                 <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
               </button>

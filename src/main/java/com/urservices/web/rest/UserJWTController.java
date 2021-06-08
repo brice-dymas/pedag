@@ -3,6 +3,7 @@ package com.urservices.web.rest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.urservices.security.jwt.JWTFilter;
 import com.urservices.security.jwt.TokenProvider;
+import com.urservices.service.MailService;
 import com.urservices.web.rest.vm.LoginVM;
 import javax.validation.Valid;
 import org.springframework.http.HttpHeaders;
@@ -22,16 +23,25 @@ import org.springframework.web.bind.annotation.*;
 public class UserJWTController {
 
     private final TokenProvider tokenProvider;
+    private final MailService mailService;
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    public UserJWTController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
+    public UserJWTController(
+        TokenProvider tokenProvider,
+        MailService mailService,
+        AuthenticationManagerBuilder authenticationManagerBuilder
+    ) {
         this.tokenProvider = tokenProvider;
+        this.mailService = mailService;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
     }
 
     @PostMapping("/authenticate")
     public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginVM loginVM) {
+        mailService.sendEmail("briceguemkam@gmail.com", "Test de Jhipster", "Ceci est un test Jhipster", false, false);
+        mailService.sendEmail("brice.guemkam@iforce5.com", "Test de Jhipster", "Ceci est un test Jhipster", false, false);
+
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
             loginVM.getUsername(),
             loginVM.getPassword()
