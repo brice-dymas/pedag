@@ -3,7 +3,7 @@
     <span jhiTranslate="pedagApp.requete.home.title">Requetes</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+      <button class="btn btn-info mr-2" (click)="refresh()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="pedagApp.requete.home.refreshListLabel">Refresh List</span>
       </button>
@@ -31,23 +31,24 @@
   <div class="table-responsive" id="entities" *ngIf="requetes && requetes.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-          <th scope="col" jhiSortBy="objet"><span jhiTranslate="pedagApp.requete.objet">Objet</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="description">
-            <span jhiTranslate="pedagApp.requete.description">Description</span> <fa-icon icon="sort"></fa-icon>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="pedagApp.requete.objet">Objet</span></th>
+          <th scope="col">
+            <span jhiTranslate="pedagApp.requete.description">Description</span>
           </th>
-          <th scope="col" jhiSortBy="statut"><span jhiTranslate="pedagApp.requete.statut">Statut</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="dateCreation">
-            <span jhiTranslate="pedagApp.requete.dateCreation">Date Creation</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col"><span jhiTranslate="pedagApp.requete.statut">Statut</span></th>
+          <th scope="col">
+            <span jhiTranslate="pedagApp.requete.dateCreation">Date Creation</span>
           </th>
-          <!--<th scope="col" jhiSortBy="etudiant.id">
-            <span jhiTranslate="pedagApp.requete.etudiant">Etudiant</span> <fa-icon icon="sort"></fa-icon>
-          </th>-->
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let requete of requetes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/requete', requete.id, 'view']">{{ requete.id }}</a>
+          </td>
           <td>{{ requete.objet }}</td>
           <td>{{ requete.description }}</td>
           <td
@@ -72,11 +73,6 @@
             {{ requete.statut }}
           </td>
           <td>{{ requete.dateCreation | formatMediumDate }}</td>
-          <!--          <td>-->
-          <!--            <div *ngIf="requete.etudiant">-->
-          <!--              <a [routerLink]="['/inscription', requete.etudiant?.id, 'view']">{{ requete.etudiant?.etudiant?.prenom + ' ' + requete.etudiant?.etudiant?.nom }}</a>-->
-          <!--            </div>-->
-          <!--          </td>-->
           <td class="text-right">
             <div class="btn-group">
               <button
@@ -86,7 +82,7 @@
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
-                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>--></button
+                <!--              <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>--></button
               >&nbsp;
 
               <button
@@ -96,12 +92,12 @@
                 data-cy="entityEditButton"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>
-                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>--></button
+                <!--              <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>--></button
               >&nbsp;
 
               <button type="submit" (click)="delete(requete)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
-                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
+                <!--              <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
               </button>
             </div>
           </td>

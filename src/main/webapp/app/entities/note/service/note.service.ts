@@ -37,6 +37,11 @@ export class NoteService {
     return this.http.get<INote[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  queryByStudent(id: number, req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<INote[]>(`${this.resourceUrl}/student/${id}`, { params: options, observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

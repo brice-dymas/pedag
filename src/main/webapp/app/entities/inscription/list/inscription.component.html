@@ -54,17 +54,21 @@
           <td>{{ inscription.date | formatMediumDate }}</td>
           <td>
             <div *ngIf="inscription.etudiant">
-              <a [routerLink]="['/etudiant', inscription.etudiant?.id, 'view']">{{ inscription.etudiant?.id }}</a>
+              <a [routerLink]="['/etudiant', inscription.etudiant?.id, 'view']">{{
+                inscription.etudiant?.prenom + ' ' + inscription.etudiant?.nom
+              }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="inscription.filiere">
-              <a [routerLink]="['/filiere', inscription.filiere?.id, 'view']">{{ inscription.filiere?.id }}</a>
+              <a [routerLink]="['/filiere', inscription.filiere?.id, 'view']">{{ inscription.filiere?.libelle }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="inscription.anneeAcademique">
-              <a [routerLink]="['/annee-academique', inscription.anneeAcademique?.id, 'view']">{{ inscription.anneeAcademique?.id }}</a>
+              <a [routerLink]="['/annee-academique', inscription.anneeAcademique?.id, 'view']">{{
+                inscription.anneeAcademique?.libelle
+              }}</a>
             </div>
           </td>
           <td class="text-right">

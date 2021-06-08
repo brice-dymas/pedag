@@ -84,4 +84,29 @@ public class RequeteServiceImpl implements RequeteService {
         log.debug("Request to delete Requete : {}", id);
         requeteRepository.deleteById(id);
     }
+
+    /**
+     * Get the all requete of a Student.
+     *
+     * @param id the id of the Student.
+     * @return all the request.
+     */
+    @Override
+    public Page<Requete> findAllByEtudiant(Long id, Pageable pageable) {
+        log.debug("Request to get all Requete of student : {}", id);
+        return requeteRepository.rechercherParEtudiant(id, pageable);
+    }
+
+    /**
+     * Get the all requete of a Student.
+     *
+     * @param id       the id of the Student.
+     * @param pageable
+     * @return all the request.
+     */
+    @Override
+    public Page<Requete> findAllByEtudiant_id(Long id, Pageable pageable) {
+        log.debug("Request to get all Requete of student : {}", id);
+        return requeteRepository.findByEtudiant_Etudiant_UserId(id, pageable);
+    }
 }

@@ -153,6 +153,21 @@ public class RequeteResource {
     }
 
     /**
+     * {@code GET  /requetes} : get all the student's requetes.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of requetes in body.
+     */
+    @GetMapping("/requetes/student/{id}")
+    public ResponseEntity<List<Requete>> getAllStudentRequetes(@PathVariable Long id, Pageable pageable) {
+        log.debug("REST request to get a page of Requetes for Student {}", id);
+        Page<Requete> page = requeteService.findAllByEtudiant(id, pageable);
+        //        Page<Requete> page = requeteService.findAllByEtudiant_id(id, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
      * {@code GET  /requetes/:id} : get the "id" requete.
      *
      * @param id the id of the requete to retrieve.
