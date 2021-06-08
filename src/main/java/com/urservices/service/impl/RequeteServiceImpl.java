@@ -1,8 +1,14 @@
 package com.urservices.service.impl;
 
+import com.urservices.domain.Inscription;
 import com.urservices.domain.Requete;
+import com.urservices.domain.enumeration.StatutRequete;
+import com.urservices.repository.InscriptionRepository;
 import com.urservices.repository.RequeteRepository;
 import com.urservices.service.RequeteService;
+import com.urservices.service.dto.NewRequeteDTO;
+import com.urservices.utils.RequeteHelper;
+import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,15 +27,30 @@ public class RequeteServiceImpl implements RequeteService {
     private final Logger log = LoggerFactory.getLogger(RequeteServiceImpl.class);
 
     private final RequeteRepository requeteRepository;
+    private final InscriptionRepository inscriptionRepository;
 
-    public RequeteServiceImpl(RequeteRepository requeteRepository) {
+    public RequeteServiceImpl(RequeteRepository requeteRepository, InscriptionRepository inscriptionRepository) {
         this.requeteRepository = requeteRepository;
+        this.inscriptionRepository = inscriptionRepository;
     }
 
     @Override
     public Requete save(Requete requete) {
         log.debug("Request to save Requete : {}", requete);
         return requeteRepository.save(requete);
+    }
+
+    /**
+     * Save a requete.
+     *
+     * @param param the entity to sa ve.
+     * @return the persisted entity.
+     */
+    @Override
+    public Requete save(NewRequeteDTO param) {
+        final Inscription inscription = inscriptionRepository.findEtudiantByUserId(param.getUserId());
+        var req = RequeteHelper.newRequeteDtoToRequetePost(param, inscription);
+        return requeteRepository.save(req);
     }
 
     @Override

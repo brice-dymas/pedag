@@ -2,6 +2,32 @@
 
 This application was generated using JHipster 7.0.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v7.0.1](https://www.jhipster.tech/documentation-archive/v7.0.1).
 
+## Cloud Deployment
+
+1. First you have to compile for production with the following command :
+
+```
+gradle build  -PenvironmentName=prod --exclude-task testClasses -i
+```
+
+2. Login to your cloud account :
+
+```
+heroku login
+```
+
+3. Deploy the Jar/War file to your cloud account :
+
+```
+heroku deploy:jar build/libs/pedag-0.0.1-SNAPSHOT.jar
+```
+
+4. Open and monitor de deployed app :
+
+```
+heroku open && heroku logs --tail
+```
+
 ## Development
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
@@ -39,7 +65,7 @@ JHipster ships with PWA (Progressive Web App) support, and it's turned off by de
 The service worker initialization code is disabled by default. To enable it, uncomment the following code in `src/main/webapp/app/app.module.ts`:
 
 ```typescript
-ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
+ServiceWorkerModule.register('ngsw-worker.js', { enabled: false });
 ```
 
 ### Managing dependencies

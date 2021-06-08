@@ -13,6 +13,7 @@ export interface IRequete {
   dateModification?: dayjs.Dayjs | null;
   etudiant?: IInscription | null;
   validateur?: IAdministrateur | null;
+  userId?: number | null;
 }
 
 export class Requete implements IRequete {
@@ -25,7 +26,8 @@ export class Requete implements IRequete {
     public dateCreation?: dayjs.Dayjs | null,
     public dateModification?: dayjs.Dayjs | null,
     public etudiant?: IInscription | null,
-    public validateur?: IAdministrateur | null
+    public validateur?: IAdministrateur | null,
+    public userId?: number | null
   ) {
     this.traiter = this.traiter ?? false;
   }

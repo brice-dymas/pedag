@@ -1,6 +1,7 @@
 package com.urservices.service;
 
 import com.urservices.domain.Requete;
+import com.urservices.service.dto.NewRequeteDTO;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,13 @@ public interface RequeteService {
      * @return the persisted entity.
      */
     Requete save(Requete requete);
+    /**
+     * Save a requete.
+     *
+     * @param requete the entity to save.
+     * @return the persisted entity.
+     */
+    Requete save(NewRequeteDTO requete);
 
     /**
      * Partially updates a requete.

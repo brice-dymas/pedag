@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
@@ -26,6 +26,12 @@ export class RequeteService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  createSimple(requete: IRequete): Observable<EntityResponseType> {
+    return this.http
+      .post<IRequete>(`${this.resourceUrl}/simple`, requete, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
   update(requete: IRequete): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(requete);
     return this.http
@@ -34,9 +40,9 @@ export class RequeteService {
   }
 
   partialUpdate(requete: IRequete): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(requete);
+    const headers = new HttpHeaders().set('Content-Type', 'application/merge-patch+json');
     return this.http
-      .patch<IRequete>(`${this.resourceUrl}/${getRequeteIdentifier(requete) as number}`, copy, { observe: 'response' })
+      .patch<IRequete>(`${this.resourceUrl}/${getRequeteIdentifier(requete) as number}`, requete, { observe: 'response', headers })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
