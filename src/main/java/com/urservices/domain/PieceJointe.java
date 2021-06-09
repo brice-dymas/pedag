@@ -3,7 +3,8 @@ package com.urservices.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -39,6 +40,24 @@ public class PieceJointe implements Serializable {
 
     @ManyToOne
     private Matiere matiere;
+
+    public PieceJointe(
+        Long id,
+        @NotNull @Size(min = 3, max = 50) String libelle,
+        byte[] contenu,
+        String contenuContentType,
+        LocalDate dateCreation,
+        Matiere matiere
+    ) {
+        this.id = id;
+        this.libelle = libelle;
+        this.contenu = contenu;
+        this.contenuContentType = contenuContentType;
+        this.dateCreation = dateCreation;
+        this.matiere = matiere;
+    }
+
+    public PieceJointe() {}
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
