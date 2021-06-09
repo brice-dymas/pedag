@@ -32,4 +32,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   openMesRequetes(): void {
     this.router.navigate(['/etudiant/mes-requetes']);
   }
+
+  openMesCours(): void {
+    this.router.navigate(['/etudiant/mes-cours']);
+  }
 }
