@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
+import { MatieresEtudiantComponent } from 'app/shared/student/matieres-etudiant/matieres-etudiant.component';
 import { RequeteEtudiantComponent } from 'app/shared/student/requete-etudiant/requete-etudiant.component';
 import { EtudiantComponent } from '../list/etudiant.component';
 import { EtudiantDetailComponent } from '../detail/etudiant-detail.component';
@@ -20,6 +21,14 @@ const etudiantRoute: Routes = [
   {
     path: 'mes-requetes',
     component: RequeteEtudiantComponent,
+    data: {
+      defaultSort: 'id,asc',
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'mes-cours',
+    component: MatieresEtudiantComponent,
     data: {
       defaultSort: 'id,asc',
     },

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DispenserRepository extends JpaRepository<Dispenser, Long> {
     @Query(
-        "SELECT D FROM Dispenser D, Inscription I, CoursFiliere C WHERE C.filiere.id = I.filiere.id AND D.matiere.id = C.matiere.id AND I.etudiant.id= :idEtudiant"
+        "SELECT DISTINCT D FROM Dispenser D, Inscription I, CoursFiliere C, Etudiant E, User U WHERE D.matiere.id = C.matiere.id AND C.filiere.id = I.filiere.id AND I.etudiant.id= E.id AND E.user.id = U.id AND U.id= :idEtudiant"
     )
     List<Dispenser> findAllStudentMatieres(Long idEtudiant);
 
