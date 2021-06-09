@@ -47,4 +47,13 @@ public interface PieceJointeService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Get all the pieceJointes of a given Matiere.
+     *
+     * @param id The identifier of the desired matiere
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    Page<PieceJointe> findByMatiereId(Long id, Pageable pageable);
 }

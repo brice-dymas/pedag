@@ -153,6 +153,21 @@ public class PieceJointeResource {
     }
 
     /**
+     * {@code GET  /piece-jointes} : get all the pieceJointes of a given matiere.
+     *
+     * @param id       The identifier of the desired matiere
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of pieceJointes in body.
+     */
+    @GetMapping("/piece-jointes/matiere/{id}")
+    public ResponseEntity<List<PieceJointe>> getAllPieceJointesMatiere(@PathVariable Long id, Pageable pageable) {
+        log.debug("REST request to get a page of PieceJointes for Matiere {}", id);
+        Page<PieceJointe> page = pieceJointeService.findByMatiereId(id, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
      * {@code GET  /piece-jointes/:id} : get the "id" pieceJointe.
      *
      * @param id the id of the pieceJointe to retrieve.

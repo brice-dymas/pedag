@@ -78,4 +78,17 @@ public class PieceJointeServiceImpl implements PieceJointeService {
         log.debug("Request to delete PieceJointe : {}", id);
         pieceJointeRepository.deleteById(id);
     }
+
+    /**
+     * Get all the pieceJointes of a given Matiere.
+     *
+     * @param id       The identifier of the desired matiere
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    @Override
+    public Page<PieceJointe> findByMatiereId(Long id, Pageable pageable) {
+        log.debug("Request to get all PieceJointes of Matiere {}", id);
+        return pieceJointeRepository.findByMatiereId(id, pageable);
+    }
 }

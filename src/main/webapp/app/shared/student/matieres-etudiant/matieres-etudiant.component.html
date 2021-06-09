@@ -1,1 +1,97 @@
-<p>matieres-etudiant works!</p>
+<div>
+  <h2 id="page-heading" data-cy="DispenserHeading">
+    <span jhiTranslate="pedagApp.dispenser.home.title">Dispensers</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="refresh()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="pedagApp.dispenser.home.refreshListLabel">Refresh List</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="dispensers?.length === 0">
+    <span jhiTranslate="pedagApp.dispenser.home.notFound">No dispensers found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="dispensers && dispensers.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <!--        <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>-->
+          <th scope="col">
+            <span jhiTranslate="pedagApp.dispenser.anneeAcademique">Annee Academique</span>
+          </th>
+          <th scope="col">
+            <span jhiTranslate="pedagApp.dispenser.semestre">Semestre</span>
+          </th>
+          <th scope="col">
+            <span jhiTranslate="pedagApp.dispenser.enseignant">Enseignant</span>
+          </th>
+          <th scope="col">
+            <span jhiTranslate="pedagApp.dispenser.matiere">Matiere</span>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dispenser of dispensers; trackBy: trackId" data-cy="entityTable">
+          <!--<td>
+          <a [routerLink]="['/dispenser', dispenser.id, 'view']">{{ dispenser.id }}</a>
+        </td>-->
+          <td>
+            <div *ngIf="dispenser.anneeAcademique">
+              <a>{{ dispenser.anneeAcademique?.libelle }}</a>
+            </div>
+          </td>
+          <td jhiTranslate="{{ 'pedagApp.Semestre.' + dispenser.semestre }}">{{ dispenser.semestre }}</td>
+          <td>
+            <div *ngIf="dispenser.enseignant">
+              <a>{{ dispenser.enseignant?.grade }} {{ dispenser.enseignant?.nom }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="dispenser.matiere">
+              <a>{{ dispenser.matiere?.libelle }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Voir les details"
+                type="submit"
+                [routerLink]="['/matiere', dispenser.matiere?.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="dispensers && dispensers.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

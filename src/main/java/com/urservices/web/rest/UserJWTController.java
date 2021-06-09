@@ -39,8 +39,8 @@ public class UserJWTController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginVM loginVM) {
-        mailService.sendEmail("briceguemkam@gmail.com", "Test de Jhipster", "Ceci est un test Jhipster", false, false);
-        mailService.sendEmail("brice.guemkam@iforce5.com", "Test de Jhipster", "Ceci est un test Jhipster", false, false);
+        //        mailService.sendEmail("briceguemkam@gmail.com", "Test de Jhipster", "Ceci est un test Jhipster", false, false);
+        //        mailService.sendEmail("brice.guemkam@iforce5.com", "Test de Jhipster", "Ceci est un test Jhipster", false, false);
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
             loginVM.getUsername(),
