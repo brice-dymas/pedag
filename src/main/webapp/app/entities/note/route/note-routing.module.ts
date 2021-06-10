@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
+import { NotesEtudiantComponent } from 'app/shared/student/notes-etudiant/notes-etudiant.component';
 import { NoteComponent } from '../list/note.component';
 import { NoteDetailComponent } from '../detail/note-detail.component';
 import { NoteUpdateComponent } from '../update/note-update.component';

@@ -83,6 +83,7 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public Page<Note> findByEtudiantId(Long id, Pageable pageable) {
         log.debug("Request to get all Motes of student : {}", id);
-        return noteRepository.findByEtudiantId(id, pageable);
+        //        return noteRepository.findByEtudiantId(id, pageable);
+        return noteRepository.findByEtudiant_EtudiantUserIdOrderByIdDesc(id, pageable);
     }
 }
