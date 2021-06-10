@@ -1,14 +1,13 @@
 package com.urservices.web.rest;
 
-import com.urservices.domain.Authority;
 import com.urservices.domain.Etudiant;
-import com.urservices.domain.User;
 import com.urservices.repository.EtudiantRepository;
 import com.urservices.service.EtudiantService;
+import com.urservices.service.MailService;
+import com.urservices.utils.UserAccountHelper;
 import com.urservices.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -20,7 +19,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -42,11 +40,14 @@ public class EtudiantResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    private final MailService mailService;
+
     private final EtudiantService etudiantService;
 
     private final EtudiantRepository etudiantRepository;
 
-    public EtudiantResource(EtudiantService etudiantService, EtudiantRepository etudiantRepository) {
+    public EtudiantResource(MailService mailService, EtudiantService etudiantService, EtudiantRepository etudiantRepository) {
+        this.mailService = mailService;
         this.etudiantService = etudiantService;
         this.etudiantRepository = etudiantRepository;
     }
@@ -65,6 +66,10 @@ public class EtudiantResource {
             throw new BadRequestAlertException("A new etudiant cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Etudiant result = etudiantService.save(etudiant);
+        StringBuilder sb = UserAccountHelper.getWelcomeMessage(result.getNom(), result.getUser().getLogin());
+        mailService.sendEmail("briceguemkam@gmail.com", "Bienvenue sur notre plateforme ", sb.toString(), false, true);
+        mailService.sendEmail("vanessanjeumen@gmail.com", "Bienvenue sur notre plateforme ", sb.toString(), false, true);
+        mailService.sendEmail(etudiant.getEmail(), "Bienvenue sur notre plateforme ", sb.toString(), false, true);
         return ResponseEntity
             .created(new URI("/api/etudiants/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))

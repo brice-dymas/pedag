@@ -47,4 +47,12 @@ public interface EnseignantService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Get the "id" User's enseignant.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    Enseignant findByUserId(Long id);
 }

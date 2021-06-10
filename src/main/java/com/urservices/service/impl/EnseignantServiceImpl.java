@@ -101,4 +101,16 @@ public class EnseignantServiceImpl implements EnseignantService {
         log.debug("Request to delete Enseignant : {}", id);
         enseignantRepository.deleteById(id);
     }
+
+    /**
+     * Get the "id" User's enseignant.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    @Override
+    public Enseignant findByUserId(Long id) {
+        log.debug("Request to get an Enseignant using User ID : {}", id);
+        return enseignantRepository.findByUserId(id);
+    }
 }

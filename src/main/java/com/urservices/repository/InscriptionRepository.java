@@ -13,5 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface InscriptionRepository extends JpaRepository<Inscription, Long> {
     @Query("SELECT I FROM Inscription I, Etudiant E, User U WHERE I.etudiant.id = E.id AND E.user.id = U.id AND U.id= :id")
-    Inscription findEtudiantByUserId(@Param("id") Long id);
+    Inscription findEtudiantByUserId(Long id);
+
+    Inscription findByEtudiantUserId(Long id);
 }
