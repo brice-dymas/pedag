@@ -25,13 +25,13 @@ export class TokenService {
     }
   }
 
-  getInscription(): IInscription {
-    const xs: IInscription = JSON.parse(<string>sessionStorage.getItem(TK_INS)) || JSON.parse(<string>localStorage.getItem(TK_INS));
+  getInscription(): unknown {
+    const xs: unknown = JSON.parse(<string>sessionStorage.getItem(TK_INS)) || JSON.parse(<string>localStorage.getItem(TK_INS));
     return xs;
   }
 
-  getEnseignant(): IEnseignant {
-    const rs: IEnseignant = JSON.parse(<string>sessionStorage.getItem(TK_ENS)) || JSON.parse(<string>localStorage.getItem(TK_ENS));
+  getEnseignant(): unknown {
+    const rs: unknown = JSON.parse(<string>sessionStorage.getItem(TK_ENS)) || JSON.parse(<string>localStorage.getItem(TK_ENS));
     return rs;
   }
 

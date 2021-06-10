@@ -3,6 +3,7 @@ package com.urservices.utils;
 import com.urservices.domain.Administrateur;
 import com.urservices.domain.Enseignant;
 import com.urservices.domain.Etudiant;
+import com.urservices.security.AuthoritiesConstants;
 import com.urservices.service.dto.AdminUserDTO;
 import java.util.Collections;
 import java.util.HashSet;
@@ -18,7 +19,7 @@ public abstract class UserAccountHelper {
     public static final AdminUserDTO setUpStudentrAccount(Etudiant user) {
         AdminUserDTO userDTO = new AdminUserDTO();
         userDTO.setActivated(true);
-        userDTO.setAuthorities(new HashSet<>(Collections.singleton("ROLE_STUDENT")));
+        userDTO.setAuthorities(new HashSet<>(Collections.singleton(AuthoritiesConstants.STUDENT)));
         userDTO.setEmail(user.getEmail());
         userDTO.setFirstName(user.getPrenom());
         userDTO.setLastName(user.getNom());
@@ -30,7 +31,7 @@ public abstract class UserAccountHelper {
         StringBuilder login = new StringBuilder("prof").append(new Random().nextInt(1000));
         AdminUserDTO userDTO = new AdminUserDTO();
         userDTO.setActivated(true);
-        userDTO.setAuthorities(new HashSet<>(Collections.singleton("ROLE_STUDENT")));
+        userDTO.setAuthorities(new HashSet<>(Collections.singleton(AuthoritiesConstants.PROF)));
         userDTO.setEmail(user.getEmail());
         userDTO.setFirstName(user.getPrenom());
         userDTO.setLastName(user.getNom());
@@ -42,7 +43,7 @@ public abstract class UserAccountHelper {
         StringBuilder login = new StringBuilder("admin").append(new Random().nextInt(1000));
         AdminUserDTO userDTO = new AdminUserDTO();
         userDTO.setActivated(true);
-        userDTO.setAuthorities(new HashSet<>(Collections.singleton("ROLE_ADMIN")));
+        userDTO.setAuthorities(new HashSet<>(Collections.singleton(AuthoritiesConstants.ADMIN)));
         userDTO.setEmail(user.getEmail());
         userDTO.setFirstName(user.getPrenom());
         userDTO.setLastName(user.getNom());

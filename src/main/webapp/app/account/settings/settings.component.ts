@@ -17,8 +17,8 @@ import { IInscription } from 'app/entities/inscription/inscription.model';
 export class SettingsComponent implements OnInit {
   account!: Account;
   success = false;
-  ins!: IInscription;
-  ens!: IEnseignant;
+  ins!: any;
+  ens!: any;
 
   pls: any;
   languages = LANGUAGES;
@@ -54,12 +54,12 @@ export class SettingsComponent implements OnInit {
   }
 
   setExtraInfos(roles: string[]): void {
-    if (roles.includes(ROLE_PROF)) {
-      this.ens = this.tokenService.getEnseignant();
-    }
-    if (roles.includes(ROLE_STUDENT)) {
-      this.ins = this.tokenService.getInscription();
-    }
+    // if (roles.includes(ROLE_PROF)) {
+    this.ens = this.tokenService.getEnseignant();
+    // }
+    // if (roles.includes(ROLE_STUDENT)) {
+    this.ins = this.tokenService.getInscription();
+    // }
   }
 
   save(): void {
