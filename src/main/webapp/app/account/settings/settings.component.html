@@ -5,7 +5,10 @@
         User settings for [<strong>{{ account.login }}</strong
         >]
       </h2>
-
+      <div class="row">
+        {{ ins | json }}
+        {{ ens | json }}
+      </div>
       <div class="alert alert-success" *ngIf="success" jhiTranslate="settings.messages.success">
         <strong>Settings saved!</strong>
       </div>

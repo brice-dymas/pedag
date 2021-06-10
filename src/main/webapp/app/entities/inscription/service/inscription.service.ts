@@ -46,6 +46,12 @@ export class InscriptionService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  findbyUserId(id: number): Observable<EntityResponseType> {
+    return this.http
+      .get<IInscription>(`${this.resourceUrl}/user/${id}`, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http

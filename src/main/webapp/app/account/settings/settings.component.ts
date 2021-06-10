@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { ROLE_PROF, ROLE_STUDENT } from 'app/app.constants';
 
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { LANGUAGES } from 'app/config/language.constants';
+import { TokenService } from 'app/core/auth/token.service';
+import { IEnseignant } from 'app/entities/enseignant/enseignant.model';
+import { IInscription } from 'app/entities/inscription/inscription.model';
 
 @Component({
   selector: 'jhi-settings',
@@ -13,6 +17,9 @@ import { LANGUAGES } from 'app/config/language.constants';
 export class SettingsComponent implements OnInit {
   account!: Account;
   success = false;
+  ins!: IInscription;
+  ens!: IEnseignant;
+
   pls: any;
   languages = LANGUAGES;
   settingsForm = this.fb.group({
@@ -22,7 +29,12 @@ export class SettingsComponent implements OnInit {
     langKey: [undefined],
   });
 
-  constructor(private accountService: AccountService, private fb: FormBuilder, private translateService: TranslateService) {}
+  constructor(
+    private accountService: AccountService,
+    private fb: FormBuilder,
+    private translateService: TranslateService,
+    private tokenService: TokenService
+  ) {}
 
   ngOnInit(): void {
     this.accountService.identity().subscribe(account => {
@@ -36,8 +48,18 @@ export class SettingsComponent implements OnInit {
         });
 
         this.account = account;
+        this.setExtraInfos(this.account.authorities);
       }
     });
+  }
+
+  setExtraInfos(roles: string[]): void {
+    if (roles.includes(ROLE_PROF)) {
+      this.ens = this.tokenService.getEnseignant();
+    }
+    if (roles.includes(ROLE_STUDENT)) {
+      this.ins = this.tokenService.getInscription();
+    }
   }
 
   save(): void {

@@ -166,6 +166,19 @@ public class EnseignantResource {
     }
 
     /**
+     * {@code GET  /enseignants/user/:id} : get the "id" enseignant.
+     *
+     * @param id the id of the enseignant User's account to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the enseignant, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/enseignants/user/{id}")
+    public ResponseEntity<Enseignant> getEnseignantByUserId(@PathVariable Long id) {
+        log.debug("REST request to get Enseignant using User ID : {}", id);
+        Enseignant enseignant = enseignantService.findByUserId(id);
+        return ResponseEntity.ok(enseignant);
+    }
+
+    /**
      * {@code DELETE  /enseignants/:id} : delete the "id" enseignant.
      *
      * @param id the id of the enseignant to delete.

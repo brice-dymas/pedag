@@ -47,4 +47,20 @@ public interface InscriptionService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Get the an inscription using it's User's ID.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    Inscription findEtudiantByUserId(Long id);
+
+    /**
+     * Get the an inscription using it's User's ID
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    Inscription findByEtudiantUserId(Long id);
 }

@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface EnseignantRepository extends JpaRepository<Enseignant, Long> {}
+public interface EnseignantRepository extends JpaRepository<Enseignant, Long> {
+    Enseignant findByUserId(Long id);
+}

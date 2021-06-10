@@ -69,4 +69,28 @@ public class InscriptionServiceImpl implements InscriptionService {
         log.debug("Request to delete Inscription : {}", id);
         inscriptionRepository.deleteById(id);
     }
+
+    /**
+     * Get the an inscription using it's User's ID.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    @Override
+    public Inscription findEtudiantByUserId(Long id) {
+        log.debug("Request to get an Etudiant using User ID : {}", id);
+        return inscriptionRepository.findEtudiantByUserId(id);
+    }
+
+    /**
+     * Get the an inscription using it's User's ID
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    @Override
+    public Inscription findByEtudiantUserId(Long id) {
+        log.debug("Request to get an Etudiant using JPA User ID : {}", id);
+        return inscriptionRepository.findByEtudiantUserId(id);
+    }
 }
