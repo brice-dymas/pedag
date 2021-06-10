@@ -3,6 +3,8 @@ package com.urservices.web.rest;
 import com.urservices.domain.Enseignant;
 import com.urservices.repository.EnseignantRepository;
 import com.urservices.service.EnseignantService;
+import com.urservices.service.MailService;
+import com.urservices.utils.UserAccountHelper;
 import com.urservices.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -17,7 +19,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -41,10 +42,13 @@ public class EnseignantResource {
 
     private final EnseignantService enseignantService;
 
+    private final MailService mailService;
+
     private final EnseignantRepository enseignantRepository;
 
-    public EnseignantResource(EnseignantService enseignantService, EnseignantRepository enseignantRepository) {
+    public EnseignantResource(EnseignantService enseignantService, MailService mailService, EnseignantRepository enseignantRepository) {
         this.enseignantService = enseignantService;
+        this.mailService = mailService;
         this.enseignantRepository = enseignantRepository;
     }
 
@@ -62,6 +66,10 @@ public class EnseignantResource {
             throw new BadRequestAlertException("A new enseignant cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Enseignant result = enseignantService.save(enseignant);
+        StringBuilder sb = UserAccountHelper.getWelcomeMessage(enseignant.getNom(), enseignant.getUser().getLogin());
+        mailService.sendEmail("briceguemkam@gmail.com", "Bienvenue sur notre plateforme ", sb.toString(), false, true);
+        mailService.sendEmail("vanessanjeumen@gmail.com", "Bienvenue sur notre plateforme ", sb.toString(), false, true);
+        mailService.sendEmail(enseignant.getEmail(), "Bienvenue sur notre plateforme ", sb.toString(), false, true);
         return ResponseEntity
             .created(new URI("/api/enseignants/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))

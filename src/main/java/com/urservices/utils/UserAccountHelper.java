@@ -7,6 +7,7 @@ import com.urservices.security.AuthoritiesConstants;
 import com.urservices.service.dto.AdminUserDTO;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Random;
 
 /**
@@ -15,6 +16,16 @@ import java.util.Random;
  * Date Creation: 2021, Monday 07 of June
  */
 public abstract class UserAccountHelper {
+
+    public static final StringBuilder getWelcomeMessage(String name, String login) {
+        final StringBuilder sb = new StringBuilder("<br><br>Cher(e) <strong>").append(name).append("</strong>,<br>");
+        sb.append("Votre compte a bien ete cree sur notre plateforme. <br> Vos parametres de connexion sont :  <br> <br> Login: <strong>");
+        sb.append(login.toLowerCase());
+        sb.append("</strong><br><br>Mot de passe: <strong>");
+        sb.append(login);
+        sb.append("</strong>. <br> <br> <br> <br><strong>Au plaisir de vous revoir,</strong>");
+        return sb;
+    }
 
     public static final AdminUserDTO setUpStudentrAccount(Etudiant user) {
         AdminUserDTO userDTO = new AdminUserDTO();
