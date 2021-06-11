@@ -46,6 +46,12 @@ export class PieceJointeService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  findByMatiereForCreation(idMatiere: number): Observable<EntityResponseType> {
+    return this.http
+      .get<IPieceJointe>(`${this.resourceUrl}/matiere/${idMatiere}/prepare`, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http

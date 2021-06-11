@@ -66,13 +66,13 @@ export class RequeteComponent implements OnInit {
   valider(item: IRequete): void {
     const req = this.getRequeteForValidation(item);
     req.statut = StatutRequete.FONDE;
-    this.requeteService.partialUpdate(req).subscribe(x => this.loadPage());
+    this.requeteService.partialUpdate(req).subscribe(() => this.loadPage());
   }
 
   rejeter(item: IRequete): void {
     const req = this.getRequeteForValidation(item);
     req.statut = StatutRequete.NON_FONDE;
-    this.requeteService.partialUpdate(req).subscribe(x => this.loadPage());
+    this.requeteService.partialUpdate(req).subscribe(() => this.loadPage());
   }
 
   canValidate(item: IRequete): boolean {

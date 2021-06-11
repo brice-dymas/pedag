@@ -10,6 +10,13 @@ import org.springframework.data.domain.Pageable;
  */
 public interface PieceJointeService {
     /**
+     * Save a pieceJointe of a specific Matiere.
+     *
+     * @param pieceJointe the entity to save.
+     * @return the persisted entity.
+     */
+    PieceJointe save(Long id, PieceJointe pieceJointe);
+    /**
      * Save a pieceJointe.
      *
      * @param pieceJointe the entity to save.
@@ -40,6 +47,14 @@ public interface PieceJointeService {
      * @return the entity.
      */
     Optional<PieceJointe> findOne(Long id);
+
+    /**
+     * Get the "id" of a matiere for pieceJointe.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    PieceJointe findOneForSet(Long id);
 
     /**
      * Delete the "id" pieceJointe.

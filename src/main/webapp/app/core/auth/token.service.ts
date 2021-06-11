@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ROLE_PROF, ROLE_STUDENT, TK_ENS, TK_INS } from 'app/app.constants';
-import { IEnseignant } from 'app/entities/enseignant/enseignant.model';
 import { EnseignantService } from 'app/entities/enseignant/service/enseignant.service';
-import { IInscription } from 'app/entities/inscription/inscription.model';
 import { InscriptionService } from 'app/entities/inscription/service/inscription.service';
 
 @Injectable({ providedIn: 'root' })

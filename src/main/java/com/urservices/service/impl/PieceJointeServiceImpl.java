@@ -1,8 +1,11 @@
 package com.urservices.service.impl;
 
+import com.urservices.domain.Matiere;
 import com.urservices.domain.PieceJointe;
+import com.urservices.repository.MatiereRepository;
 import com.urservices.repository.PieceJointeRepository;
 import com.urservices.service.PieceJointeService;
+import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,13 +25,32 @@ public class PieceJointeServiceImpl implements PieceJointeService {
 
     private final PieceJointeRepository pieceJointeRepository;
 
-    public PieceJointeServiceImpl(PieceJointeRepository pieceJointeRepository) {
+    private final MatiereRepository matiereRepository;
+
+    public PieceJointeServiceImpl(PieceJointeRepository pieceJointeRepository, MatiereRepository matiereRepository) {
         this.pieceJointeRepository = pieceJointeRepository;
+        this.matiereRepository = matiereRepository;
+    }
+
+    /**
+     * Save a pieceJointe of a specific Matiere.
+     *
+     * @param id
+     * @param pieceJointe the entity to save.
+     * @return the persisted entity.
+     */
+    @Override
+    public PieceJointe save(Long id, PieceJointe pieceJointe) {
+        final Matiere matiere = matiereRepository.findById(id).orElse(null);
+        pieceJointe.setMatiere(matiere);
+        pieceJointe.setDateCreation(LocalDate.now());
+        return pieceJointeRepository.save(pieceJointe);
     }
 
     @Override
     public PieceJointe save(PieceJointe pieceJointe) {
         log.debug("Request to save PieceJointe : {}", pieceJointe);
+        pieceJointe.setDateCreation(LocalDate.now());
         return pieceJointeRepository.save(pieceJointe);
     }
 
@@ -71,6 +93,19 @@ public class PieceJointeServiceImpl implements PieceJointeService {
     public Optional<PieceJointe> findOne(Long id) {
         log.debug("Request to get PieceJointe : {}", id);
         return pieceJointeRepository.findById(id);
+    }
+
+    /**
+     * Get the "id" of a matiere for pieceJointe.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    @Override
+    public PieceJointe findOneForSet(Long id) {
+        PieceJointe p = new PieceJointe();
+        p.setMatiere(matiereRepository.findById(id).orElse(null));
+        return p;
     }
 
     @Override

@@ -4,18 +4,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { AccountService } from 'app/core/auth/account.service';
+import { IDispenser } from 'app/entities/dispenser/dispenser.model';
+import { DispenserService } from 'app/entities/dispenser/service/dispenser.service';
 import { RequeteDeleteDialogComponent } from 'app/entities/requete/delete/requete-delete-dialog.component';
-import { IRequete } from 'app/entities/requete/requete.model';
-import { RequeteService } from 'app/entities/requete/service/requete.service';
 import { combineLatest, Subscription } from 'rxjs';
 
 @Component({
-  selector: 'jhi-requete-etudiant',
-  templateUrl: './requete-etudiant.component.html',
-  styleUrls: ['./requete-etudiant.component.scss'],
+  selector: 'jhi-matieres-prof',
+  templateUrl: './matieres-prof.component.html',
+  styleUrls: ['./matieres-prof.component.scss'],
 })
-export class RequeteEtudiantComponent implements OnInit, OnDestroy {
-  requetes?: IRequete[];
+export class MatieresProfComponent implements OnInit, OnDestroy {
+  dispensers?: IDispenser[];
   isLoading = false;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -28,7 +28,7 @@ export class RequeteEtudiantComponent implements OnInit, OnDestroy {
 
   constructor(
     private accountService: AccountService,
-    protected requeteService: RequeteService,
+    protected dispenserService: DispenserService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected modalService: NgbModal
@@ -53,13 +53,13 @@ export class RequeteEtudiantComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
 
-    this.requeteService
-      .queryByStudent(id, {
+    this.dispenserService
+      .queryByTeacher(id, {
         page: pageToLoad - 1,
         size: this.itemsPerPage,
       })
       .subscribe(
-        (res: HttpResponse<IRequete[]>) => {
+        (res: HttpResponse<IDispenser[]>) => {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
         },
@@ -70,11 +70,11 @@ export class RequeteEtudiantComponent implements OnInit, OnDestroy {
       );
   }
 
-  trackId(index: number, item: IRequete): number {
+  trackId(index: number, item: IDispenser): number {
     return item.id!;
   }
 
-  delete(requete: IRequete): void {
+  delete(requete: IDispenser): void {
     const modalRef = this.modalService.open(RequeteDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.requete = requete;
     // unsubscribe not needed because closed completes on modal close
@@ -95,18 +95,18 @@ export class RequeteEtudiantComponent implements OnInit, OnDestroy {
     });
   }
 
-  protected onSuccess(data: IRequete[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
+  protected onSuccess(data: IDispenser[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
     if (navigate) {
-      this.router.navigate(['/etudiant/mes-requetes'], {
+      this.router.navigate(['/enseignant/mes-cours'], {
         queryParams: {
           page: this.page,
           size: this.itemsPerPage,
         },
       });
     }
-    this.requetes = data ?? [];
+    this.dispensers = data ?? [];
     this.ngbPaginationPage = this.page;
   }
 

@@ -17,4 +17,6 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
     Page<Note> findByEtudiantId(Long id, Pageable pageable);
 
     Page<Note> findByEtudiant_EtudiantUserIdOrderByIdDesc(Long id, Pageable pageable);
+
+    Page<Note> findByEnseignantUserIdOrderByIdDesc(Long id, Pageable pageable);
 }

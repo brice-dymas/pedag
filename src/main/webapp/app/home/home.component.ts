@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { TK_ENS, TK_INS } from 'app/app.constants';
+import { ROLE_PROF, ROLE_STUDENT } from 'app/app.constants';
 import { TokenService } from 'app/core/auth/token.service';
 import { Subscription } from 'rxjs';
 
@@ -15,6 +15,8 @@ import { Account } from 'app/core/auth/account.model';
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   authSubscription?: Subscription;
+  PROF_ETU = ROLE_STUDENT;
+  PROF_ENS = ROLE_PROF;
 
   constructor(private accountService: AccountService, private router: Router, private storageService: TokenService) {}
 

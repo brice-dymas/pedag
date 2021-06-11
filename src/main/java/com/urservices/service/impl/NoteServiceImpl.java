@@ -86,4 +86,16 @@ public class NoteServiceImpl implements NoteService {
         //        return noteRepository.findByEtudiantId(id, pageable);
         return noteRepository.findByEtudiant_EtudiantUserIdOrderByIdDesc(id, pageable);
     }
+
+    /**
+     * Get all notes of a Teacher.
+     *
+     * @param id       the id of the Teacher User Account.
+     * @param pageable
+     * @return the list of notes.
+     */
+    @Override
+    public Page<Note> findByEnseignantId(Long id, Pageable pageable) {
+        return noteRepository.findByEnseignantUserIdOrderByIdDesc(id, pageable);
+    }
 }
