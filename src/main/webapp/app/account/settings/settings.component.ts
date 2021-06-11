@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { ROLE_PROF, ROLE_STUDENT } from 'app/app.constants';
 
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { LANGUAGES } from 'app/config/language.constants';
 import { TokenService } from 'app/core/auth/token.service';
-import { IEnseignant } from 'app/entities/enseignant/enseignant.model';
-import { IInscription } from 'app/entities/inscription/inscription.model';
 
 @Component({
   selector: 'jhi-settings',
@@ -48,18 +45,14 @@ export class SettingsComponent implements OnInit {
         });
 
         this.account = account;
-        this.setExtraInfos(this.account.authorities);
+        this.setExtraInfos();
       }
     });
   }
 
-  setExtraInfos(roles: string[]): void {
-    // if (roles.includes(ROLE_PROF)) {
+  setExtraInfos(): void {
     this.ens = this.tokenService.getEnseignant();
-    // }
-    // if (roles.includes(ROLE_STUDENT)) {
     this.ins = this.tokenService.getInscription();
-    // }
   }
 
   save(): void {

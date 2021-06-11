@@ -16,6 +16,9 @@ import { RequeteEtudiantComponent } from './student/requete-etudiant/requete-etu
 import { MatieresEtudiantComponent } from './student/matieres-etudiant/matieres-etudiant.component';
 import { NotesEtudiantComponent } from './student/notes-etudiant/notes-etudiant.component';
 import { RouterModule } from '@angular/router';
+import { ProfDashboardComponent } from './prof/prof-dashboard/prof-dashboard.component';
+import { NotesProfComponent } from './prof/notes-prof/notes-prof.component';
+import { MatieresProfComponent } from './prof/matieres-prof/matieres-prof.component';
 
 @NgModule({
   imports: [SharedLibsModule, RouterModule],
@@ -35,6 +38,9 @@ import { RouterModule } from '@angular/router';
     RequeteEtudiantComponent,
     MatieresEtudiantComponent,
     NotesEtudiantComponent,
+    ProfDashboardComponent,
+    NotesProfComponent,
+    MatieresProfComponent,
   ],
   exports: [
     SharedLibsModule,
@@ -53,6 +59,9 @@ import { RouterModule } from '@angular/router';
     RequeteEtudiantComponent,
     MatieresEtudiantComponent,
     NotesEtudiantComponent,
+    ProfDashboardComponent,
+    NotesProfComponent,
+    MatieresProfComponent,
   ],
 })
 export class SharedModule {}

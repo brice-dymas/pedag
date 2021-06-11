@@ -92,6 +92,6 @@ public class DispenserServiceImpl implements DispenserService {
     @Override
     public List<Dispenser> findByEnseignantId(Long idTeacher) {
         log.debug("Request to FIND_MATIERES_BY_ENSEIGNANT_ID  for Student: {}", idTeacher);
-        return dispenserRepository.findByEnseignantId(idTeacher);
+        return dispenserRepository.findByEnseignantUserIdOrderByIdDesc(idTeacher);
     }
 }

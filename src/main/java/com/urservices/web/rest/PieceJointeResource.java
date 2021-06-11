@@ -19,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
@@ -57,6 +58,27 @@ public class PieceJointeResource {
      */
     @PostMapping("/piece-jointes")
     public ResponseEntity<PieceJointe> createPieceJointe(@Valid @RequestBody PieceJointe pieceJointe) throws URISyntaxException {
+        log.debug("REST request to save PieceJointe : {}", pieceJointe);
+        if (pieceJointe.getId() != null) {
+            throw new BadRequestAlertException("A new pieceJointe cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        PieceJointe result = pieceJointeService.save(pieceJointe);
+        return ResponseEntity
+            .created(new URI("/api/piece-jointes/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * {@code POST  /piece-jointes} : Create a new pieceJointe of a specific Matiere.
+     *
+     * @param pieceJointe the pieceJointe to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new pieceJointe, or with status {@code 400 (Bad Request)} if the pieceJointe has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/piece-jointes/matiere/{id}")
+    public ResponseEntity<PieceJointe> createPieceJointe(@PathVariable Long id, @Valid @RequestBody PieceJointe pieceJointe)
+        throws URISyntaxException {
         log.debug("REST request to save PieceJointe : {}", pieceJointe);
         if (pieceJointe.getId() != null) {
             throw new BadRequestAlertException("A new pieceJointe cannot already have an ID", ENTITY_NAME, "idexists");
@@ -178,6 +200,19 @@ public class PieceJointeResource {
         log.debug("REST request to get PieceJointe : {}", id);
         Optional<PieceJointe> pieceJointe = pieceJointeService.findOne(id);
         return ResponseUtil.wrapOrNotFound(pieceJointe);
+    }
+
+    /**
+     * {@code GET  /piece-jointes/:id} : get the "id" of a Matiere to prepare a pieceJointe.
+     *
+     * @param id the id of the pieceJointe to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the pieceJointe, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/piece-jointes/matiere/{id}/prepare")
+    public ResponseEntity<PieceJointe> preparePieceJointeForUpdate(@NonNull @PathVariable Long id) {
+        log.debug("REST request to set PieceJointe  for Matiere: {}", id);
+        PieceJointe pieceJointe = pieceJointeService.findOneForSet(id);
+        return ResponseEntity.ok(pieceJointe);
     }
 
     /**

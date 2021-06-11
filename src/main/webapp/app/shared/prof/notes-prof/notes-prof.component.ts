@@ -4,18 +4,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { AccountService } from 'app/core/auth/account.service';
-import { RequeteDeleteDialogComponent } from 'app/entities/requete/delete/requete-delete-dialog.component';
-import { IRequete } from 'app/entities/requete/requete.model';
-import { RequeteService } from 'app/entities/requete/service/requete.service';
+import { NoteDeleteDialogComponent } from 'app/entities/note/delete/note-delete-dialog.component';
+import { INote } from 'app/entities/note/note.model';
+import { NoteService } from 'app/entities/note/service/note.service';
 import { combineLatest, Subscription } from 'rxjs';
 
 @Component({
-  selector: 'jhi-requete-etudiant',
-  templateUrl: './requete-etudiant.component.html',
-  styleUrls: ['./requete-etudiant.component.scss'],
+  selector: 'jhi-notes-prof',
+  templateUrl: './notes-prof.component.html',
+  styleUrls: ['./notes-prof.component.scss'],
 })
-export class RequeteEtudiantComponent implements OnInit, OnDestroy {
-  requetes?: IRequete[];
+export class NotesProfComponent implements OnInit, OnDestroy {
+  notes?: INote[];
   isLoading = false;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -28,7 +28,7 @@ export class RequeteEtudiantComponent implements OnInit, OnDestroy {
 
   constructor(
     private accountService: AccountService,
-    protected requeteService: RequeteService,
+    protected noteService: NoteService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected modalService: NgbModal
@@ -39,27 +39,26 @@ export class RequeteEtudiantComponent implements OnInit, OnDestroy {
     this.handleNavigation(this.account.id);
   }
 
+  refresh(): void {
+    this.handleNavigation(this.account.id);
+  }
   ngOnDestroy(): void {
     if (this.authSubscription) {
       this.authSubscription.unsubscribe();
     }
   }
 
-  refresh(): void {
-    this.loadPage(this.account.id);
-  }
-
-  loadPage(id: number, page?: number, dontNavigate?: boolean): void {
+  loadPage(id: any, page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
 
-    this.requeteService
-      .queryByStudent(id, {
+    this.noteService
+      .queryByTeacher(id, {
         page: pageToLoad - 1,
         size: this.itemsPerPage,
       })
       .subscribe(
-        (res: HttpResponse<IRequete[]>) => {
+        (res: HttpResponse<INote[]>) => {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
         },
@@ -70,22 +69,21 @@ export class RequeteEtudiantComponent implements OnInit, OnDestroy {
       );
   }
 
-  trackId(index: number, item: IRequete): number {
-    return item.id!;
-  }
-
-  delete(requete: IRequete): void {
-    const modalRef = this.modalService.open(RequeteDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.requete = requete;
-    // unsubscribe not needed because closed completes on modal close
+  delete(note: INote): void {
+    const modalRef = this.modalService.open(NoteDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.note = note;
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
-        this.loadPage(this.account.id);
+        this.refresh();
       }
     });
   }
 
-  protected handleNavigation(id: number): void {
+  trackId(index: number, item: INote): number {
+    return item.id!;
+  }
+
+  protected handleNavigation(id: any): void {
     combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
       const page = params.get('page');
       const pageNumber = page !== null ? +page : 1;
@@ -95,18 +93,18 @@ export class RequeteEtudiantComponent implements OnInit, OnDestroy {
     });
   }
 
-  protected onSuccess(data: IRequete[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
+  protected onSuccess(data: INote[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
     if (navigate) {
-      this.router.navigate(['/etudiant/mes-requetes'], {
+      this.router.navigate(['/enseignant/mes-notes'], {
         queryParams: {
           page: this.page,
           size: this.itemsPerPage,
         },
       });
     }
-    this.requetes = data ?? [];
+    this.notes = data ?? [];
     this.ngbPaginationPage = this.page;
   }
 

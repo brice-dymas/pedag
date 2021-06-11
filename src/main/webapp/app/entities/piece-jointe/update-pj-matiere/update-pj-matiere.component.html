@@ -1,8 +1,8 @@
 <div class="row justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-matiere-heading" data-cy="MatiereCreateUpdateHeading" jhiTranslate="pedagApp.matiere.home.createOrEditLabel">
-        Create or edit a Matiere
+      <h2 id="jhi-piece-jointe-heading" data-cy="PieceJointeCreateUpdateHeading" jhiTranslate="pedagApp.pieceJointe.home.createOrEditLabel">
+        Create or edit a Piece Jointe
       </h2>
 
       <div>
@@ -12,8 +12,9 @@
           <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
+
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.matiere.libelle" for="field_libelle">Libelle</label>
+          <label class="form-label mt-4" jhiTranslate="pedagApp.pieceJointe.libelle" for="field_libelle">Libelle</label>
           <input type="text" class="form-control" name="libelle" id="field_libelle" data-cy="libelle" formControlName="libelle" />
           <div *ngIf="editForm.get('libelle')!.invalid && (editForm.get('libelle')!.dirty || editForm.get('libelle')!.touched)">
             <small
@@ -43,27 +44,48 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.matiere.code" for="field_code">Code</label>
-          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
-          <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required" jhiTranslate="entity.validation.required">
+          <label class="form-control-label" jhiTranslate="pedagApp.pieceJointe.contenu" for="field_contenu">Contenu</label>
+          <div>
+            <div *ngIf="editForm.get('contenu')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-left"
+                (click)="openFile(editForm.get('contenu')!.value, editForm.get('contenuContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-left">{{ editForm.get('contenuContentType')!.value }}, {{ byteSize(editForm.get('contenu')!.value) }}</span>
+              <button
+                type="button"
+                (click)="editForm.patchValue({ contenu: null }); editForm.patchValue({ contenuContentType: null })"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              class="form-control"
+              id="file_contenu"
+              data-cy="contenu"
+              (change)="setFileData($event, 'contenu', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="contenu" id="field_contenu" data-cy="contenu" formControlName="contenu" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="contenuContentType"
+            id="field_contenuContentType"
+            formControlName="contenuContentType"
+          />
+          <div *ngIf="editForm.get('contenu')!.invalid && (editForm.get('contenu')!.dirty || editForm.get('contenu')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('contenu')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
               This field is required.
-            </small>
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('code')?.errors?.minlength"
-              jhiTranslate="entity.validation.minlength"
-              [translateValues]="{ min: 2 }"
-            >
-              This field is required to be at least 2 characters.
-            </small>
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('code')?.errors?.maxlength"
-              jhiTranslate="entity.validation.maxlength"
-              [translateValues]="{ max: 10 }"
-            >
-              This field cannot be longer than 10 characters.
             </small>
           </div>
         </div>

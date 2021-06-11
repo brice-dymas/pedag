@@ -56,4 +56,12 @@ public interface NoteService {
      * @return the list of notes.
      */
     Page<Note> findByEtudiantId(Long id, Pageable pageable);
+
+    /**
+     * Get all notes of a Teacher.
+     *
+     * @param id the id of the Teacher User Account.
+     * @return the list of notes.
+     */
+    Page<Note> findByEnseignantId(Long id, Pageable pageable);
 }
