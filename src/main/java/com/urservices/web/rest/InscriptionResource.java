@@ -166,6 +166,19 @@ public class InscriptionResource {
     }
 
     /**
+     * {@code GET  /inscriptions/:id} : get the "id" inscription.
+     *
+     * @param id the id of the inscription to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the inscription, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/inscriptions/user/{id}")
+    public ResponseEntity<Inscription> getInscriptionByEtudiantUserId(@PathVariable Long id) {
+        log.debug("REST request to get Inscription with User ID: {}", id);
+        Inscription inscription = inscriptionService.findByEtudiantUserId(id);
+        return ResponseEntity.ok(inscription);
+    }
+
+    /**
      * {@code DELETE  /inscriptions/:id} : delete the "id" inscription.
      *
      * @param id the id of the inscription to delete.

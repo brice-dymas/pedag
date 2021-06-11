@@ -6,10 +6,17 @@ import { PieceJointeDetailComponent } from './detail/piece-jointe-detail.compone
 import { PieceJointeUpdateComponent } from './update/piece-jointe-update.component';
 import { PieceJointeDeleteDialogComponent } from './delete/piece-jointe-delete-dialog.component';
 import { PieceJointeRoutingModule } from './route/piece-jointe-routing.module';
+import { UpdatePjMatiereComponent } from './update-pj-matiere/update-pj-matiere.component';
 
 @NgModule({
   imports: [SharedModule, PieceJointeRoutingModule],
-  declarations: [PieceJointeComponent, PieceJointeDetailComponent, PieceJointeUpdateComponent, PieceJointeDeleteDialogComponent],
+  declarations: [
+    PieceJointeComponent,
+    PieceJointeDetailComponent,
+    PieceJointeUpdateComponent,
+    PieceJointeDeleteDialogComponent,
+    UpdatePjMatiereComponent,
+  ],
   entryComponents: [PieceJointeDeleteDialogComponent],
 })
 export class PieceJointeModule {}

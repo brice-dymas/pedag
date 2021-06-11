@@ -7,97 +7,109 @@
 
       <div>
         <jhi-alert-error></jhi-alert-error>
-
         <div class="form-group" [hidden]="editForm.get('id')!.value == null">
           <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.note.moyenne" for="field_moyenne">Moyenne</label>
-          <input type="number" class="form-control" name="moyenne" id="field_moyenne" data-cy="moyenne" formControlName="moyenne" />
-          <div *ngIf="editForm.get('moyenne')!.invalid && (editForm.get('moyenne')!.dirty || editForm.get('moyenne')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('moyenne')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-            <small
-              class="form-text text-danger"
-              [hidden]="!editForm.get('moyenne')?.errors?.number"
-              jhiTranslate="entity.validation.number"
-            >
-              This field should be a number.
-            </small>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.note.examen" for="field_examen">Examen</label>
+              <select class="form-control" id="field_examen" data-cy="examen" name="examen" formControlName="examen">
+                <option [ngValue]="null"></option>
+                <option
+                  [ngValue]="examenOption.id === editForm.get('examen')!.value?.id ? editForm.get('examen')!.value : examenOption"
+                  *ngFor="let examenOption of examenSharedCollection; trackBy: trackExamenById"
+                >
+                  {{ examenOption.type + ' ' + examenOption.semestre + ' date ' + examenOption.dateExamen }}
+                </option>
+              </select>
+            </div>
           </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.note.observation" for="field_observation">Observation</label>
-          <input
-            type="text"
-            class="form-control"
-            name="observation"
-            id="field_observation"
-            data-cy="observation"
-            formControlName="observation"
-          />
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.note.etudiant" for="field_etudiant">Etudiant</label>
-          <select class="form-control" id="field_etudiant" data-cy="etudiant" name="etudiant" formControlName="etudiant">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="inscriptionOption.id === editForm.get('etudiant')!.value?.id ? editForm.get('etudiant')!.value : inscriptionOption"
-              *ngFor="let inscriptionOption of inscriptionsSharedCollection; trackBy: trackInscriptionById"
-            >
-              {{ inscriptionOption.id }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.note.examen" for="field_examen">Examen</label>
-          <select class="form-control" id="field_examen" data-cy="examen" name="examen" formControlName="examen">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="examenOption.id === editForm.get('examen')!.value?.id ? editForm.get('examen')!.value : examenOption"
-              *ngFor="let examenOption of examenSharedCollection; trackBy: trackExamenById"
-            >
-              {{ examenOption.id }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.note.matiere" for="field_matiere">Matiere</label>
-          <select class="form-control" id="field_matiere" data-cy="matiere" name="matiere" formControlName="matiere">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="matiereOption.id === editForm.get('matiere')!.value?.id ? editForm.get('matiere')!.value : matiereOption"
-              *ngFor="let matiereOption of matieresSharedCollection; trackBy: trackMatiereById"
-            >
-              {{ matiereOption.id }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.note.enseignant" for="field_enseignant">Enseignant</label>
-          <select class="form-control" id="field_enseignant" data-cy="enseignant" name="enseignant" formControlName="enseignant">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="
-                enseignantOption.id === editForm.get('enseignant')!.value?.id ? editForm.get('enseignant')!.value : enseignantOption
-              "
-              *ngFor="let enseignantOption of enseignantsSharedCollection; trackBy: trackEnseignantById"
-            >
-              {{ enseignantOption.id }}
-            </option>
-          </select>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.note.matiere" for="field_matiere">Matiere</label>
+              <select class="form-control" id="field_matiere" data-cy="matiere" name="matiere" formControlName="matiere">
+                <option [ngValue]="null"></option>
+                <option
+                  [ngValue]="matiereOption.id === editForm.get('matiere')!.value?.id ? editForm.get('matiere')!.value : matiereOption"
+                  *ngFor="let matiereOption of matieresSharedCollection; trackBy: trackMatiereById"
+                >
+                  {{ matiereOption.libelle }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.note.etudiant" for="field_etudiant">Etudiant</label>
+              <select class="form-control" id="field_etudiant" data-cy="etudiant" name="etudiant" formControlName="etudiant">
+                <option [ngValue]="null"></option>
+                <option
+                  [ngValue]="
+                    inscriptionOption.id === editForm.get('etudiant')!.value?.id ? editForm.get('etudiant')!.value : inscriptionOption
+                  "
+                  *ngFor="let inscriptionOption of inscriptionsSharedCollection; trackBy: trackInscriptionById"
+                >
+                  {{ inscriptionOption.etudiant?.prenom + ' ' + inscriptionOption.etudiant?.nom }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <!--        </div>-->
+          <!--        <div class="row">-->
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.note.moyenne" for="field_moyenne">Moyenne</label>
+              <input type="number" class="form-control" name="moyenne" id="field_moyenne" data-cy="moyenne" formControlName="moyenne" />
+              <div *ngIf="editForm.get('moyenne')!.invalid && (editForm.get('moyenne')!.dirty || editForm.get('moyenne')!.touched)">
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('moyenne')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  [hidden]="!editForm.get('moyenne')?.errors?.number"
+                  jhiTranslate="entity.validation.number"
+                >
+                  This field should be a number.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.note.observation" for="field_observation">Observation</label>
+              <input
+                type="text"
+                class="form-control"
+                name="observation"
+                id="field_observation"
+                data-cy="observation"
+                formControlName="observation"
+              />
+            </div>
+          </div>
+          <div class="col-sm-4" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.note.enseignant" for="field_enseignant">Enseignant</label>
+              <select class="form-control" id="field_enseignant" data-cy="enseignant" name="enseignant" formControlName="enseignant">
+                <option [ngValue]="null"></option>
+                <option
+                  [ngValue]="
+                    enseignantOption.id === editForm.get('enseignant')!.value?.id ? editForm.get('enseignant')!.value : enseignantOption
+                  "
+                  *ngFor="let enseignantOption of enseignantsSharedCollection; trackBy: trackEnseignantById"
+                >
+                  {{ enseignantOption.grade + ' ' + enseignantOption.nom }}
+                </option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
 

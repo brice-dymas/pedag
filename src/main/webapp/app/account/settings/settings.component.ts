@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { LANGUAGES } from 'app/config/language.constants';
+import { TokenService } from 'app/core/auth/token.service';
 
 @Component({
   selector: 'jhi-settings',
@@ -13,6 +14,9 @@ import { LANGUAGES } from 'app/config/language.constants';
 export class SettingsComponent implements OnInit {
   account!: Account;
   success = false;
+  ins!: any;
+  ens!: any;
+
   pls: any;
   languages = LANGUAGES;
   settingsForm = this.fb.group({
@@ -22,7 +26,12 @@ export class SettingsComponent implements OnInit {
     langKey: [undefined],
   });
 
-  constructor(private accountService: AccountService, private fb: FormBuilder, private translateService: TranslateService) {}
+  constructor(
+    private accountService: AccountService,
+    private fb: FormBuilder,
+    private translateService: TranslateService,
+    private tokenService: TokenService
+  ) {}
 
   ngOnInit(): void {
     this.accountService.identity().subscribe(account => {
@@ -36,8 +45,14 @@ export class SettingsComponent implements OnInit {
         });
 
         this.account = account;
+        this.setExtraInfos();
       }
     });
+  }
+
+  setExtraInfos(): void {
+    this.ens = this.tokenService.getEnseignant();
+    this.ins = this.tokenService.getInscription();
   }
 
   save(): void {

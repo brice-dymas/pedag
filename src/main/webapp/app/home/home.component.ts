@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { ROLE_PROF, ROLE_STUDENT } from 'app/app.constants';
+import { TokenService } from 'app/core/auth/token.service';
 import { Subscription } from 'rxjs';
 
 import { AccountService } from 'app/core/auth/account.service';
@@ -13,11 +15,16 @@ import { Account } from 'app/core/auth/account.model';
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   authSubscription?: Subscription;
+  PROF_ETU = ROLE_STUDENT;
+  PROF_ENS = ROLE_PROF;
 
-  constructor(private accountService: AccountService, private router: Router) {}
+  constructor(private accountService: AccountService, private router: Router, private storageService: TokenService) {}
 
   ngOnInit(): void {
-    this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
+    this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+      this.storageService.accountStorageProceeed(Number(this.account?.id) || 0, true, this.account?.authorities ?? []);
+    });
   }
 
   isAuthenticated(): boolean {

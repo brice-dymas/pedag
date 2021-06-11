@@ -13,8 +13,10 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface NoteRepository extends JpaRepository<Note, Long> {
-    @Query("SELECT N FROM Note N WHERE N.etudiant.etudiant.id= :id")
+    @Query("SELECT N FROM Note N WHERE N.etudiant.etudiant.id= :id ORDER BY N.id DESC")
     Page<Note> findByEtudiantId(Long id, Pageable pageable);
 
-    Page<Note> findByEtudiant_EtudiantId(Long id, Pageable pageable);
+    Page<Note> findByEtudiant_EtudiantUserIdOrderByIdDesc(Long id, Pageable pageable);
+
+    Page<Note> findByEnseignantUserIdOrderByIdDesc(Long id, Pageable pageable);
 }

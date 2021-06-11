@@ -57,7 +57,6 @@ export class RequeteEtudiantComponent implements OnInit, OnDestroy {
       .queryByStudent(id, {
         page: pageToLoad - 1,
         size: this.itemsPerPage,
-        sort: this.sort(),
       })
       .subscribe(
         (res: HttpResponse<IRequete[]>) => {
@@ -86,24 +85,11 @@ export class RequeteEtudiantComponent implements OnInit, OnDestroy {
     });
   }
 
-  protected sort(): string[] {
-    const result = [this.predicate + ',' + (this.ascending ? 'asc' : 'desc')];
-    if (this.predicate !== 'id') {
-      result.push('id');
-    }
-    return result;
-  }
-
   protected handleNavigation(id: number): void {
     combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
       const page = params.get('page');
       const pageNumber = page !== null ? +page : 1;
-      const sort = (params.get('sort') ?? data['defaultSort']).split(',');
-      const predicate = sort[0];
-      const ascending = sort[1] === 'asc';
-      if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
-        this.predicate = predicate;
-        this.ascending = ascending;
+      if (pageNumber !== this.page) {
         this.loadPage(id, pageNumber, true);
       }
     });
@@ -117,7 +103,6 @@ export class RequeteEtudiantComponent implements OnInit, OnDestroy {
         queryParams: {
           page: this.page,
           size: this.itemsPerPage,
-          sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc'),
         },
       });
     }
