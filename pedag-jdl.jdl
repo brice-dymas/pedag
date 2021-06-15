@@ -114,7 +114,14 @@ entity CoursFiliere {
     quotaHoraire Integer
 }
 
+entity Module {
+    libelle String required
+    code String required
+    credit Integer min(1)
+}
+
 relationship ManyToOne {
+  Module{filiere required} to Filiere
   CoursFiliere{filiere} to Filiere
   CoursFiliere{matiere} to Matiere
   Inscription{etudiant} to Etudiant
