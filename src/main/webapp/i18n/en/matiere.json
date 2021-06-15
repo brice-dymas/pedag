@@ -19,7 +19,8 @@
       },
       "id": "ID",
       "libelle": "Libelle",
-      "code": "Code"
+      "code": "Code",
+      "credit": "Credit"
     }
   }
 }

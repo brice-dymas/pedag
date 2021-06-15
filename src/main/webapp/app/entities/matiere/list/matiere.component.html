@@ -37,6 +37,7 @@
             <span jhiTranslate="pedagApp.matiere.libelle">Libelle</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="code"><span jhiTranslate="pedagApp.matiere.code">Code</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="credit"><span jhiTranslate="pedagApp.matiere.credit">Credit</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -47,6 +48,7 @@
           </td>
           <td>{{ matiere.libelle }}</td>
           <td>{{ matiere.code }}</td>
+          <td>{{ matiere.credit }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button

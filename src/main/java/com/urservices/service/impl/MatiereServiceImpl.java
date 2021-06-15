@@ -46,6 +46,9 @@ public class MatiereServiceImpl implements MatiereService {
                     if (matiere.getCode() != null) {
                         existingMatiere.setCode(matiere.getCode());
                     }
+                    if (matiere.getCredit() != null) {
+                        existingMatiere.setCredit(matiere.getCredit());
+                    }
 
                     return existingMatiere;
                 }
