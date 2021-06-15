@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { AccountService } from 'app/core/auth/account.service';
+import { StatutRequete } from 'app/entities/enumerations/statut-requete.model';
 import { RequeteDeleteDialogComponent } from 'app/entities/requete/delete/requete-delete-dialog.component';
 import { IRequete } from 'app/entities/requete/requete.model';
 import { RequeteService } from 'app/entities/requete/service/requete.service';
@@ -16,6 +17,9 @@ import { combineLatest, Subscription } from 'rxjs';
 })
 export class RequeteEtudiantComponent implements OnInit, OnDestroy {
   requetes?: IRequete[];
+  statutAttente = 'EN ATTENTE';
+  statutFonde = 'FONDÉE';
+  statutNonFonde = 'NON FONDÉE';
   isLoading = false;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;

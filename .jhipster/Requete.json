@@ -17,7 +17,7 @@
     {
       "fieldName": "statut",
       "fieldType": "StatutRequete",
-      "fieldValues": "EN_ATTENTE,FONDE,NON_FONDE"
+      "fieldValues": "EN_ATTENTE (EN ATTENTE),FONDE (FONDÉE),NON_FONDE (NON FONDÉE)"
     },
     {
       "fieldName": "traiter",
