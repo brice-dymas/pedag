@@ -1,3 +1,6 @@
+enum MoisAnnee{
+    JANVIER, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE, OCTOBRE, NOVEMBRE, DECEMBRE
+}
 
 enum Statut {
 	VACATAIRE, PERMANENT
@@ -124,6 +127,12 @@ entity Module {
     libelle String required
     code String required
     credit Integer min(1)
+}
+
+entity SessionExamen {
+    libelle String
+    mois MoisAnnee required
+    annee Integer required min(2000)
 }
 
 relationship ManyToOne {

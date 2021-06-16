@@ -1,0 +1,32 @@
+{
+  "name": "SessionExamen",
+  "fields": [
+    {
+      "fieldName": "libelle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mois",
+      "fieldType": "MoisAnnee",
+      "fieldValues": "JANVIER,FEVRIER,MARS,AVRIL,MAI,JUIN,JUILLET,AOUT,SEPTEMBRE,OCTOBRE,NOVEMBRE,DECEMBRE",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "annee",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "2000"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "session_examen",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210616005656"
+}
