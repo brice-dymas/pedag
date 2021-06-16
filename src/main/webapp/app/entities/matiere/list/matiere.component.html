@@ -38,6 +38,9 @@
           </th>
           <th scope="col" jhiSortBy="code"><span jhiTranslate="pedagApp.matiere.code">Code</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="credit"><span jhiTranslate="pedagApp.matiere.credit">Credit</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="module.id">
+            <span jhiTranslate="pedagApp.matiere.module">Module</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -49,6 +52,11 @@
           <td>{{ matiere.libelle }}</td>
           <td>{{ matiere.code }}</td>
           <td>{{ matiere.credit }}</td>
+          <td>
+            <div *ngIf="matiere.module">
+              <a [routerLink]="['/module', matiere.module?.id, 'view']">{{ matiere.module?.id }}</a>
+            </div>
+          </td>
           <td class="text-right">
             <div class="btn-group">
               <button

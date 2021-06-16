@@ -138,6 +138,7 @@ entity SessionExamen {
 }
 
 relationship ManyToOne {
+  Matiere{module required} to Module
   Note{sessionExamen} to SessionExamen
   Module{filiere required} to Filiere
   CoursFiliere{filiere} to Filiere
