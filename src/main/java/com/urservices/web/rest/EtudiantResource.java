@@ -67,9 +67,9 @@ public class EtudiantResource {
         }
         Etudiant result = etudiantService.save(etudiant);
         StringBuilder sb = UserAccountHelper.getWelcomeMessage(result.getNom(), result.getUser().getLogin());
-        mailService.sendEmail("briceguemkam@gmail.com", "Bienvenue sur notre plateforme ", sb.toString(), false, true);
-        mailService.sendEmail("vanessanjeumen@gmail.com", "Bienvenue sur notre plateforme ", sb.toString(), false, true);
-        mailService.sendEmail(etudiant.getEmail(), "Bienvenue sur notre plateforme ", sb.toString(), false, true);
+        //        mailService.sendEmail("briceguemkam@gmail.com", "Bienvenue sur notre plateforme ", sb.toString(), false, true);
+        //        mailService.sendEmail("vanessanjeumen@gmail.com", "Bienvenue sur notre plateforme ", sb.toString(), false, true);
+        //        mailService.sendEmail(etudiant.getEmail(), "Bienvenue sur notre plateforme ", sb.toString(), false, true);
         return ResponseEntity
             .created(new URI("/api/etudiants/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))

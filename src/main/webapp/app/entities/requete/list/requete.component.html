@@ -51,32 +51,27 @@
           <td>{{ requete.objet }}</td>
           <td>{{ requete.description }}</td>
           <td
-            *ngIf="requete.statut == 'EN_ATTENTE'"
+            *ngIf="requete.statut == statutAttente"
             class="badge badge-xs badge-warning"
             jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
           >
             {{ requete.statut }}
           </td>
           <td
-            *ngIf="requete.statut == 'FONDE'"
+            *ngIf="requete.statut == statutFonde"
             class="badge badge-xs badge-success"
             jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
           >
             {{ requete.statut }}
           </td>
           <td
-            *ngIf="requete.statut == 'NON_FONDE'"
+            *ngIf="requete.statut == statutNonFonde"
             class="badge badge-xs badge-danger"
             jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
           >
             {{ requete.statut }}
           </td>
           <td>{{ requete.dateCreation | formatMediumDate }}</td>
-          <!--          <td>-->
-          <!--            <div *ngIf="requete.etudiant">-->
-          <!--              <a [routerLink]="['/inscription', requete.etudiant?.id, 'view']">{{ requete.etudiant?.etudiant?.prenom + ' ' + requete.etudiant?.etudiant?.nom }}</a>-->
-          <!--            </div>-->
-          <!--          </td>-->
           <td class="text-right">
             <div class="btn-group">
               <button

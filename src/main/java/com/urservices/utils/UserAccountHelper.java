@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Random;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Projet:  pedag
@@ -35,6 +36,9 @@ public abstract class UserAccountHelper {
         userDTO.setFirstName(user.getPrenom());
         userDTO.setLastName(user.getNom());
         userDTO.setLogin(user.getMatricule().strip());
+        System.out.println("\n \n \n \n");
+        System.out.println("Student set is " + userDTO);
+        System.out.println("\n \n \n \n");
         return userDTO;
     }
 
@@ -47,6 +51,9 @@ public abstract class UserAccountHelper {
         userDTO.setFirstName(user.getPrenom());
         userDTO.setLastName(user.getNom());
         userDTO.setLogin(login.toString());
+        System.out.println("\n \n \n \n");
+        System.out.println("Prof set is " + userDTO);
+        System.out.println("\n \n \n \n");
         return userDTO;
     }
 

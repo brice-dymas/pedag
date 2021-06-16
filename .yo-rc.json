@@ -59,8 +59,10 @@
       "Dispenser",
       "Inscription",
       "AnneeAcademique",
-      "CoursFiliere"
+      "CoursFiliere",
+      "Module",
+      "SessionExamen"
     ],
-    "lastLiquibaseTimestamp": 1623086804000
+    "lastLiquibaseTimestamp": 1623805016000
   }
 }

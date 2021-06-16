@@ -1,3 +1,6 @@
+enum MoisAnnee{
+    JANVIER, FEVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOUT, SEPTEMBRE, OCTOBRE, NOVEMBRE, DECEMBRE
+}
 
 enum Statut {
 	VACATAIRE, PERMANENT
@@ -17,11 +20,16 @@ enum TypeExamen {
 }
 
 enum Semestre {
-	SEMESTRE1, SEMESTRE2, SEMESTRE3, SEMESTRE4, SEMESTRE6, SEMESTRE6
+	SEMESTRE1("Semestre LMD 1"),
+	SEMESTRE2("Semestre LMD 2"),
+	SEMESTRE3("Semestre LMD 3"),
+	SEMESTRE4("Semestre LMD 4"),
+	SEMESTRE5("Semestre LMD 5"),
+	SEMESTRE6("Semestre LMD 6")
 }
 
 enum StatutRequete {
-	EN_ATTENTE, FONDE, NON_FONDE
+	EN_ATTENTE("EN ATTENTE"), FONDE("FONDÉE"), NON_FONDE("NON FONDÉE")
 }
 
 
@@ -61,6 +69,7 @@ entity Filiere {
 entity Matiere {
     libelle String required minlength(3) maxlength(50)
     code String required minlength(2) maxlength(10)
+    credit Integer min(1)
 }
 
 entity PieceJointe {
@@ -114,7 +123,20 @@ entity CoursFiliere {
     quotaHoraire Integer
 }
 
+entity Module {
+    libelle String required
+    code String required
+    credit Integer min(1)
+}
+
+entity SessionExamen {
+    libelle String
+    mois MoisAnnee required
+    annee Integer required min(2000)
+}
+
 relationship ManyToOne {
+  Module{filiere required} to Filiere
   CoursFiliere{filiere} to Filiere
   CoursFiliere{matiere} to Matiere
   Inscription{etudiant} to Etudiant

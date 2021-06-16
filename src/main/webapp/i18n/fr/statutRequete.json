@@ -2,9 +2,9 @@
   "pedagApp": {
     "StatutRequete": {
       "null": "",
-      "EN_ATTENTE": "EN_ATTENTE",
-      "FONDE": "FONDE",
-      "NON_FONDE": "NON_FONDE"
+      "EN_ATTENTE": "EN ATTENTE",
+      "FONDE": "FONDÉE",
+      "NON_FONDE": "NON FONDÉE"
     }
   }
 }

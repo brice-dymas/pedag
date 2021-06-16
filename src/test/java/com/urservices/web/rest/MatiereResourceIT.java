@@ -35,6 +35,9 @@ class MatiereResourceIT {
     private static final String DEFAULT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CODE = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_CREDIT = 1;
+    private static final Integer UPDATED_CREDIT = 2;
+
     private static final String ENTITY_API_URL = "/api/matieres";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -59,7 +62,7 @@ class MatiereResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Matiere createEntity(EntityManager em) {
-        Matiere matiere = new Matiere().libelle(DEFAULT_LIBELLE).code(DEFAULT_CODE);
+        Matiere matiere = new Matiere().libelle(DEFAULT_LIBELLE).code(DEFAULT_CODE).credit(DEFAULT_CREDIT);
         return matiere;
     }
 
@@ -70,7 +73,7 @@ class MatiereResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Matiere createUpdatedEntity(EntityManager em) {
-        Matiere matiere = new Matiere().libelle(UPDATED_LIBELLE).code(UPDATED_CODE);
+        Matiere matiere = new Matiere().libelle(UPDATED_LIBELLE).code(UPDATED_CODE).credit(UPDATED_CREDIT);
         return matiere;
     }
 
@@ -94,6 +97,7 @@ class MatiereResourceIT {
         Matiere testMatiere = matiereList.get(matiereList.size() - 1);
         assertThat(testMatiere.getLibelle()).isEqualTo(DEFAULT_LIBELLE);
         assertThat(testMatiere.getCode()).isEqualTo(DEFAULT_CODE);
+        assertThat(testMatiere.getCredit()).isEqualTo(DEFAULT_CREDIT);
     }
 
     @Test
@@ -161,7 +165,8 @@ class MatiereResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(matiere.getId().intValue())))
             .andExpect(jsonPath("$.[*].libelle").value(hasItem(DEFAULT_LIBELLE)))
-            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)));
+            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
+            .andExpect(jsonPath("$.[*].credit").value(hasItem(DEFAULT_CREDIT)));
     }
 
     @Test
@@ -177,7 +182,8 @@ class MatiereResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(matiere.getId().intValue()))
             .andExpect(jsonPath("$.libelle").value(DEFAULT_LIBELLE))
-            .andExpect(jsonPath("$.code").value(DEFAULT_CODE));
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
+            .andExpect(jsonPath("$.credit").value(DEFAULT_CREDIT));
     }
 
     @Test
@@ -199,7 +205,7 @@ class MatiereResourceIT {
         Matiere updatedMatiere = matiereRepository.findById(matiere.getId()).get();
         // Disconnect from session so that the updates on updatedMatiere are not directly saved in db
         em.detach(updatedMatiere);
-        updatedMatiere.libelle(UPDATED_LIBELLE).code(UPDATED_CODE);
+        updatedMatiere.libelle(UPDATED_LIBELLE).code(UPDATED_CODE).credit(UPDATED_CREDIT);
 
         restMatiereMockMvc
             .perform(
@@ -215,6 +221,7 @@ class MatiereResourceIT {
         Matiere testMatiere = matiereList.get(matiereList.size() - 1);
         assertThat(testMatiere.getLibelle()).isEqualTo(UPDATED_LIBELLE);
         assertThat(testMatiere.getCode()).isEqualTo(UPDATED_CODE);
+        assertThat(testMatiere.getCredit()).isEqualTo(UPDATED_CREDIT);
     }
 
     @Test
@@ -301,6 +308,7 @@ class MatiereResourceIT {
         Matiere testMatiere = matiereList.get(matiereList.size() - 1);
         assertThat(testMatiere.getLibelle()).isEqualTo(UPDATED_LIBELLE);
         assertThat(testMatiere.getCode()).isEqualTo(UPDATED_CODE);
+        assertThat(testMatiere.getCredit()).isEqualTo(DEFAULT_CREDIT);
     }
 
     @Test
@@ -315,7 +323,7 @@ class MatiereResourceIT {
         Matiere partialUpdatedMatiere = new Matiere();
         partialUpdatedMatiere.setId(matiere.getId());
 
-        partialUpdatedMatiere.libelle(UPDATED_LIBELLE).code(UPDATED_CODE);
+        partialUpdatedMatiere.libelle(UPDATED_LIBELLE).code(UPDATED_CODE).credit(UPDATED_CREDIT);
 
         restMatiereMockMvc
             .perform(
@@ -331,6 +339,7 @@ class MatiereResourceIT {
         Matiere testMatiere = matiereList.get(matiereList.size() - 1);
         assertThat(testMatiere.getLibelle()).isEqualTo(UPDATED_LIBELLE);
         assertThat(testMatiere.getCode()).isEqualTo(UPDATED_CODE);
+        assertThat(testMatiere.getCredit()).isEqualTo(UPDATED_CREDIT);
     }
 
     @Test

@@ -21,19 +21,19 @@
         <dt><span jhiTranslate="pedagApp.requete.statut">Statut</span></dt>
         <dd>
           <span
-            *ngIf="requete.statut == 'NON_FONDE'"
+            *ngIf="requete.statut == statutNonFonde"
             class="badge badge-danger"
             jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
             >{{ requete.statut }}</span
           >
           <span
-            *ngIf="requete.statut == 'FONDE'"
+            *ngIf="requete.statut == statutFonde"
             class="badge badge-success"
             jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
             >{{ requete.statut }}</span
           >
           <span
-            *ngIf="requete.statut == 'EN_ATTENTE'"
+            *ngIf="requete.statut == statutAttente"
             class="badge badge-warning"
             jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
             >{{ requete.statut }}</span

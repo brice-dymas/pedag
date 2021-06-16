@@ -14,6 +14,12 @@
       "fieldValidateRules": ["required", "minlength", "maxlength"],
       "fieldValidateRulesMinlength": "2",
       "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "credit",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "1"
     }
   ],
   "relationships": [],
