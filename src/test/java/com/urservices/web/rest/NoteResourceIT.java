@@ -35,6 +35,12 @@ class NoteResourceIT {
     private static final String DEFAULT_OBSERVATION = "AAAAAAAAAA";
     private static final String UPDATED_OBSERVATION = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_CREDIT_MATIERE = 1;
+    private static final Integer UPDATED_CREDIT_MATIERE = 2;
+
+    private static final Integer DEFAULT_CREDIT_OBTENU = 1;
+    private static final Integer UPDATED_CREDIT_OBTENU = 2;
+
     private static final String ENTITY_API_URL = "/api/notes";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -59,7 +65,11 @@ class NoteResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Note createEntity(EntityManager em) {
-        Note note = new Note().moyenne(DEFAULT_MOYENNE).observation(DEFAULT_OBSERVATION);
+        Note note = new Note()
+            .moyenne(DEFAULT_MOYENNE)
+            .observation(DEFAULT_OBSERVATION)
+            .creditMatiere(DEFAULT_CREDIT_MATIERE)
+            .creditObtenu(DEFAULT_CREDIT_OBTENU);
         return note;
     }
 
@@ -70,7 +80,11 @@ class NoteResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Note createUpdatedEntity(EntityManager em) {
-        Note note = new Note().moyenne(UPDATED_MOYENNE).observation(UPDATED_OBSERVATION);
+        Note note = new Note()
+            .moyenne(UPDATED_MOYENNE)
+            .observation(UPDATED_OBSERVATION)
+            .creditMatiere(UPDATED_CREDIT_MATIERE)
+            .creditObtenu(UPDATED_CREDIT_OBTENU);
         return note;
     }
 
@@ -94,6 +108,8 @@ class NoteResourceIT {
         Note testNote = noteList.get(noteList.size() - 1);
         assertThat(testNote.getMoyenne()).isEqualTo(DEFAULT_MOYENNE);
         assertThat(testNote.getObservation()).isEqualTo(DEFAULT_OBSERVATION);
+        assertThat(testNote.getCreditMatiere()).isEqualTo(DEFAULT_CREDIT_MATIERE);
+        assertThat(testNote.getCreditObtenu()).isEqualTo(DEFAULT_CREDIT_OBTENU);
     }
 
     @Test
@@ -144,7 +160,9 @@ class NoteResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(note.getId().intValue())))
             .andExpect(jsonPath("$.[*].moyenne").value(hasItem(DEFAULT_MOYENNE.doubleValue())))
-            .andExpect(jsonPath("$.[*].observation").value(hasItem(DEFAULT_OBSERVATION)));
+            .andExpect(jsonPath("$.[*].observation").value(hasItem(DEFAULT_OBSERVATION)))
+            .andExpect(jsonPath("$.[*].creditMatiere").value(hasItem(DEFAULT_CREDIT_MATIERE)))
+            .andExpect(jsonPath("$.[*].creditObtenu").value(hasItem(DEFAULT_CREDIT_OBTENU)));
     }
 
     @Test
@@ -160,7 +178,9 @@ class NoteResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(note.getId().intValue()))
             .andExpect(jsonPath("$.moyenne").value(DEFAULT_MOYENNE.doubleValue()))
-            .andExpect(jsonPath("$.observation").value(DEFAULT_OBSERVATION));
+            .andExpect(jsonPath("$.observation").value(DEFAULT_OBSERVATION))
+            .andExpect(jsonPath("$.creditMatiere").value(DEFAULT_CREDIT_MATIERE))
+            .andExpect(jsonPath("$.creditObtenu").value(DEFAULT_CREDIT_OBTENU));
     }
 
     @Test
@@ -182,7 +202,11 @@ class NoteResourceIT {
         Note updatedNote = noteRepository.findById(note.getId()).get();
         // Disconnect from session so that the updates on updatedNote are not directly saved in db
         em.detach(updatedNote);
-        updatedNote.moyenne(UPDATED_MOYENNE).observation(UPDATED_OBSERVATION);
+        updatedNote
+            .moyenne(UPDATED_MOYENNE)
+            .observation(UPDATED_OBSERVATION)
+            .creditMatiere(UPDATED_CREDIT_MATIERE)
+            .creditObtenu(UPDATED_CREDIT_OBTENU);
 
         restNoteMockMvc
             .perform(
@@ -198,6 +222,8 @@ class NoteResourceIT {
         Note testNote = noteList.get(noteList.size() - 1);
         assertThat(testNote.getMoyenne()).isEqualTo(UPDATED_MOYENNE);
         assertThat(testNote.getObservation()).isEqualTo(UPDATED_OBSERVATION);
+        assertThat(testNote.getCreditMatiere()).isEqualTo(UPDATED_CREDIT_MATIERE);
+        assertThat(testNote.getCreditObtenu()).isEqualTo(UPDATED_CREDIT_OBTENU);
     }
 
     @Test
@@ -268,6 +294,8 @@ class NoteResourceIT {
         Note partialUpdatedNote = new Note();
         partialUpdatedNote.setId(note.getId());
 
+        partialUpdatedNote.creditMatiere(UPDATED_CREDIT_MATIERE).creditObtenu(UPDATED_CREDIT_OBTENU);
+
         restNoteMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedNote.getId())
@@ -282,6 +310,8 @@ class NoteResourceIT {
         Note testNote = noteList.get(noteList.size() - 1);
         assertThat(testNote.getMoyenne()).isEqualTo(DEFAULT_MOYENNE);
         assertThat(testNote.getObservation()).isEqualTo(DEFAULT_OBSERVATION);
+        assertThat(testNote.getCreditMatiere()).isEqualTo(UPDATED_CREDIT_MATIERE);
+        assertThat(testNote.getCreditObtenu()).isEqualTo(UPDATED_CREDIT_OBTENU);
     }
 
     @Test
@@ -296,7 +326,11 @@ class NoteResourceIT {
         Note partialUpdatedNote = new Note();
         partialUpdatedNote.setId(note.getId());
 
-        partialUpdatedNote.moyenne(UPDATED_MOYENNE).observation(UPDATED_OBSERVATION);
+        partialUpdatedNote
+            .moyenne(UPDATED_MOYENNE)
+            .observation(UPDATED_OBSERVATION)
+            .creditMatiere(UPDATED_CREDIT_MATIERE)
+            .creditObtenu(UPDATED_CREDIT_OBTENU);
 
         restNoteMockMvc
             .perform(
@@ -312,6 +346,8 @@ class NoteResourceIT {
         Note testNote = noteList.get(noteList.size() - 1);
         assertThat(testNote.getMoyenne()).isEqualTo(UPDATED_MOYENNE);
         assertThat(testNote.getObservation()).isEqualTo(UPDATED_OBSERVATION);
+        assertThat(testNote.getCreditMatiere()).isEqualTo(UPDATED_CREDIT_MATIERE);
+        assertThat(testNote.getCreditObtenu()).isEqualTo(UPDATED_CREDIT_OBTENU);
     }
 
     @Test

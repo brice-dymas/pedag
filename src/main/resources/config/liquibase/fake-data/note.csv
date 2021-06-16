@@ -1,11 +1,11 @@
-id;moyenne;observation
-1;42230;state
-2;61684;Designer Czech
-3;36871;Electronics b cross-platform
-4;96734;drive magnetic teal
-5;92244;supply-chains hacking Executif
-6;19688;Architecte Provence-Alpes-Côte Augustins
-7;35556;Monsieur-le-Prince
-8;40365;tangible
-9;5297;HDD Hat Kuwaiti
-10;29234;hacking
+id;moyenne;observation;credit_matiere;credit_obtenu
+1;42230;state;61684;45016
+2;97238;Chicken framework;820;19693
+3;76105;envisioneer clicks-and-mortar redundant;14993;36040
+4;44080;teal c;47829;6627
+5;83954;methodologies;71547;19688
+6;99606;la a portal;26061;47381
+7;47871;envisioneer;88269;11689
+8;5297;HDD Hat Kuwaiti;29234;24502
+9;83870;Colon;13569;64408
+10;15346;Charlemagne Dollar;76495;69622

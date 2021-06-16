@@ -20,6 +20,15 @@
             <column name="observation" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="credit_matiere" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="credit_obtenu" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="session_examen_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <column name="etudiant_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -54,6 +63,8 @@
             <column name="id" type="numeric"/>
             <column name="moyenne" type="numeric"/>
             <column name="observation" type="string"/>
+            <column name="credit_matiere" type="numeric"/>
+            <column name="credit_obtenu" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

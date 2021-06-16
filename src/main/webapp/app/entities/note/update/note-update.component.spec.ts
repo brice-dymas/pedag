@@ -9,6 +9,8 @@ import { of, Subject } from 'rxjs';
 
 import { NoteService } from '../service/note.service';
 import { INote, Note } from '../note.model';
+import { ISessionExamen } from 'app/entities/session-examen/session-examen.model';
+import { SessionExamenService } from 'app/entities/session-examen/service/session-examen.service';
 import { IInscription } from 'app/entities/inscription/inscription.model';
 import { InscriptionService } from 'app/entities/inscription/service/inscription.service';
 import { IExamen } from 'app/entities/examen/examen.model';
@@ -26,6 +28,7 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<NoteUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let noteService: NoteService;
+    let sessionExamenService: SessionExamenService;
     let inscriptionService: InscriptionService;
     let examenService: ExamenService;
     let matiereService: MatiereService;
@@ -43,6 +46,7 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(NoteUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       noteService = TestBed.inject(NoteService);
+      sessionExamenService = TestBed.inject(SessionExamenService);
       inscriptionService = TestBed.inject(InscriptionService);
       examenService = TestBed.inject(ExamenService);
       matiereService = TestBed.inject(MatiereService);
@@ -52,6 +56,28 @@ describe('Component Tests', () => {
     });
 
     describe('ngOnInit', () => {
+      it('Should call SessionExamen query and add missing value', () => {
+        const note: INote = { id: 456 };
+        const sessionExamen: ISessionExamen = { id: 81298 };
+        note.sessionExamen = sessionExamen;
+
+        const sessionExamenCollection: ISessionExamen[] = [{ id: 18084 }];
+        spyOn(sessionExamenService, 'query').and.returnValue(of(new HttpResponse({ body: sessionExamenCollection })));
+        const additionalSessionExamen = [sessionExamen];
+        const expectedCollection: ISessionExamen[] = [...additionalSessionExamen, ...sessionExamenCollection];
+        spyOn(sessionExamenService, 'addSessionExamenToCollectionIfMissing').and.returnValue(expectedCollection);
+
+        activatedRoute.data = of({ note });
+        comp.ngOnInit();
+
+        expect(sessionExamenService.query).toHaveBeenCalled();
+        expect(sessionExamenService.addSessionExamenToCollectionIfMissing).toHaveBeenCalledWith(
+          sessionExamenCollection,
+          ...additionalSessionExamen
+        );
+        expect(comp.sessionExamenSharedCollection).toEqual(expectedCollection);
+      });
+
       it('Should call Inscription query and add missing value', () => {
         const note: INote = { id: 456 };
         const etudiant: IInscription = { id: 98867 };
@@ -95,10 +121,10 @@ describe('Component Tests', () => {
 
       it('Should call Matiere query and add missing value', () => {
         const note: INote = { id: 456 };
-        const matiere: IMatiere = { id: 94282 };
+        const matiere: IMatiere = { id: 84595 };
         note.matiere = matiere;
 
-        const matiereCollection: IMatiere[] = [{ id: 84595 }];
+        const matiereCollection: IMatiere[] = [{ id: 43014 }];
         spyOn(matiereService, 'query').and.returnValue(of(new HttpResponse({ body: matiereCollection })));
         const additionalMatieres = [matiere];
         const expectedCollection: IMatiere[] = [...additionalMatieres, ...matiereCollection];
@@ -133,11 +159,13 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const note: INote = { id: 456 };
+        const sessionExamen: ISessionExamen = { id: 373 };
+        note.sessionExamen = sessionExamen;
         const etudiant: IInscription = { id: 52069 };
         note.etudiant = etudiant;
         const examen: IExamen = { id: 75424 };
         note.examen = examen;
-        const matiere: IMatiere = { id: 43014 };
+        const matiere: IMatiere = { id: 7271 };
         note.matiere = matiere;
         const enseignant: IEnseignant = { id: 84209 };
         note.enseignant = enseignant;
@@ -146,6 +174,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(note));
+        expect(comp.sessionExamenSharedCollection).toContain(sessionExamen);
         expect(comp.inscriptionsSharedCollection).toContain(etudiant);
         expect(comp.examenSharedCollection).toContain(examen);
         expect(comp.matieresSharedCollection).toContain(matiere);
@@ -218,6 +247,14 @@ describe('Component Tests', () => {
     });
 
     describe('Tracking relationships identifiers', () => {
+      describe('trackSessionExamenById', () => {
+        it('Should return tracked SessionExamen primary key', () => {
+          const entity = { id: 123 };
+          const trackResult = comp.trackSessionExamenById(0, entity);
+          expect(trackResult).toEqual(entity.id);
+        });
+      });
+
       describe('trackInscriptionById', () => {
         it('Should return tracked Inscription primary key', () => {
           const entity = { id: 123 };

@@ -7,6 +7,8 @@ import { finalize, map } from 'rxjs/operators';
 
 import { INote, Note } from '../note.model';
 import { NoteService } from '../service/note.service';
+import { ISessionExamen } from 'app/entities/session-examen/session-examen.model';
+import { SessionExamenService } from 'app/entities/session-examen/service/session-examen.service';
 import { IInscription } from 'app/entities/inscription/inscription.model';
 import { InscriptionService } from 'app/entities/inscription/service/inscription.service';
 import { IExamen } from 'app/entities/examen/examen.model';
@@ -23,6 +25,7 @@ import { EnseignantService } from 'app/entities/enseignant/service/enseignant.se
 export class NoteUpdateComponent implements OnInit {
   isSaving = false;
 
+  sessionExamenSharedCollection: ISessionExamen[] = [];
   inscriptionsSharedCollection: IInscription[] = [];
   examenSharedCollection: IExamen[] = [];
   matieresSharedCollection: IMatiere[] = [];
@@ -32,6 +35,9 @@ export class NoteUpdateComponent implements OnInit {
     id: [],
     moyenne: [null, [Validators.required]],
     observation: [],
+    creditMatiere: [],
+    creditObtenu: [],
+    sessionExamen: [],
     etudiant: [],
     examen: [],
     matiere: [],
@@ -40,6 +46,7 @@ export class NoteUpdateComponent implements OnInit {
 
   constructor(
     protected noteService: NoteService,
+    protected sessionExamenService: SessionExamenService,
     protected inscriptionService: InscriptionService,
     protected examenService: ExamenService,
     protected matiereService: MatiereService,
@@ -68,6 +75,10 @@ export class NoteUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.noteService.create(note));
     }
+  }
+
+  trackSessionExamenById(index: number, item: ISessionExamen): number {
+    return item.id!;
   }
 
   trackInscriptionById(index: number, item: IInscription): number {
@@ -110,12 +121,19 @@ export class NoteUpdateComponent implements OnInit {
       id: note.id,
       moyenne: note.moyenne,
       observation: note.observation,
+      creditMatiere: note.creditMatiere,
+      creditObtenu: note.creditObtenu,
+      sessionExamen: note.sessionExamen,
       etudiant: note.etudiant,
       examen: note.examen,
       matiere: note.matiere,
       enseignant: note.enseignant,
     });
 
+    this.sessionExamenSharedCollection = this.sessionExamenService.addSessionExamenToCollectionIfMissing(
+      this.sessionExamenSharedCollection,
+      note.sessionExamen
+    );
     this.inscriptionsSharedCollection = this.inscriptionService.addInscriptionToCollectionIfMissing(
       this.inscriptionsSharedCollection,
       note.etudiant
@@ -129,6 +147,16 @@ export class NoteUpdateComponent implements OnInit {
   }
 
   protected loadRelationshipsOptions(): void {
+    this.sessionExamenService
+      .query()
+      .pipe(map((res: HttpResponse<ISessionExamen[]>) => res.body ?? []))
+      .pipe(
+        map((sessionExamen: ISessionExamen[]) =>
+          this.sessionExamenService.addSessionExamenToCollectionIfMissing(sessionExamen, this.editForm.get('sessionExamen')!.value)
+        )
+      )
+      .subscribe((sessionExamen: ISessionExamen[]) => (this.sessionExamenSharedCollection = sessionExamen));
+
     this.inscriptionService
       .query()
       .pipe(map((res: HttpResponse<IInscription[]>) => res.body ?? []))
@@ -170,6 +198,9 @@ export class NoteUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       moyenne: this.editForm.get(['moyenne'])!.value,
       observation: this.editForm.get(['observation'])!.value,
+      creditMatiere: this.editForm.get(['creditMatiere'])!.value,
+      creditObtenu: this.editForm.get(['creditObtenu'])!.value,
+      sessionExamen: this.editForm.get(['sessionExamen'])!.value,
       etudiant: this.editForm.get(['etudiant'])!.value,
       examen: this.editForm.get(['examen'])!.value,
       matiere: this.editForm.get(['matiere'])!.value,

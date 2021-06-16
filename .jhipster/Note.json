@@ -9,9 +9,23 @@
     {
       "fieldName": "observation",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "creditMatiere",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "creditObtenu",
+      "fieldType": "Integer"
     }
   ],
   "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "sessionExamen",
+      "otherEntityRelationshipName": "note",
+      "relationshipName": "sessionExamen"
+    },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "inscription",
