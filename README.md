@@ -2,6 +2,12 @@
 
 This application was generated using JHipster 7.0.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v7.0.1](https://www.jhipster.tech/documentation-archive/v7.0.1).
 
+#Clear LiquidBase change Logs checksum (Type in Postgres DB Console)
+
+```
+UPDATE databasechangelog SET md5sum = null
+```
+
 ## Cloud Deployment
 
 1. First you have to compile for production with the following command :
