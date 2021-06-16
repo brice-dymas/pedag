@@ -28,8 +28,8 @@ public class SessionExamenServiceImpl implements SessionExamenService {
 
     @Override
     public SessionExamen save(SessionExamen sessionExamen) {
-        sessionExamen.setLibelle(sessionExamen.getMois().toString().toUpperCase() + "-" + sessionExamen.getAnnee());
         log.debug("Request to save SessionExamen : {}", sessionExamen);
+        sessionExamen.setLibelle(sessionExamen.getMois().toString().toUpperCase() + "-" + sessionExamen.getAnnee());
         return sessionExamenRepository.save(sessionExamen);
     }
 
