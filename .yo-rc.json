@@ -60,8 +60,9 @@
       "Inscription",
       "AnneeAcademique",
       "CoursFiliere",
-      "Module"
+      "Module",
+      "SessionExamen"
     ],
-    "lastLiquibaseTimestamp": 1623731035000
+    "lastLiquibaseTimestamp": 1623805016000
   }
 }

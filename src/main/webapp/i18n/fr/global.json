@@ -22,6 +22,7 @@
         "anneeAcademique": "Annee Academique",
         "coursFiliere": "Cours Filiere",
         "module": "Module",
+        "sessionExamen": "Session Examen",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
