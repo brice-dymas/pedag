@@ -24,6 +24,8 @@ describe('Service Tests', () => {
         id: 0,
         moyenne: 0,
         observation: 'AAAAAAA',
+        creditMatiere: 0,
+        creditObtenu: 0,
       };
     });
 
@@ -61,6 +63,8 @@ describe('Service Tests', () => {
             id: 1,
             moyenne: 1,
             observation: 'BBBBBB',
+            creditMatiere: 1,
+            creditObtenu: 1,
           },
           elemDefault
         );
@@ -75,7 +79,13 @@ describe('Service Tests', () => {
       });
 
       it('should partial update a Note', () => {
-        const patchObject = Object.assign({}, new Note());
+        const patchObject = Object.assign(
+          {
+            creditMatiere: 1,
+            creditObtenu: 1,
+          },
+          new Note()
+        );
 
         const returnedFromService = Object.assign(patchObject, elemDefault);
 
@@ -94,6 +104,8 @@ describe('Service Tests', () => {
             id: 1,
             moyenne: 1,
             observation: 'BBBBBB',
+            creditMatiere: 1,
+            creditObtenu: 1,
           },
           elemDefault
         );
@@ -145,7 +157,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Note to an array', () => {
-          const noteArray: INote[] = [{ id: 123 }, { id: 456 }, { id: 78112 }];
+          const noteArray: INote[] = [{ id: 123 }, { id: 456 }, { id: 66772 }];
           const noteCollection: INote[] = [{ id: 123 }];
           expectedResult = service.addNoteToCollectionIfMissing(noteCollection, ...noteArray);
           expect(expectedResult).toHaveLength(3);

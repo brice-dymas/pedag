@@ -37,6 +37,15 @@
           <th scope="col" jhiSortBy="observation">
             <span jhiTranslate="pedagApp.note.observation">Observation</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="creditMatiere">
+            <span jhiTranslate="pedagApp.note.creditMatiere">Credit Matiere</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="creditObtenu">
+            <span jhiTranslate="pedagApp.note.creditObtenu">Credit Obtenu</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="sessionExamen.id">
+            <span jhiTranslate="pedagApp.note.sessionExamen">Session Examen</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="etudiant.id">
             <span jhiTranslate="pedagApp.note.etudiant">Etudiant</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -57,6 +66,13 @@
           </td>
           <td>{{ note.moyenne }}</td>
           <td>{{ note.observation }}</td>
+          <td>{{ note.creditMatiere }}</td>
+          <td>{{ note.creditObtenu }}</td>
+          <td>
+            <div *ngIf="note.sessionExamen">
+              <a [routerLink]="['/session-examen', note.sessionExamen?.id, 'view']">{{ note.sessionExamen?.id }}</a>
+            </div>
+          </td>
           <td>
             <div *ngIf="note.etudiant">
               <a [routerLink]="['/inscription', note.etudiant?.id, 'view']">{{ note.etudiant?.id }}</a>

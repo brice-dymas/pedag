@@ -20,7 +20,8 @@
       "id": "ID",
       "libelle": "Libelle",
       "code": "Code",
-      "credit": "Credit"
+      "credit": "Credit",
+      "module": "Module"
     }
   }
 }

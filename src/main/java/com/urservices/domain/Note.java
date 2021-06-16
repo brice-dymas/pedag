@@ -29,6 +29,15 @@ public class Note implements Serializable {
     @Column(name = "observation")
     private String observation;
 
+    @Column(name = "credit_matiere")
+    private Integer creditMatiere;
+
+    @Column(name = "credit_obtenu")
+    private Integer creditObtenu;
+
+    @ManyToOne
+    private SessionExamen sessionExamen;
+
     @ManyToOne
     @JsonIgnoreProperties(value = { "etudiant", "filiere", "anneeAcademique" }, allowSetters = true)
     private Inscription etudiant;
@@ -81,6 +90,45 @@ public class Note implements Serializable {
 
     public void setObservation(String observation) {
         this.observation = observation;
+    }
+
+    public Integer getCreditMatiere() {
+        return this.creditMatiere;
+    }
+
+    public Note creditMatiere(Integer creditMatiere) {
+        this.creditMatiere = creditMatiere;
+        return this;
+    }
+
+    public void setCreditMatiere(Integer creditMatiere) {
+        this.creditMatiere = creditMatiere;
+    }
+
+    public Integer getCreditObtenu() {
+        return this.creditObtenu;
+    }
+
+    public Note creditObtenu(Integer creditObtenu) {
+        this.creditObtenu = creditObtenu;
+        return this;
+    }
+
+    public void setCreditObtenu(Integer creditObtenu) {
+        this.creditObtenu = creditObtenu;
+    }
+
+    public SessionExamen getSessionExamen() {
+        return this.sessionExamen;
+    }
+
+    public Note sessionExamen(SessionExamen sessionExamen) {
+        this.setSessionExamen(sessionExamen);
+        return this;
+    }
+
+    public void setSessionExamen(SessionExamen sessionExamen) {
+        this.sessionExamen = sessionExamen;
     }
 
     public Inscription getEtudiant() {
@@ -161,6 +209,8 @@ public class Note implements Serializable {
             "id=" + getId() +
             ", moyenne=" + getMoyenne() +
             ", observation='" + getObservation() + "'" +
+            ", creditMatiere=" + getCreditMatiere() +
+            ", creditObtenu=" + getCreditObtenu() +
             "}";
     }
 }
