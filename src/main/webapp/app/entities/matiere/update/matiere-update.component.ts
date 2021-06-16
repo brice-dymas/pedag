@@ -19,6 +19,7 @@ export class MatiereUpdateComponent implements OnInit {
     id: [],
     libelle: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
     code: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(10)]],
+    credit: [null, [Validators.min(1)]],
   });
 
   constructor(protected matiereService: MatiereService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
@@ -67,6 +68,7 @@ export class MatiereUpdateComponent implements OnInit {
       id: matiere.id,
       libelle: matiere.libelle,
       code: matiere.code,
+      credit: matiere.credit,
     });
   }
 
@@ -76,6 +78,7 @@ export class MatiereUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       libelle: this.editForm.get(['libelle'])!.value,
       code: this.editForm.get(['code'])!.value,
+      credit: this.editForm.get(['credit'])!.value,
     };
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { StatutRequete } from 'app/entities/enumerations/statut-requete.model';
 
 import { IRequete } from '../requete.model';
 
@@ -9,6 +10,9 @@ import { IRequete } from '../requete.model';
 })
 export class RequeteDetailComponent implements OnInit {
   requete: IRequete | null = null;
+  statutAttente = 'EN ATTENTE';
+  statutFonde = 'FONDÉE';
+  statutNonFonde = 'NON FONDÉE';
 
   constructor(protected activatedRoute: ActivatedRoute) {}
 

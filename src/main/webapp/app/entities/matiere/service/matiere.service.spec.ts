@@ -24,6 +24,7 @@ describe('Service Tests', () => {
         id: 0,
         libelle: 'AAAAAAA',
         code: 'AAAAAAA',
+        credit: 0,
       };
     });
 
@@ -61,6 +62,7 @@ describe('Service Tests', () => {
             id: 1,
             libelle: 'BBBBBB',
             code: 'BBBBBB',
+            credit: 1,
           },
           elemDefault
         );
@@ -100,6 +102,7 @@ describe('Service Tests', () => {
             id: 1,
             libelle: 'BBBBBB',
             code: 'BBBBBB',
+            credit: 1,
           },
           elemDefault
         );
@@ -151,7 +154,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Matiere to an array', () => {
-          const matiereArray: IMatiere[] = [{ id: 123 }, { id: 456 }, { id: 10307 }];
+          const matiereArray: IMatiere[] = [{ id: 123 }, { id: 456 }, { id: 28803 }];
           const matiereCollection: IMatiere[] = [{ id: 123 }];
           expectedResult = service.addMatiereToCollectionIfMissing(matiereCollection, ...matiereArray);
           expect(expectedResult).toHaveLength(3);

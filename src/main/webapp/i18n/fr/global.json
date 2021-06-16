@@ -21,6 +21,7 @@
         "inscription": "Inscription",
         "anneeAcademique": "Annee Academique",
         "coursFiliere": "Cours Filiere",
+        "module": "Module",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

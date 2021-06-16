@@ -12,6 +12,7 @@
           <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
+
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="pedagApp.matiere.libelle" for="field_libelle">Libelle</label>
           <input type="text" class="form-control" name="libelle" id="field_libelle" data-cy="libelle" formControlName="libelle" />
@@ -64,6 +65,24 @@
               [translateValues]="{ max: 10 }"
             >
               This field cannot be longer than 10 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pedagApp.matiere.credit" for="field_credit">Credit</label>
+          <input type="number" class="form-control" name="credit" id="field_credit" data-cy="credit" formControlName="credit" />
+          <div *ngIf="editForm.get('credit')!.invalid && (editForm.get('credit')!.dirty || editForm.get('credit')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('credit')?.errors?.min"
+              jhiTranslate="entity.validation.min"
+              [translateValues]="{ min: 1 }"
+            >
+              This field should be at least 1.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('credit')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
             </small>
           </div>
         </div>

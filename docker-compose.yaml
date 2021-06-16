@@ -8,7 +8,7 @@ services:
             - POSTGRES_DB=${DB_NAME}
         volumes:
             - ./docker-postgres:/var/lib/postgresql/data
-        container_name: postgres_server
+        container_name: postgres_baracuda
         network_mode: host
 
     application:
@@ -28,4 +28,4 @@ services:
         volumes:
             - /opt/app/build
             - .:/opt/app
-        container_name: pedag
+        container_name: baracuda

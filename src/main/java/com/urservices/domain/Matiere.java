@@ -31,6 +31,10 @@ public class Matiere implements Serializable {
     @Column(name = "code", length = 10, nullable = false)
     private String code;
 
+    @Min(value = 1)
+    @Column(name = "credit")
+    private Integer credit;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -71,6 +75,19 @@ public class Matiere implements Serializable {
         this.code = code;
     }
 
+    public Integer getCredit() {
+        return this.credit;
+    }
+
+    public Matiere credit(Integer credit) {
+        this.credit = credit;
+        return this;
+    }
+
+    public void setCredit(Integer credit) {
+        this.credit = credit;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -97,6 +114,7 @@ public class Matiere implements Serializable {
             "id=" + getId() +
             ", libelle='" + getLibelle() + "'" +
             ", code='" + getCode() + "'" +
+            ", credit=" + getCredit() +
             "}";
     }
 }

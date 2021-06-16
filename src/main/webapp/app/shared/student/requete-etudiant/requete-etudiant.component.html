@@ -52,21 +52,21 @@
           <td>{{ requete.objet }}</td>
           <td>{{ requete.description }}</td>
           <td
-            *ngIf="requete.statut == 'EN_ATTENTE'"
+            *ngIf="requete.statut == statutAttente"
             class="badge badge-xs badge-warning"
             jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
           >
             {{ requete.statut }}
           </td>
           <td
-            *ngIf="requete.statut == 'FONDE'"
+            *ngIf="requete.statut == statutFonde"
             class="badge badge-xs badge-success"
             jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
           >
             {{ requete.statut }}
           </td>
           <td
-            *ngIf="requete.statut == 'NON_FONDE'"
+            *ngIf="requete.statut == statutFonde"
             class="badge badge-xs badge-danger"
             jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
           >
@@ -86,7 +86,7 @@
               >&nbsp;
 
               <button
-                *ngIf="requete.statut == 'EN_ATTENTE'"
+                *ngIf="requete.statut == statutAttente"
                 type="submit"
                 [routerLink]="['/requete', requete.id, 'edit']"
                 class="btn btn-primary btn-sm"
@@ -97,7 +97,7 @@
               >&nbsp;
 
               <button
-                *ngIf="requete.statut == 'EN_ATTENTE'"
+                *ngIf="requete.statut == statutAttente"
                 type="submit"
                 (click)="delete(requete)"
                 class="btn btn-danger btn-sm"

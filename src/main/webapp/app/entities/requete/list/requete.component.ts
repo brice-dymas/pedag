@@ -18,6 +18,11 @@ import { RequeteService } from '../service/requete.service';
 })
 export class RequeteComponent implements OnInit {
   requetes?: IRequete[];
+
+  statutAttente = StatutRequete.EN_ATTENTE;
+  statutFonde = StatutRequete.FONDE;
+  statutNonFonde = StatutRequete.NON_FONDE;
+
   isLoading = false;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -76,7 +81,7 @@ export class RequeteComponent implements OnInit {
   }
 
   canValidate(item: IRequete): boolean {
-    return item.statut === StatutRequete.EN_ATTENTE;
+    return item.statut === this.statutAttente;
   }
 
   getRequeteForValidation(item: IRequete): IRequete {
@@ -87,6 +92,7 @@ export class RequeteComponent implements OnInit {
       dateModification: dayjs(),
     };
   }
+
   delete(requete: IRequete): void {
     const modalRef = this.modalService.open(RequeteDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.requete = requete;

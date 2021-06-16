@@ -1,11 +1,13 @@
 export enum Semestre {
-  SEMESTRE1 = 'SEMESTRE 1',
+  SEMESTRE1 = 'Semestre LMD 1',
 
-  SEMESTRE2 = 'SEMESTRE 2',
+  SEMESTRE2 = 'Semestre LMD 2',
 
-  SEMESTRE3 = 'SEMESTRE 3',
+  SEMESTRE3 = 'Semestre LMD 3',
 
-  SEMESTRE4 = 'SEMESTRE 4',
+  SEMESTRE4 = 'Semestre LMD 4',
 
-  SEMESTRE6 = 'SEMESTRE 6',
+  SEMESTRE5 = 'Semestre LMD 5',
+
+  SEMESTRE6 = 'Semestre LMD 6',
 }
