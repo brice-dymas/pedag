@@ -1,5 +1,6 @@
 package com.urservices.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -34,6 +35,11 @@ public class Matiere implements Serializable {
     @Min(value = 1)
     @Column(name = "credit")
     private Integer credit;
+
+    @ManyToOne(optional = false)
+    @NotNull
+    @JsonIgnoreProperties(value = { "filiere" }, allowSetters = true)
+    private Module module;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -86,6 +92,19 @@ public class Matiere implements Serializable {
 
     public void setCredit(Integer credit) {
         this.credit = credit;
+    }
+
+    public Module getModule() {
+        return this.module;
+    }
+
+    public Matiere module(Module module) {
+        this.setModule(module);
+        return this;
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

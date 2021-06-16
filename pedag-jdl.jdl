@@ -87,6 +87,8 @@ entity Examen {
 entity Note {
     moyenne Float required
     observation String
+    creditMatiere Integer
+    creditObtenu Integer
 }
 
 entity Requete {
@@ -136,6 +138,8 @@ entity SessionExamen {
 }
 
 relationship ManyToOne {
+  Matiere{module required} to Module
+  Note{sessionExamen} to SessionExamen
   Module{filiere required} to Filiere
   CoursFiliere{filiere} to Filiere
   CoursFiliere{matiere} to Matiere

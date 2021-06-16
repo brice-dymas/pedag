@@ -22,7 +22,15 @@
       "fieldValidateRulesMin": "1"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "module",
+      "otherEntityRelationshipName": "matiere",
+      "relationshipValidateRules": "required",
+      "relationshipName": "module"
+    }
+  ],
   "entityTableName": "matiere",
   "dto": "no",
   "pagination": "pagination",

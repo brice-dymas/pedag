@@ -3,10 +3,12 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 import { IMatiere, Matiere } from '../matiere.model';
 import { MatiereService } from '../service/matiere.service';
+import { IModule } from 'app/entities/module/module.model';
+import { ModuleService } from 'app/entities/module/service/module.service';
 
 @Component({
   selector: 'jhi-matiere-update',
@@ -15,18 +17,28 @@ import { MatiereService } from '../service/matiere.service';
 export class MatiereUpdateComponent implements OnInit {
   isSaving = false;
 
+  modulesSharedCollection: IModule[] = [];
+
   editForm = this.fb.group({
     id: [],
     libelle: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
     code: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(10)]],
     credit: [null, [Validators.min(1)]],
+    module: [null, Validators.required],
   });
 
-  constructor(protected matiereService: MatiereService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(
+    protected matiereService: MatiereService,
+    protected moduleService: ModuleService,
+    protected activatedRoute: ActivatedRoute,
+    protected fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ matiere }) => {
       this.updateForm(matiere);
+
+      this.loadRelationshipsOptions();
     });
   }
 
@@ -42,6 +54,10 @@ export class MatiereUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.matiereService.create(matiere));
     }
+  }
+
+  trackModuleById(index: number, item: IModule): number {
+    return item.id!;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IMatiere>>): void {
@@ -69,7 +85,18 @@ export class MatiereUpdateComponent implements OnInit {
       libelle: matiere.libelle,
       code: matiere.code,
       credit: matiere.credit,
+      module: matiere.module,
     });
+
+    this.modulesSharedCollection = this.moduleService.addModuleToCollectionIfMissing(this.modulesSharedCollection, matiere.module);
+  }
+
+  protected loadRelationshipsOptions(): void {
+    this.moduleService
+      .query()
+      .pipe(map((res: HttpResponse<IModule[]>) => res.body ?? []))
+      .pipe(map((modules: IModule[]) => this.moduleService.addModuleToCollectionIfMissing(modules, this.editForm.get('module')!.value)))
+      .subscribe((modules: IModule[]) => (this.modulesSharedCollection = modules));
   }
 
   protected createFromForm(): IMatiere {
@@ -79,6 +106,7 @@ export class MatiereUpdateComponent implements OnInit {
       libelle: this.editForm.get(['libelle'])!.value,
       code: this.editForm.get(['code'])!.value,
       credit: this.editForm.get(['credit'])!.value,
+      module: this.editForm.get(['module'])!.value,
     };
   }
 }

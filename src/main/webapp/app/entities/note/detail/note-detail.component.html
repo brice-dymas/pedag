@@ -22,6 +22,20 @@
         <dd>
           <span>{{ note.observation }}</span>
         </dd>
+        <dt><span jhiTranslate="pedagApp.note.creditMatiere">Credit Matiere</span></dt>
+        <dd>
+          <span>{{ note.creditMatiere }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.note.creditObtenu">Credit Obtenu</span></dt>
+        <dd>
+          <span>{{ note.creditObtenu }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.note.sessionExamen">Session Examen</span></dt>
+        <dd>
+          <div *ngIf="note.sessionExamen">
+            <a [routerLink]="['/session-examen', note.sessionExamen?.id, 'view']">{{ note.sessionExamen?.id }}</a>
+          </div>
+        </dd>
         <dt><span jhiTranslate="pedagApp.note.etudiant">Etudiant</span></dt>
         <dd>
           <div *ngIf="note.etudiant">

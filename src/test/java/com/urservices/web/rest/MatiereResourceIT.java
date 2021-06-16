@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.urservices.IntegrationTest;
 import com.urservices.domain.Matiere;
+import com.urservices.domain.Module;
 import com.urservices.repository.MatiereRepository;
 import java.util.List;
 import java.util.Random;
@@ -63,6 +64,16 @@ class MatiereResourceIT {
      */
     public static Matiere createEntity(EntityManager em) {
         Matiere matiere = new Matiere().libelle(DEFAULT_LIBELLE).code(DEFAULT_CODE).credit(DEFAULT_CREDIT);
+        // Add required entity
+        Module module;
+        if (TestUtil.findAll(em, Module.class).isEmpty()) {
+            module = ModuleResourceIT.createEntity(em);
+            em.persist(module);
+            em.flush();
+        } else {
+            module = TestUtil.findAll(em, Module.class).get(0);
+        }
+        matiere.setModule(module);
         return matiere;
     }
 
@@ -74,6 +85,16 @@ class MatiereResourceIT {
      */
     public static Matiere createUpdatedEntity(EntityManager em) {
         Matiere matiere = new Matiere().libelle(UPDATED_LIBELLE).code(UPDATED_CODE).credit(UPDATED_CREDIT);
+        // Add required entity
+        Module module;
+        if (TestUtil.findAll(em, Module.class).isEmpty()) {
+            module = ModuleResourceIT.createUpdatedEntity(em);
+            em.persist(module);
+            em.flush();
+        } else {
+            module = TestUtil.findAll(em, Module.class).get(0);
+        }
+        matiere.setModule(module);
         return matiere;
     }
 
