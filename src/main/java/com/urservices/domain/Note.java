@@ -39,7 +39,7 @@ public class Note implements Serializable {
     private SessionExamen sessionExamen;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "etudiant", "filiere", "anneeAcademique" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "filiere", "anneeAcademique" }, allowSetters = true)
     private Inscription etudiant;
 
     @ManyToOne
