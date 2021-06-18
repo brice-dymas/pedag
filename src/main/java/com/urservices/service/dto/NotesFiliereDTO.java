@@ -13,7 +13,6 @@ public class NotesFiliereDTO {
     private Matiere matiere;
     private Filiere filiere;
     private List<Note> notes;
-    private List<Inscription> inscriptions;
     private Dispenser dispenser;
     private Enseignant enseignant;
     private SessionExamen sessionExamen;
@@ -23,7 +22,6 @@ public class NotesFiliereDTO {
         Matiere matiere,
         Filiere filiere,
         List<Note> notes,
-        List<Inscription> inscriptions,
         Dispenser dispenser,
         Enseignant enseignant,
         SessionExamen sessionExamen,
@@ -32,7 +30,6 @@ public class NotesFiliereDTO {
         this.matiere = matiere;
         this.filiere = filiere;
         this.notes = notes;
-        this.inscriptions = inscriptions;
         this.dispenser = dispenser;
         this.enseignant = enseignant;
         this.sessionExamen = sessionExamen;
@@ -51,10 +48,6 @@ public class NotesFiliereDTO {
 
     public List<Note> getNotes() {
         return this.notes;
-    }
-
-    public List<Inscription> getInscriptions() {
-        return this.inscriptions;
     }
 
     public Dispenser getDispenser() {
@@ -83,10 +76,6 @@ public class NotesFiliereDTO {
 
     public void setNotes(List<Note> notes) {
         this.notes = notes;
-    }
-
-    public void setInscriptions(List<Inscription> inscriptions) {
-        this.inscriptions = inscriptions;
     }
 
     public void setDispenser(Dispenser dispenser) {
@@ -119,9 +108,6 @@ public class NotesFiliereDTO {
         final Object this$notes = this.getNotes();
         final Object other$notes = other.getNotes();
         if (this$notes == null ? other$notes != null : !this$notes.equals(other$notes)) return false;
-        final Object this$inscriptions = this.getInscriptions();
-        final Object other$inscriptions = other.getInscriptions();
-        if (this$inscriptions == null ? other$inscriptions != null : !this$inscriptions.equals(other$inscriptions)) return false;
         final Object this$dispenser = this.getDispenser();
         final Object other$dispenser = other.getDispenser();
         if (this$dispenser == null ? other$dispenser != null : !this$dispenser.equals(other$dispenser)) return false;
@@ -152,8 +138,6 @@ public class NotesFiliereDTO {
         result = result * PRIME + ($filiere == null ? 43 : $filiere.hashCode());
         final Object $notes = this.getNotes();
         result = result * PRIME + ($notes == null ? 43 : $notes.hashCode());
-        final Object $inscriptions = this.getInscriptions();
-        result = result * PRIME + ($inscriptions == null ? 43 : $inscriptions.hashCode());
         final Object $dispenser = this.getDispenser();
         result = result * PRIME + ($dispenser == null ? 43 : $dispenser.hashCode());
         final Object $enseignant = this.getEnseignant();
@@ -173,8 +157,6 @@ public class NotesFiliereDTO {
             this.getFiliere() +
             ", notes=" +
             this.getNotes() +
-            ", inscriptions=" +
-            this.getInscriptions() +
             ", dispenser=" +
             this.getDispenser() +
             ", enseignant=" +

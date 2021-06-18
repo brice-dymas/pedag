@@ -33,6 +33,8 @@ public interface NotesFiliereService {
      * @return the entity.
      */
     NotesFiliereDTO findBySessionAndMatiere(Long idSession, Long idMatiere);
+
+    NotesFiliereDTO findBySessionAndMatiereForRemplissage(Long idSession, Long idMatiere);
     /**
      * Get the "id" note.
      *
