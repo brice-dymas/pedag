@@ -55,4 +55,15 @@ public class NoteFiliereResource {
         final NotesFiliereDTO formulaireNotesForRemplissage = noteService.findByMatiereForRemplissage(id);
         return ResponseEntity.ok(formulaireNotesForRemplissage);
     }
+
+    @GetMapping("/matiere/{id}/session/{is}")
+    public ResponseEntity<NotesFiliereDTO> getFormulaireNoteByMatiereSession(
+        @PathVariable Long id,
+        @PathVariable Long is,
+        Pageable pageable
+    ) {
+        log.debug("REST request to get a page of Notes for matiere {} and session {}", id, is);
+        final NotesFiliereDTO formulaireNotesForRemplissage = noteService.findBySessionAndMatiereForRemplissage(is, id);
+        return ResponseEntity.ok(formulaireNotesForRemplissage);
+    }
 }

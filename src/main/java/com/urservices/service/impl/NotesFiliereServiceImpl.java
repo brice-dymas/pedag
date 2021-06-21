@@ -6,6 +6,8 @@ import com.urservices.service.NotesFiliereService;
 import com.urservices.service.dto.NotesFiliereDTO;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,32 +21,23 @@ import org.springframework.stereotype.Service;
 public class NotesFiliereServiceImpl implements NotesFiliereService {
 
     private final MatiereRepository matiereRepository;
-    private final FiliereRepository filiereRepository;
     private final NoteRepository noteRepository;
     private final DispenserRepository dispenserRepository;
-    private final EnseignantRepository enseignantRepository;
     private final InscriptionRepository inscriptionRepository;
     private final SessionExamenRepository sessionExamenRepository;
-    private final AnneeAcademiqueRepository anneeAcademiqueRepository;
 
     public NotesFiliereServiceImpl(
         MatiereRepository matiereRepository,
-        FiliereRepository filiereRepository,
         NoteRepository noteRepository,
         DispenserRepository dispenserRepository,
-        EnseignantRepository enseignantRepository,
         InscriptionRepository inscriptionRepository,
-        SessionExamenRepository sessionExamenRepository,
-        AnneeAcademiqueRepository anneeAcademiqueRepository
+        SessionExamenRepository sessionExamenRepository
     ) {
         this.matiereRepository = matiereRepository;
-        this.filiereRepository = filiereRepository;
         this.noteRepository = noteRepository;
         this.dispenserRepository = dispenserRepository;
-        this.enseignantRepository = enseignantRepository;
         this.inscriptionRepository = inscriptionRepository;
         this.sessionExamenRepository = sessionExamenRepository;
-        this.anneeAcademiqueRepository = anneeAcademiqueRepository;
     }
 
     /**
@@ -68,6 +61,7 @@ public class NotesFiliereServiceImpl implements NotesFiliereService {
         for (Note note : notes.getNotes()) {
             note.setCreditMatiere(result.getMatiere().getCredit());
             note.setCreditObtenu(note.getMoyenne() < 10 ? 0 : result.getMatiere().getCredit());
+            assert dispenser != null;
             note.setEnseignant(dispenser.getEnseignant());
             note.setMatiere(dispenser.getMatiere());
             note.setObservation(getObservation(note.getMoyenne()));
@@ -98,6 +92,43 @@ public class NotesFiliereServiceImpl implements NotesFiliereService {
     }
 
     @Override
+    public NotesFiliereDTO findBySessionAndMatiereForRemplissage(Long idSession, Long idMatiere) {
+        NotesFiliereDTO result = new NotesFiliereDTO();
+        List<Note> noteList = new ArrayList<>();
+        Dispenser dispenser = dispenserRepository.findById(idMatiere).orElse(null);
+        final SessionExamen sessionExamen = sessionExamenRepository.findById(idSession).orElse(null);
+        result.setSessionExamen(sessionExamen);
+        assert dispenser != null;
+        result.setMatiere(dispenser.getMatiere());
+        result.setDispenser(dispenser);
+        result.setEnseignant(dispenser.getEnseignant());
+        result.setAnneeAcademique(dispenser.getAnneeAcademique());
+        final List<Note> savedNotes = noteRepository.findBySessionExamenIdAndMatiereIdOrderByIdDesc(idSession, idMatiere);
+        List<Inscription> inscriptions = inscriptionRepository.findByMatiere(idMatiere);
+        //        inscriptions.stream().forEach(ins -> noteList.add(getNote(ins, savedNotes)));
+        inscriptions.forEach(ins -> noteList.add(getNote(ins, savedNotes)));
+        //        result.setNotes(noteRepository.findBySessionExamenIdAndMatiereIdOrderByIdDesc(idSession, dispenser.getMatiere().getId()));
+        result.setNotes(noteList);
+        return result;
+    }
+
+    private static Note getNote(Inscription ins, List<Note> savedNotes) {
+        Predicate<Note> noteExists = note -> note.getEtudiant().equals(ins);
+        final List<Note> collected = savedNotes.stream().filter(noteExists).collect(Collectors.toList());
+        return (collected.size() < 1) ? getDefaultNote(ins) : collected.get(0);
+    }
+
+    private static List<Note> getDefaultClassList(List<Inscription> inscriptions) {
+        return inscriptions.stream().map(NotesFiliereServiceImpl::getDefaultNote).collect(Collectors.toList());
+    }
+
+    private static Note getDefaultNote(Inscription ins) {
+        Note n = new Note();
+        n.setEtudiant(ins);
+        return n;
+    }
+
+    @Override
     public NotesFiliereDTO findByMatiereForRemplissage(Long idMatiere) {
         Dispenser dispenser = dispenserRepository.findById(idMatiere).orElse(null);
         NotesFiliereDTO result = new NotesFiliereDTO();
@@ -108,13 +139,14 @@ public class NotesFiliereServiceImpl implements NotesFiliereService {
         result.setEnseignant(dispenser.getEnseignant());
         List<Note> notes = new ArrayList<>();
         List<Inscription> inscriptions = inscriptionRepository.findByMatiere(idMatiere);
-        for (Inscription ins : inscriptions) {
+        result.setNotes(getDefaultClassList(inscriptions));
+        /*for (Inscription ins : inscriptions) {
             Note n = new Note();
             n.setMatiere(matiere);
             n.setEtudiant(ins);
             notes.add(n);
         }
-        result.setNotes(notes);
+        result.setNotes(notes);*/
         return result;
     }
 
@@ -168,10 +200,12 @@ public class NotesFiliereServiceImpl implements NotesFiliereService {
 
     private final String getObservation(Float moyenne) {
         String obs = "EL";
-        if (moyenne <= 9) {
-            obs = "NV";
-        } else {
-            obs = "VA";
+        if (moyenne != null) {
+            if (moyenne <= 9) {
+                obs = "NV";
+            } else {
+                obs = "VA";
+            }
         }
         return obs;
     }

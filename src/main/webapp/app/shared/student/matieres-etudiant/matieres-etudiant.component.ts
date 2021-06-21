@@ -86,7 +86,7 @@ export class MatieresEtudiantComponent implements OnInit, OnDestroy {
   }
 
   protected handleNavigation(id: number): void {
-    combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
+    combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([params]) => {
       const page = params.get('page');
       const pageNumber = page !== null ? +page : 1;
       if (pageNumber !== this.page) {

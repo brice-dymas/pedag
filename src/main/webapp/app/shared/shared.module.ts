@@ -19,6 +19,7 @@ import { RouterModule } from '@angular/router';
 import { ProfDashboardComponent } from './prof/prof-dashboard/prof-dashboard.component';
 import { NotesProfComponent } from './prof/notes-prof/notes-prof.component';
 import { MatieresProfComponent } from './prof/matieres-prof/matieres-prof.component';
+import { RemplirNotesComponent } from './prof/remplir-notes/remplir-notes.component';
 
 @NgModule({
   imports: [SharedLibsModule, RouterModule],
@@ -41,6 +42,7 @@ import { MatieresProfComponent } from './prof/matieres-prof/matieres-prof.compon
     ProfDashboardComponent,
     NotesProfComponent,
     MatieresProfComponent,
+    RemplirNotesComponent,
   ],
   exports: [
     SharedLibsModule,
@@ -62,6 +64,7 @@ import { MatieresProfComponent } from './prof/matieres-prof/matieres-prof.compon
     ProfDashboardComponent,
     NotesProfComponent,
     MatieresProfComponent,
+    RemplirNotesComponent,
   ],
 })
 export class SharedModule {}

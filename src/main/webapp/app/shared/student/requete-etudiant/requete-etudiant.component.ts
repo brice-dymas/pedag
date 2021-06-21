@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { AccountService } from 'app/core/auth/account.service';
-import { StatutRequete } from 'app/entities/enumerations/statut-requete.model';
 import { RequeteDeleteDialogComponent } from 'app/entities/requete/delete/requete-delete-dialog.component';
 import { IRequete } from 'app/entities/requete/requete.model';
 import { RequeteService } from 'app/entities/requete/service/requete.service';
@@ -90,7 +89,7 @@ export class RequeteEtudiantComponent implements OnInit, OnDestroy {
   }
 
   protected handleNavigation(id: number): void {
-    combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
+    combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([params]) => {
       const page = params.get('page');
       const pageNumber = page !== null ? +page : 1;
       if (pageNumber !== this.page) {

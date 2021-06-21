@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { StatutRequete } from 'app/entities/enumerations/statut-requete.model';
 
 import { IRequete } from '../requete.model';
 
