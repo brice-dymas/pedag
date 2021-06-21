@@ -4,14 +4,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AccountService } from 'app/core/auth/account.service';
 import { Observable, Subscription } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 import { IRequete, Requete } from '../requete.model';
 import { RequeteService } from '../service/requete.service';
-import { IInscription } from 'app/entities/inscription/inscription.model';
-import { InscriptionService } from 'app/entities/inscription/service/inscription.service';
-import { IAdministrateur } from 'app/entities/administrateur/administrateur.model';
-import { AdministrateurService } from 'app/entities/administrateur/service/administrateur.service';
 
 @Component({
   selector: 'jhi-requete-update',
