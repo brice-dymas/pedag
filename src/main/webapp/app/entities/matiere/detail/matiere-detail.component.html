@@ -9,20 +9,47 @@
 
       <jhi-alert></jhi-alert>
 
-      <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ matiere.id }}</span>
-        </dd>
-        <dt><span jhiTranslate="pedagApp.matiere.libelle">Libelle</span></dt>
-        <dd>
-          <span>{{ matiere.libelle }}</span>
-        </dd>
-        <dt><span jhiTranslate="pedagApp.matiere.code">Code</span></dt>
-        <dd>
-          <span>{{ matiere.code }}</span>
-        </dd>
-      </dl>
+      <div class="card shadow mt-1">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="font-weight-bold text-capitalize mb-2">
+                    <strong jhiTranslate="pedagApp.matiere.code">Code</strong>
+                    <span></span>
+                  </div>
+                  <div class="text-gray-800">
+                    {{ matiere?.code }}
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="font-weight-bold text-capitalize mb-2">
+                    <strong jhiTranslate="pedagApp.matiere.libelle">Matiere</strong>
+                    <span></span>
+                  </div>
+                  <div class="text-gray-800">{{ matiere?.libelle }}</div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="font-weight-bold text-capitalize mb-2">
+                    <strong jhiTranslate="pedagApp.matiere.credit">Credits</strong>
+                    <span></span>
+                  </div>
+                  <div class="text-gray-800">{{ matiere?.credit }}</div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="font-weight-bold text-capitalize mb-2">
+                    <strong jhiTranslate="pedagApp.matiere.module">Module</strong>
+                    <span></span>
+                  </div>
+                  <div class="text-gray-800">{{ matiere?.module?.libelle }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
       <div class="row">
         <div class="col-6">
           <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

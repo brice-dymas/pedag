@@ -3,6 +3,7 @@ package com.urservices.service.impl;
 import com.urservices.domain.SessionExamen;
 import com.urservices.repository.SessionExamenRepository;
 import com.urservices.service.SessionExamenService;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,6 +64,16 @@ public class SessionExamenServiceImpl implements SessionExamenService {
     public Page<SessionExamen> findAll(Pageable pageable) {
         log.debug("Request to get all SessionExamen");
         return sessionExamenRepository.findAll(pageable);
+    }
+
+    /**
+     * Get all actives sessionExamen.
+     *
+     * @return the list of entities.
+     */
+    @Override
+    public List<SessionExamen> findAllActiveSession() {
+        return sessionExamenRepository.findByActifTrueOrderByIdDesc();
     }
 
     @Override

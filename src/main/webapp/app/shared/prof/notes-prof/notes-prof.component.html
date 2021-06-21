@@ -22,37 +22,33 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span jhiTranslate="pedagApp.examen.dateExamen">date</span></th>
-          <th scope="col"><span jhiTranslate="pedagApp.examen.type">type</span></th>
-          <th scope="col"><span jhiTranslate="pedagApp.examen.semestre">semestre</span></th>
-          <th scope="col">
-            <span jhiTranslate="pedagApp.note.matiere">Matiere</span>
-          </th>
+          <th scope="col"><span jhiTranslate="pedagApp.inscription.etudiant">etudiant</span></th>
+          <th scope="col"><span jhiTranslate="pedagApp.inscription.filiere">filiere</span></th>
+          <th scope="col"><span jhiTranslate="pedagApp.matiere.module">module</span></th>
+          <th scope="col"><span jhiTranslate="pedagApp.note.matiere">matiere</span></th>
           <th scope="col"><span jhiTranslate="pedagApp.note.moyenne">Moyenne</span></th>
           <th scope="col">
             <span jhiTranslate="pedagApp.note.observation">Observation</span>
           </th>
-          <th scope="col">
-            <span jhiTranslate="pedagApp.note.etudiant">etudiant</span>
-          </th>
+          <th scope="col"><span jhiTranslate="pedagApp.note.sessionExamen">session Examen</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let note of notes; trackBy: trackId" data-cy="entityTable">
           <td>
-            <div *ngIf="note.examen">
-              <a>{{ note.examen?.dateExamen }}</a>
+            <div *ngIf="note.etudiant">
+              <a>{{ note.etudiant?.etudiant?.prenom + ' ' + note.etudiant?.etudiant?.nom }}</a>
             </div>
           </td>
           <td>
-            <div *ngIf="note.examen">
-              <a jhiTranslate="{{ 'pedagApp.TypeExamen.' + note.examen.type }}">{{ note.examen?.type }}</a>
+            <div *ngIf="note.etudiant">
+              <a>{{ note.etudiant?.filiere?.libelle }}</a>
             </div>
           </td>
           <td>
-            <div *ngIf="note.examen">
-              <a jhiTranslate="{{ 'pedagApp.Semestre.' + note.examen.semestre }}">{{ note.examen?.semestre }}</a>
+            <div *ngIf="note.matiere">
+              <a>{{ note.matiere?.module?.libelle }}</a>
             </div>
           </td>
           <td>
@@ -63,13 +59,13 @@
           <td>{{ note.moyenne }}</td>
           <td>{{ note.observation }}</td>
           <td>
-            <div *ngIf="note.enseignant">
-              <a>{{ note.etudiant?.etudiant?.id + ' ' + note.etudiant?.id }}</a>
+            <div *ngIf="note.sessionExamen">
+              <a>{{ note.sessionExamen?.libelle }}</a>
             </div>
           </td>
           <td class="text-right">
             <div class="btn-group">
-              <button
+              <!--<button
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
                 title="Modifier la note"
@@ -79,8 +75,7 @@
                 data-cy="entityEditButton"
               >
                 <fa-icon icon="pencil-alt"></fa-icon></button
-              >&nbsp;
-
+              >&nbsp;-->
               <button
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"

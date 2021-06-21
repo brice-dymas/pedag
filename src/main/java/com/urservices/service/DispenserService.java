@@ -62,4 +62,11 @@ public interface DispenserService {
      * @param idTeacher The ID of the Teacher
      * */
     List<Dispenser> findByEnseignantId(Long idTeacher);
+
+    /**
+     * Fetch all active {@link com.urservices.domain.Dispenser} assigned to a {@link com.urservices.domain.Enseignant}
+     *
+     * @param idTeacher The ID of the Teacher
+     * */
+    List<Dispenser> findByEnseignantIdAndActifTrue(Long idTeacher);
 }

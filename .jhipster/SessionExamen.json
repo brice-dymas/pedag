@@ -16,6 +16,10 @@
       "fieldType": "Integer",
       "fieldValidateRules": ["required", "min"],
       "fieldValidateRulesMin": "2000"
+    },
+    {
+      "fieldName": "actif",
+      "fieldType": "Boolean"
     }
   ],
   "relationships": [],

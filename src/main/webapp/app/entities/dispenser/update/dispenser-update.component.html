@@ -63,7 +63,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group">
               <label class="form-control-label" jhiTranslate="pedagApp.dispenser.enseignant" for="field_enseignant">Enseignant</label>
               <select class="form-control" id="field_enseignant" data-cy="enseignant" name="enseignant" formControlName="enseignant">
@@ -79,7 +79,13 @@
               </select>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.dispenser.actif" for="field_actif">Actif</label>
+              <input type="checkbox" class="form-check" name="actif" id="field_actif" data-cy="actif" formControlName="actif" />
+            </div>
+          </div>
+          <div class="col-md-4">
             <div class="form-group">
               <label class="form-control-label" jhiTranslate="pedagApp.dispenser.matiere" for="field_matiere">Matiere</label>
               <select class="form-control" id="field_matiere" data-cy="matiere" name="matiere" formControlName="matiere">

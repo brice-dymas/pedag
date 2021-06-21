@@ -40,6 +40,9 @@
           <th scope="col" jhiSortBy="annee">
             <span jhiTranslate="pedagApp.sessionExamen.annee">Annee</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="actif">
+            <span jhiTranslate="pedagApp.sessionExamen.actif">Actif</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -51,6 +54,7 @@
           <td>{{ sessionExamen.libelle }}</td>
           <td jhiTranslate="{{ 'pedagApp.MoisAnnee.' + sessionExamen.mois }}">{{ sessionExamen.mois }}</td>
           <td>{{ sessionExamen.annee }}</td>
+          <td>{{ sessionExamen.actif }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button

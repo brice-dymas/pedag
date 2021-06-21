@@ -35,6 +35,9 @@ public class SessionExamen implements Serializable {
     @Column(name = "annee", nullable = false)
     private Integer annee;
 
+    @Column(name = "actif")
+    private Boolean actif;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -88,6 +91,19 @@ public class SessionExamen implements Serializable {
         this.annee = annee;
     }
 
+    public Boolean getActif() {
+        return this.actif;
+    }
+
+    public SessionExamen actif(Boolean actif) {
+        this.actif = actif;
+        return this;
+    }
+
+    public void setActif(Boolean actif) {
+        this.actif = actif;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -115,6 +131,7 @@ public class SessionExamen implements Serializable {
             ", libelle='" + getLibelle() + "'" +
             ", mois='" + getMois() + "'" +
             ", annee=" + getAnnee() +
+            ", actif='" + getActif() + "'" +
             "}";
     }
 }

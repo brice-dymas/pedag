@@ -17,6 +17,9 @@
             <column name="semestre" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            <column name="actif" type="boolean">
+                <constraints nullable="true" />
+            </column>
             <column name="annee_academique_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -47,6 +50,7 @@
                   tableName="dispenser">
             <column name="id" type="numeric"/>
             <column name="semestre" type="string"/>
+            <column name="actif" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

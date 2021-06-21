@@ -28,6 +28,9 @@ public class Dispenser implements Serializable {
     @Column(name = "semestre", nullable = false)
     private Semestre semestre;
 
+    @Column(name = "actif")
+    private Boolean actif;
+
     @ManyToOne
     private AnneeAcademique anneeAcademique;
 
@@ -36,6 +39,7 @@ public class Dispenser implements Serializable {
     private Enseignant enseignant;
 
     @ManyToOne
+    //    @JsonIgnoreProperties(value = { "module" }, allowSetters = true)
     private Matiere matiere;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -63,6 +67,19 @@ public class Dispenser implements Serializable {
 
     public void setSemestre(Semestre semestre) {
         this.semestre = semestre;
+    }
+
+    public Boolean getActif() {
+        return this.actif;
+    }
+
+    public Dispenser actif(Boolean actif) {
+        this.actif = actif;
+        return this;
+    }
+
+    public void setActif(Boolean actif) {
+        this.actif = actif;
     }
 
     public AnneeAcademique getAnneeAcademique() {
@@ -129,6 +146,7 @@ public class Dispenser implements Serializable {
         return "Dispenser{" +
             "id=" + getId() +
             ", semestre='" + getSemestre() + "'" +
+            ", actif='" + getActif() + "'" +
             "}";
     }
 }

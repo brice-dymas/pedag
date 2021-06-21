@@ -51,6 +51,11 @@ export class DispenserService {
     return this.http.get<IDispenser[]>(`${this.resourceUrl}/teacher/${id}`, { params: options, observe: 'response' });
   }
 
+  queryByTeacherActive(id: number, req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IDispenser[]>(`${this.resourceUrl}/teacher/${id}/actif`, { params: options, observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

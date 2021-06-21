@@ -110,6 +110,7 @@ entity Courriel {
 
 entity Dispenser {
     semestre Semestre required
+    actif Boolean
 }
 
 entity Inscription {
@@ -135,6 +136,7 @@ entity SessionExamen {
     libelle String
     mois MoisAnnee required
     annee Integer required min(2000)
+    actif Boolean
 }
 
 relationship ManyToOne {
