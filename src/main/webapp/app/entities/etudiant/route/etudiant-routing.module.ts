@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
+import { CourrielEtudiantComponent } from 'app/shared/student/courriel-etudiant/courriel-etudiant.component';
 import { MatieresEtudiantComponent } from 'app/shared/student/matieres-etudiant/matieres-etudiant.component';
 import { NotesEtudiantComponent } from 'app/shared/student/notes-etudiant/notes-etudiant.component';
 import { RequeteEtudiantComponent } from 'app/shared/student/requete-etudiant/requete-etudiant.component';
@@ -62,6 +63,11 @@ const etudiantRoute: Routes = [
   {
     path: 'mes-notes',
     component: NotesEtudiantComponent,
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'mes-courriels',
+    component: CourrielEtudiantComponent,
     canActivate: [UserRouteAccessService],
   },
 ];

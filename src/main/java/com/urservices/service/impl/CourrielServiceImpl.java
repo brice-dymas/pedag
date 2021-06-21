@@ -69,6 +69,18 @@ public class CourrielServiceImpl implements CourrielService {
         return courrielRepository.findAll(pageable);
     }
 
+    /**
+     * Get all the courriels of a given student.
+     *
+     * @param id       Student's users id
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    @Override
+    public Page<Courriel> findByEtudiantUserId(Long id, Pageable pageable) {
+        return courrielRepository.findByEtudiant_Etudiant_UserIdOrderByIdDesc(id, pageable);
+    }
+
     @Override
     @Transactional(readOnly = true)
     public Optional<Courriel> findOne(Long id) {

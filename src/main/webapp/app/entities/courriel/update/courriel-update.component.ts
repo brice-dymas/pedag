@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TokenService } from 'app/core/auth/token.service';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
@@ -18,10 +19,11 @@ export class CourrielUpdateComponent implements OnInit {
   isSaving = false;
 
   inscriptionsSharedCollection: IInscription[] = [];
+  ins!: any;
 
   editForm = this.fb.group({
     id: [],
-    sender: [null, [Validators.required]],
+    sender: [null],
     receiver: [null, [Validators.required]],
     objet: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(70)]],
     message: [null, [Validators.required, Validators.minLength(2)]],
@@ -33,13 +35,15 @@ export class CourrielUpdateComponent implements OnInit {
     protected courrielService: CourrielService,
     protected inscriptionService: InscriptionService,
     protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
+    protected tokenService: TokenService,
+    protected fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ courriel }) => {
       this.updateForm(courriel);
-
+      this.ins = this.tokenService.getInscription();
       this.loadRelationshipsOptions();
     });
   }
@@ -51,11 +55,14 @@ export class CourrielUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const courriel = this.createFromForm();
-    if (courriel.id !== undefined) {
-      this.subscribeToSaveResponse(this.courrielService.update(courriel));
-    } else {
-      this.subscribeToSaveResponse(this.courrielService.create(courriel));
-    }
+    // eslint-disable-next-line no-console
+    console.log('courriel', courriel);
+    // this.isSaving = false;
+    // if (courriel.id !== undefined) {
+    //   this.subscribeToSaveResponse(this.courrielService.update(courriel));
+    // } else {
+    this.subscribeToSaveResponse(this.courrielService.create(courriel));
+    // }
   }
 
   trackInscriptionById(index: number, item: IInscription): number {
@@ -70,7 +77,7 @@ export class CourrielUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.previousState();
+    this.router.navigate(['/etudiant/mes-courriels']);
   }
 
   protected onSaveError(): void {
@@ -114,12 +121,12 @@ export class CourrielUpdateComponent implements OnInit {
     return {
       ...new Courriel(),
       id: this.editForm.get(['id'])!.value,
-      sender: this.editForm.get(['sender'])!.value,
+      sender: this.ins.etudiant.email,
       receiver: this.editForm.get(['receiver'])!.value,
       objet: this.editForm.get(['objet'])!.value,
       message: this.editForm.get(['message'])!.value,
       dateCreation: this.editForm.get(['dateCreation'])!.value,
-      etudiant: this.editForm.get(['etudiant'])!.value,
+      etudiant: this.ins,
     };
   }
 }

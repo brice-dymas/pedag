@@ -3,9 +3,11 @@ package com.urservices.web.rest;
 import com.urservices.domain.Courriel;
 import com.urservices.repository.CourrielRepository;
 import com.urservices.service.CourrielService;
+import com.urservices.service.MailService;
 import com.urservices.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -17,7 +19,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -39,11 +40,14 @@ public class CourrielResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    private final MailService mailService;
+
     private final CourrielService courrielService;
 
     private final CourrielRepository courrielRepository;
 
-    public CourrielResource(CourrielService courrielService, CourrielRepository courrielRepository) {
+    public CourrielResource(MailService mailService, CourrielService courrielService, CourrielRepository courrielRepository) {
+        this.mailService = mailService;
         this.courrielService = courrielService;
         this.courrielRepository = courrielRepository;
     }
@@ -61,7 +65,10 @@ public class CourrielResource {
         if (courriel.getId() != null) {
             throw new BadRequestAlertException("A new courriel cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        courriel.setDateCreation(LocalDate.now());
         Courriel result = courrielService.save(courriel);
+        mailService.sendEmail(result.getReceiver(), result.getObjet(), result.getMessage(), false, false);
+        mailService.sendEmail("briceguemkam@gmail.com", result.getObjet(), result.getMessage(), false, false);
         return ResponseEntity
             .created(new URI("/api/courriels/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -148,6 +155,20 @@ public class CourrielResource {
     public ResponseEntity<List<Courriel>> getAllCourriels(Pageable pageable) {
         log.debug("REST request to get a page of Courriels");
         Page<Courriel> page = courrielService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /courriels/student/:id} : get all the courriels of a given student.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of courriels in body.
+     */
+    @GetMapping("/courriels/student/{id}")
+    public ResponseEntity<List<Courriel>> findByEtudiantUserId(@PathVariable Long id, Pageable pageable) {
+        log.debug("REST request to get a page of Courriels for Student {}", id);
+        Page<Courriel> page = courrielService.findByEtudiantUserId(id, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

@@ -13,7 +13,7 @@
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
 
-        <div class="form-group">
+        <!--<div class="form-group">
           <label class="form-control-label" jhiTranslate="pedagApp.courriel.sender" for="field_sender">Sender</label>
           <input type="text" class="form-control" name="sender" id="field_sender" data-cy="sender" formControlName="sender" />
           <div *ngIf="editForm.get('sender')!.invalid && (editForm.get('sender')!.dirty || editForm.get('sender')!.touched)">
@@ -21,71 +21,91 @@
               This field is required.
             </small>
           </div>
-        </div>
+        </div>-->
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.courriel.receiver" for="field_receiver">Receiver</label>
-          <input type="text" class="form-control" name="receiver" id="field_receiver" data-cy="receiver" formControlName="receiver" />
-          <div *ngIf="editForm.get('receiver')!.invalid && (editForm.get('receiver')!.dirty || editForm.get('receiver')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('receiver')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.courriel.receiver" for="field_receiver">Receiver</label>
+              <input type="text" class="form-control" name="receiver" id="field_receiver" data-cy="receiver" formControlName="receiver" />
+              <div *ngIf="editForm.get('receiver')!.invalid && (editForm.get('receiver')!.dirty || editForm.get('receiver')!.touched)">
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('receiver')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.courriel.objet" for="field_objet">Objet</label>
+              <input type="text" class="form-control" name="objet" id="field_objet" data-cy="objet" formControlName="objet" />
+              <div *ngIf="editForm.get('objet')!.invalid && (editForm.get('objet')!.dirty || editForm.get('objet')!.touched)">
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('objet')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('objet')?.errors?.minlength"
+                  jhiTranslate="entity.validation.minlength"
+                  [translateValues]="{ min: 4 }"
+                >
+                  This field is required to be at least 4 characters.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('objet')?.errors?.maxlength"
+                  jhiTranslate="entity.validation.maxlength"
+                  [translateValues]="{ max: 70 }"
+                >
+                  This field cannot be longer than 70 characters.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.courriel.message" for="field_message">Message</label>
+              <textarea
+                type="text"
+                class="form-control"
+                name="message"
+                rows="7"
+                id="field_message"
+                data-cy="message"
+                formControlName="message"
+              ></textarea>
+              <div *ngIf="editForm.get('message')!.invalid && (editForm.get('message')!.dirty || editForm.get('message')!.touched)">
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('message')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('message')?.errors?.minlength"
+                  jhiTranslate="entity.validation.minlength"
+                  [translateValues]="{ min: 2 }"
+                >
+                  This field is required to be at least 2 characters.
+                </small>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.courriel.objet" for="field_objet">Objet</label>
-          <input type="text" class="form-control" name="objet" id="field_objet" data-cy="objet" formControlName="objet" />
-          <div *ngIf="editForm.get('objet')!.invalid && (editForm.get('objet')!.dirty || editForm.get('objet')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('objet')?.errors?.required" jhiTranslate="entity.validation.required">
-              This field is required.
-            </small>
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('objet')?.errors?.minlength"
-              jhiTranslate="entity.validation.minlength"
-              [translateValues]="{ min: 4 }"
-            >
-              This field is required to be at least 4 characters.
-            </small>
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('objet')?.errors?.maxlength"
-              jhiTranslate="entity.validation.maxlength"
-              [translateValues]="{ max: 70 }"
-            >
-              This field cannot be longer than 70 characters.
-            </small>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.courriel.message" for="field_message">Message</label>
-          <input type="text" class="form-control" name="message" id="field_message" data-cy="message" formControlName="message" />
-          <div *ngIf="editForm.get('message')!.invalid && (editForm.get('message')!.dirty || editForm.get('message')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('message')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('message')?.errors?.minlength"
-              jhiTranslate="entity.validation.minlength"
-              [translateValues]="{ min: 2 }"
-            >
-              This field is required to be at least 2 characters.
-            </small>
-          </div>
-        </div>
-
-        <div class="form-group">
+        <!--<div class="form-group">
           <label class="form-control-label" jhiTranslate="pedagApp.courriel.dateCreation" for="field_dateCreation">Date Creation</label>
           <div class="input-group">
             <input
@@ -104,9 +124,9 @@
               </button>
             </span>
           </div>
-        </div>
+        </div>-->
 
-        <div class="form-group">
+        <!--<div class="form-group">
           <label class="form-control-label" jhiTranslate="pedagApp.courriel.etudiant" for="field_etudiant">Etudiant</label>
           <select class="form-control" id="field_etudiant" data-cy="etudiant" name="etudiant" formControlName="etudiant">
             <option [ngValue]="null"></option>
@@ -117,7 +137,7 @@
               {{ inscriptionOption.id }}
             </option>
           </select>
-        </div>
+        </div>-->
       </div>
 
       <div>

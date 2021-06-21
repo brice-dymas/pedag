@@ -10,14 +10,6 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ courriel.id }}</span>
-        </dd>
-        <dt><span jhiTranslate="pedagApp.courriel.sender">Sender</span></dt>
-        <dd>
-          <span>{{ courriel.sender }}</span>
-        </dd>
         <dt><span jhiTranslate="pedagApp.courriel.receiver">Receiver</span></dt>
         <dd>
           <span>{{ courriel.receiver }}</span>
@@ -34,20 +26,10 @@
         <dd>
           <span>{{ courriel.dateCreation | formatMediumDate }}</span>
         </dd>
-        <dt><span jhiTranslate="pedagApp.courriel.etudiant">Etudiant</span></dt>
-        <dd>
-          <div *ngIf="courriel.etudiant">
-            <a [routerLink]="['/inscription', courriel.etudiant?.id, 'view']">{{ courriel.etudiant?.id }}</a>
-          </div>
-        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-      </button>
-
-      <button type="button" [routerLink]="['/courriel', courriel.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>
   </div>
