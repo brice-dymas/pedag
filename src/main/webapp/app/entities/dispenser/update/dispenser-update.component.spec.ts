@@ -91,10 +91,10 @@ describe('Component Tests', () => {
 
       it('Should call Matiere query and add missing value', () => {
         const dispenser: IDispenser = { id: 456 };
-        const matiere: IMatiere = { id: 7271 };
+        const matiere: IMatiere = { id: 29330 };
         dispenser.matiere = matiere;
 
-        const matiereCollection: IMatiere[] = [{ id: 29330 }];
+        const matiereCollection: IMatiere[] = [{ id: 54446 }];
         spyOn(matiereService, 'query').and.returnValue(of(new HttpResponse({ body: matiereCollection })));
         const additionalMatieres = [matiere];
         const expectedCollection: IMatiere[] = [...additionalMatieres, ...matiereCollection];
@@ -114,7 +114,7 @@ describe('Component Tests', () => {
         dispenser.anneeAcademique = anneeAcademique;
         const enseignant: IEnseignant = { id: 36155 };
         dispenser.enseignant = enseignant;
-        const matiere: IMatiere = { id: 54446 };
+        const matiere: IMatiere = { id: 90590 };
         dispenser.matiere = matiere;
 
         activatedRoute.data = of({ dispenser });

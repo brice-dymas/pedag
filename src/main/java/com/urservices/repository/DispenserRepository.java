@@ -17,4 +17,5 @@ public interface DispenserRepository extends JpaRepository<Dispenser, Long> {
     List<Dispenser> findAllStudentMatieres(Long idEtudiant);
 
     List<Dispenser> findByEnseignantUserIdOrderByIdDesc(Long idTeacher);
+    List<Dispenser> findByEnseignantUserIdAndActifTrueOrderByIdDesc(Long idTeacher);
 }

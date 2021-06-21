@@ -179,6 +179,19 @@ public class DispenserResource {
     }
 
     /**
+     * {@code GET  /dispensers} : get all the dispensers of a teacher.
+     *
+     * @param id the teacher's Id.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of dispensers in body.
+     */
+    @GetMapping("/dispensers/teacher/{id}/actif")
+    public ResponseEntity<List<Dispenser>> findByEnseignantActif(@PathVariable Long id) {
+        log.debug("REST request to get a Teachers' Matieres that are still active ID: {}", id);
+        List<Dispenser> page = dispenserService.findByEnseignantId(id);
+        return ResponseEntity.ok(page);
+    }
+
+    /**
      * {@code GET  /dispensers/:id} : get the "id" dispenser.
      *
      * @param id the id of the dispenser to retrieve.

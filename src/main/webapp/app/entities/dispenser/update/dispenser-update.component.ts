@@ -28,6 +28,7 @@ export class DispenserUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     semestre: [null, [Validators.required]],
+    actif: [],
     anneeAcademique: [],
     enseignant: [],
     matiere: [],
@@ -99,6 +100,7 @@ export class DispenserUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: dispenser.id,
       semestre: dispenser.semestre,
+      actif: dispenser.actif,
       anneeAcademique: dispenser.anneeAcademique,
       enseignant: dispenser.enseignant,
       matiere: dispenser.matiere,
@@ -150,6 +152,7 @@ export class DispenserUpdateComponent implements OnInit {
       ...new Dispenser(),
       id: this.editForm.get(['id'])!.value,
       semestre: this.editForm.get(['semestre'])!.value,
+      actif: this.editForm.get(['actif'])!.value,
       anneeAcademique: this.editForm.get(['anneeAcademique'])!.value,
       enseignant: this.editForm.get(['enseignant'])!.value,
       matiere: this.editForm.get(['matiere'])!.value,

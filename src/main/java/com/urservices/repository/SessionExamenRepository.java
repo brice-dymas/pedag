@@ -1,6 +1,8 @@
 package com.urservices.repository;
 
 import com.urservices.domain.SessionExamen;
+import java.util.List;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface SessionExamenRepository extends JpaRepository<SessionExamen, Long> {}
+public interface SessionExamenRepository extends JpaRepository<SessionExamen, Long> {
+    List<SessionExamen> findByActifTrueOrderByIdDesc();
+}

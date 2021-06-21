@@ -110,6 +110,7 @@ entity Courriel {
 
 entity Dispenser {
     semestre Semestre required
+    actif Boolean
 }
 
 entity Inscription {

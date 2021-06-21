@@ -1,6 +1,7 @@
 package com.urservices.service;
 
 import com.urservices.domain.SessionExamen;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +33,13 @@ public interface SessionExamenService {
      * @return the list of entities.
      */
     Page<SessionExamen> findAll(Pageable pageable);
+
+    /**
+     * Get all actives sessionExamen.
+     *
+     * @return the list of entities.
+     */
+    List<SessionExamen> findAllActiveSession();
 
     /**
      * Get the "id" sessionExamen.

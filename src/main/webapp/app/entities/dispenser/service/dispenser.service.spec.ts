@@ -24,6 +24,7 @@ describe('Service Tests', () => {
       elemDefault = {
         id: 0,
         semestre: Semestre.SEMESTRE1,
+        actif: false,
       };
     });
 
@@ -60,6 +61,7 @@ describe('Service Tests', () => {
           {
             id: 1,
             semestre: 'BBBBBB',
+            actif: true,
           },
           elemDefault
         );
@@ -77,6 +79,7 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             semestre: 'BBBBBB',
+            actif: true,
           },
           new Dispenser()
         );
@@ -97,6 +100,7 @@ describe('Service Tests', () => {
           {
             id: 1,
             semestre: 'BBBBBB',
+            actif: true,
           },
           elemDefault
         );
@@ -148,7 +152,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Dispenser to an array', () => {
-          const dispenserArray: IDispenser[] = [{ id: 123 }, { id: 456 }, { id: 72514 }];
+          const dispenserArray: IDispenser[] = [{ id: 123 }, { id: 456 }, { id: 83330 }];
           const dispenserCollection: IDispenser[] = [{ id: 123 }];
           expectedResult = service.addDispenserToCollectionIfMissing(dispenserCollection, ...dispenserArray);
           expect(expectedResult).toHaveLength(3);

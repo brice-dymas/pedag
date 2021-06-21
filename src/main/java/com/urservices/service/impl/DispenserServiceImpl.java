@@ -94,4 +94,14 @@ public class DispenserServiceImpl implements DispenserService {
         log.debug("Request to FIND_MATIERES_BY_ENSEIGNANT_ID  for Student: {}", idTeacher);
         return dispenserRepository.findByEnseignantUserIdOrderByIdDesc(idTeacher);
     }
+
+    /**
+     * Fetch all active {@link Dispenser} assigned to a {@link Enseignant}
+     *
+     * @param idTeacher The ID of the Teacher
+     */
+    @Override
+    public List<Dispenser> findByEnseignantIdAndActifTrue(Long idTeacher) {
+        return dispenserRepository.findByEnseignantUserIdAndActifTrueOrderByIdDesc(idTeacher);
+    }
 }

@@ -1,13 +1,56 @@
 <div>
   <h2 id="page-heading" data-cy="DispenserHeading">
     <span jhiTranslate="pedagApp.dispenser.home.title">Dispensers</span>
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <div class="row">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pedagApp.note.sessionExamen" for="field_sessionExamen">Session Examen</label>
+            <select
+              class="form-control"
+              id="field_sessionExamen"
+              data-cy="sessionExamen"
+              name="sessionExamen"
+              formControlName="sessionExamen"
+            >
+              <option [ngValue]="null"></option>
+              <option
+                [ngValue]="session.id === editForm.get('sessionExamen')!.value?.id ? editForm.get('sessionExamen')!.value : session"
+                *ngFor="let session of activeSessions; trackBy: trackSessionExamenById"
+              >
+                {{ session.libelle }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pedagApp.note.matiere" for="field_matiere">Matiere</label>
+            <select class="form-control" id="field_matiere" data-cy="matiere" name="matiere" formControlName="matiere">
+              <option [ngValue]="null"></option>
+              <option
+                [ngValue]="dispenser.id === editForm.get('matiere')!.value?.id ? editForm.get('matiere')!.value : dispenser"
+                *ngFor="let dispenser of activeDipenser; trackBy: trackMatiereById"
+              >
+                {{ dispenser.matiere?.libelle + ' ' + dispenser.matiere?.code + ' Module ' + dispenser.matiere?.module?.libelle }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
 
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="refresh()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="pedagApp.dispenser.home.refreshListLabel">Refresh List</span>
-      </button>
-    </div>
+      <div class="d-flex justify-content-end">
+        <button type="submit" id="save-entity" data-cy="entityCreateSaveButton" [disabled]="editForm.invalid" class="btn btn-primary">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Remplir</span>
+        </button>
+        &nbsp;
+        <button class="btn btn-info mr-2" (click)="refresh()" [disabled]="isLoading">
+          <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+          <span jhiTranslate="pedagApp.dispenser.home.refreshListLabel">Refresh List</span>
+        </button>
+      </div>
+    </form>
   </h2>
 
   <jhi-alert></jhi-alert>
@@ -32,6 +75,15 @@
           <th scope="col">
             <span jhiTranslate="pedagApp.matiere.code">code</span>
           </th>
+          <th scope="col">
+            <span jhiTranslate="pedagApp.dispenser.actif">Actif</span>
+          </th>
+          <th scope="col">
+            <span jhiTranslate="pedagApp.matiere.module">Actif</span>
+          </th>
+          <th scope="col">
+            <span jhiTranslate="pedagApp.module.code">code</span>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -51,6 +103,20 @@
           <td>
             <div *ngIf="dispenser.matiere">
               <a>{{ dispenser.matiere?.code }}</a>
+            </div>
+          </td>
+          <td>
+            <span *ngIf="dispenser.actif" class="badge badge-sm badge-success">{{ dispenser.actif }}</span>
+            <span *ngIf="!dispenser.actif" class="badge badge-sm badge-danger">{{ dispenser.actif }}</span>
+          </td>
+          <td>
+            <div *ngIf="dispenser.matiere">
+              <a>{{ dispenser.matiere?.module?.libelle }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="dispenser.matiere">
+              <a>{{ dispenser.matiere?.module?.code }}</a>
             </div>
           </td>
           <td class="text-right">
