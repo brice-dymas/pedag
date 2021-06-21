@@ -39,6 +39,9 @@ class SessionExamenResourceIT {
     private static final Integer DEFAULT_ANNEE = 2000;
     private static final Integer UPDATED_ANNEE = 2001;
 
+    private static final Boolean DEFAULT_ACTIF = false;
+    private static final Boolean UPDATED_ACTIF = true;
+
     private static final String ENTITY_API_URL = "/api/session-examen";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -63,7 +66,11 @@ class SessionExamenResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static SessionExamen createEntity(EntityManager em) {
-        SessionExamen sessionExamen = new SessionExamen().libelle(DEFAULT_LIBELLE).mois(DEFAULT_MOIS).annee(DEFAULT_ANNEE);
+        SessionExamen sessionExamen = new SessionExamen()
+            .libelle(DEFAULT_LIBELLE)
+            .mois(DEFAULT_MOIS)
+            .annee(DEFAULT_ANNEE)
+            .actif(DEFAULT_ACTIF);
         return sessionExamen;
     }
 
@@ -74,7 +81,11 @@ class SessionExamenResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static SessionExamen createUpdatedEntity(EntityManager em) {
-        SessionExamen sessionExamen = new SessionExamen().libelle(UPDATED_LIBELLE).mois(UPDATED_MOIS).annee(UPDATED_ANNEE);
+        SessionExamen sessionExamen = new SessionExamen()
+            .libelle(UPDATED_LIBELLE)
+            .mois(UPDATED_MOIS)
+            .annee(UPDATED_ANNEE)
+            .actif(UPDATED_ACTIF);
         return sessionExamen;
     }
 
@@ -99,6 +110,7 @@ class SessionExamenResourceIT {
         assertThat(testSessionExamen.getLibelle()).isEqualTo(DEFAULT_LIBELLE);
         assertThat(testSessionExamen.getMois()).isEqualTo(DEFAULT_MOIS);
         assertThat(testSessionExamen.getAnnee()).isEqualTo(DEFAULT_ANNEE);
+        assertThat(testSessionExamen.getActif()).isEqualTo(DEFAULT_ACTIF);
     }
 
     @Test
@@ -167,7 +179,8 @@ class SessionExamenResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(sessionExamen.getId().intValue())))
             .andExpect(jsonPath("$.[*].libelle").value(hasItem(DEFAULT_LIBELLE)))
             .andExpect(jsonPath("$.[*].mois").value(hasItem(DEFAULT_MOIS.toString())))
-            .andExpect(jsonPath("$.[*].annee").value(hasItem(DEFAULT_ANNEE)));
+            .andExpect(jsonPath("$.[*].annee").value(hasItem(DEFAULT_ANNEE)))
+            .andExpect(jsonPath("$.[*].actif").value(hasItem(DEFAULT_ACTIF.booleanValue())));
     }
 
     @Test
@@ -184,7 +197,8 @@ class SessionExamenResourceIT {
             .andExpect(jsonPath("$.id").value(sessionExamen.getId().intValue()))
             .andExpect(jsonPath("$.libelle").value(DEFAULT_LIBELLE))
             .andExpect(jsonPath("$.mois").value(DEFAULT_MOIS.toString()))
-            .andExpect(jsonPath("$.annee").value(DEFAULT_ANNEE));
+            .andExpect(jsonPath("$.annee").value(DEFAULT_ANNEE))
+            .andExpect(jsonPath("$.actif").value(DEFAULT_ACTIF.booleanValue()));
     }
 
     @Test
@@ -206,7 +220,7 @@ class SessionExamenResourceIT {
         SessionExamen updatedSessionExamen = sessionExamenRepository.findById(sessionExamen.getId()).get();
         // Disconnect from session so that the updates on updatedSessionExamen are not directly saved in db
         em.detach(updatedSessionExamen);
-        updatedSessionExamen.libelle(UPDATED_LIBELLE).mois(UPDATED_MOIS).annee(UPDATED_ANNEE);
+        updatedSessionExamen.libelle(UPDATED_LIBELLE).mois(UPDATED_MOIS).annee(UPDATED_ANNEE).actif(UPDATED_ACTIF);
 
         restSessionExamenMockMvc
             .perform(
@@ -223,6 +237,7 @@ class SessionExamenResourceIT {
         assertThat(testSessionExamen.getLibelle()).isEqualTo(UPDATED_LIBELLE);
         assertThat(testSessionExamen.getMois()).isEqualTo(UPDATED_MOIS);
         assertThat(testSessionExamen.getAnnee()).isEqualTo(UPDATED_ANNEE);
+        assertThat(testSessionExamen.getActif()).isEqualTo(UPDATED_ACTIF);
     }
 
     @Test
@@ -310,6 +325,7 @@ class SessionExamenResourceIT {
         assertThat(testSessionExamen.getLibelle()).isEqualTo(UPDATED_LIBELLE);
         assertThat(testSessionExamen.getMois()).isEqualTo(DEFAULT_MOIS);
         assertThat(testSessionExamen.getAnnee()).isEqualTo(UPDATED_ANNEE);
+        assertThat(testSessionExamen.getActif()).isEqualTo(DEFAULT_ACTIF);
     }
 
     @Test
@@ -324,7 +340,7 @@ class SessionExamenResourceIT {
         SessionExamen partialUpdatedSessionExamen = new SessionExamen();
         partialUpdatedSessionExamen.setId(sessionExamen.getId());
 
-        partialUpdatedSessionExamen.libelle(UPDATED_LIBELLE).mois(UPDATED_MOIS).annee(UPDATED_ANNEE);
+        partialUpdatedSessionExamen.libelle(UPDATED_LIBELLE).mois(UPDATED_MOIS).annee(UPDATED_ANNEE).actif(UPDATED_ACTIF);
 
         restSessionExamenMockMvc
             .perform(
@@ -341,6 +357,7 @@ class SessionExamenResourceIT {
         assertThat(testSessionExamen.getLibelle()).isEqualTo(UPDATED_LIBELLE);
         assertThat(testSessionExamen.getMois()).isEqualTo(UPDATED_MOIS);
         assertThat(testSessionExamen.getAnnee()).isEqualTo(UPDATED_ANNEE);
+        assertThat(testSessionExamen.getActif()).isEqualTo(UPDATED_ACTIF);
     }
 
     @Test

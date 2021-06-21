@@ -33,6 +33,9 @@ class DispenserResourceIT {
     private static final Semestre DEFAULT_SEMESTRE = Semestre.SEMESTRE1;
     private static final Semestre UPDATED_SEMESTRE = Semestre.SEMESTRE2;
 
+    private static final Boolean DEFAULT_ACTIF = false;
+    private static final Boolean UPDATED_ACTIF = true;
+
     private static final String ENTITY_API_URL = "/api/dispensers";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -57,7 +60,7 @@ class DispenserResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Dispenser createEntity(EntityManager em) {
-        Dispenser dispenser = new Dispenser().semestre(DEFAULT_SEMESTRE);
+        Dispenser dispenser = new Dispenser().semestre(DEFAULT_SEMESTRE).actif(DEFAULT_ACTIF);
         return dispenser;
     }
 
@@ -68,7 +71,7 @@ class DispenserResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Dispenser createUpdatedEntity(EntityManager em) {
-        Dispenser dispenser = new Dispenser().semestre(UPDATED_SEMESTRE);
+        Dispenser dispenser = new Dispenser().semestre(UPDATED_SEMESTRE).actif(UPDATED_ACTIF);
         return dispenser;
     }
 
@@ -91,6 +94,7 @@ class DispenserResourceIT {
         assertThat(dispenserList).hasSize(databaseSizeBeforeCreate + 1);
         Dispenser testDispenser = dispenserList.get(dispenserList.size() - 1);
         assertThat(testDispenser.getSemestre()).isEqualTo(DEFAULT_SEMESTRE);
+        assertThat(testDispenser.getActif()).isEqualTo(DEFAULT_ACTIF);
     }
 
     @Test
@@ -140,7 +144,8 @@ class DispenserResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(dispenser.getId().intValue())))
-            .andExpect(jsonPath("$.[*].semestre").value(hasItem(DEFAULT_SEMESTRE.toString())));
+            .andExpect(jsonPath("$.[*].semestre").value(hasItem(DEFAULT_SEMESTRE.toString())))
+            .andExpect(jsonPath("$.[*].actif").value(hasItem(DEFAULT_ACTIF.booleanValue())));
     }
 
     @Test
@@ -155,7 +160,8 @@ class DispenserResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(dispenser.getId().intValue()))
-            .andExpect(jsonPath("$.semestre").value(DEFAULT_SEMESTRE.toString()));
+            .andExpect(jsonPath("$.semestre").value(DEFAULT_SEMESTRE.toString()))
+            .andExpect(jsonPath("$.actif").value(DEFAULT_ACTIF.booleanValue()));
     }
 
     @Test
@@ -177,7 +183,7 @@ class DispenserResourceIT {
         Dispenser updatedDispenser = dispenserRepository.findById(dispenser.getId()).get();
         // Disconnect from session so that the updates on updatedDispenser are not directly saved in db
         em.detach(updatedDispenser);
-        updatedDispenser.semestre(UPDATED_SEMESTRE);
+        updatedDispenser.semestre(UPDATED_SEMESTRE).actif(UPDATED_ACTIF);
 
         restDispenserMockMvc
             .perform(
@@ -192,6 +198,7 @@ class DispenserResourceIT {
         assertThat(dispenserList).hasSize(databaseSizeBeforeUpdate);
         Dispenser testDispenser = dispenserList.get(dispenserList.size() - 1);
         assertThat(testDispenser.getSemestre()).isEqualTo(UPDATED_SEMESTRE);
+        assertThat(testDispenser.getActif()).isEqualTo(UPDATED_ACTIF);
     }
 
     @Test
@@ -262,7 +269,7 @@ class DispenserResourceIT {
         Dispenser partialUpdatedDispenser = new Dispenser();
         partialUpdatedDispenser.setId(dispenser.getId());
 
-        partialUpdatedDispenser.semestre(UPDATED_SEMESTRE);
+        partialUpdatedDispenser.semestre(UPDATED_SEMESTRE).actif(UPDATED_ACTIF);
 
         restDispenserMockMvc
             .perform(
@@ -277,6 +284,7 @@ class DispenserResourceIT {
         assertThat(dispenserList).hasSize(databaseSizeBeforeUpdate);
         Dispenser testDispenser = dispenserList.get(dispenserList.size() - 1);
         assertThat(testDispenser.getSemestre()).isEqualTo(UPDATED_SEMESTRE);
+        assertThat(testDispenser.getActif()).isEqualTo(UPDATED_ACTIF);
     }
 
     @Test
@@ -291,7 +299,7 @@ class DispenserResourceIT {
         Dispenser partialUpdatedDispenser = new Dispenser();
         partialUpdatedDispenser.setId(dispenser.getId());
 
-        partialUpdatedDispenser.semestre(UPDATED_SEMESTRE);
+        partialUpdatedDispenser.semestre(UPDATED_SEMESTRE).actif(UPDATED_ACTIF);
 
         restDispenserMockMvc
             .perform(
@@ -306,6 +314,7 @@ class DispenserResourceIT {
         assertThat(dispenserList).hasSize(databaseSizeBeforeUpdate);
         Dispenser testDispenser = dispenserList.get(dispenserList.size() - 1);
         assertThat(testDispenser.getSemestre()).isEqualTo(UPDATED_SEMESTRE);
+        assertThat(testDispenser.getActif()).isEqualTo(UPDATED_ACTIF);
     }
 
     @Test

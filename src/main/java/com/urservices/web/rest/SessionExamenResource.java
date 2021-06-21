@@ -166,6 +166,18 @@ public class SessionExamenResource {
     }
 
     /**
+     * {@code GET  /session-examen/:id/actif} : get the "id" sessionExamen.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the sessionExamen, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/session-examen/actif")
+    public ResponseEntity<List<SessionExamen>> getSessionExamenActif() {
+        log.debug("REST request to get actives SessionExamen ");
+        List<SessionExamen> sessionExamens = sessionExamenService.findAllActiveSession();
+        return ResponseEntity.ok(sessionExamens);
+    }
+
+    /**
      * {@code DELETE  /session-examen/:id} : delete the "id" sessionExamen.
      *
      * @param id the id of the sessionExamen to delete.

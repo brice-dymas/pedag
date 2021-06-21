@@ -18,6 +18,10 @@
         <dd>
           <span jhiTranslate="{{ 'pedagApp.Semestre.' + dispenser.semestre }}">{{ dispenser.semestre }}</span>
         </dd>
+        <dt><span jhiTranslate="pedagApp.dispenser.actif">Actif</span></dt>
+        <dd>
+          <span>{{ dispenser.actif }}</span>
+        </dd>
         <dt><span jhiTranslate="pedagApp.dispenser.anneeAcademique">Annee Academique</span></dt>
         <dd>
           <div *ngIf="dispenser.anneeAcademique">

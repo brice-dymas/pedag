@@ -20,7 +20,8 @@
       "id": "ID",
       "libelle": "Libelle",
       "mois": "Mois",
-      "annee": "Annee"
+      "annee": "Annee",
+      "actif": "Actif"
     }
   }
 }

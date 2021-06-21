@@ -19,6 +19,7 @@
       },
       "id": "ID",
       "semestre": "Semestre",
+      "actif": "Actif",
       "anneeAcademique": "Annee Academique",
       "enseignant": "Enseignant",
       "matiere": "Matiere"
