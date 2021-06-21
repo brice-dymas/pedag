@@ -20,6 +20,7 @@ import { ProfDashboardComponent } from './prof/prof-dashboard/prof-dashboard.com
 import { NotesProfComponent } from './prof/notes-prof/notes-prof.component';
 import { MatieresProfComponent } from './prof/matieres-prof/matieres-prof.component';
 import { RemplirNotesComponent } from './prof/remplir-notes/remplir-notes.component';
+import { CourrielEtudiantComponent } from './student/courriel-etudiant/courriel-etudiant.component';
 
 @NgModule({
   imports: [SharedLibsModule, RouterModule],
@@ -43,6 +44,7 @@ import { RemplirNotesComponent } from './prof/remplir-notes/remplir-notes.compon
     NotesProfComponent,
     MatieresProfComponent,
     RemplirNotesComponent,
+    CourrielEtudiantComponent,
   ],
   exports: [
     SharedLibsModule,
@@ -65,6 +67,7 @@ import { RemplirNotesComponent } from './prof/remplir-notes/remplir-notes.compon
     NotesProfComponent,
     MatieresProfComponent,
     RemplirNotesComponent,
+    CourrielEtudiantComponent,
   ],
 })
 export class SharedModule {}

@@ -34,6 +34,15 @@ public interface CourrielService {
     Page<Courriel> findAll(Pageable pageable);
 
     /**
+     * Get all the courriels of a given student.
+     *
+     * @param id Student's users id
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    Page<Courriel> findByEtudiantUserId(Long id, Pageable pageable);
+
+    /**
      * Get the "id" courriel.
      *
      * @param id the id of the entity.
