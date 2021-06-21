@@ -40,4 +40,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   openMesNotes(): void {
     this.router.navigate(['/etudiant/mes-notes']);
   }
+
+  openMesCourriels(): void {
+    this.router.navigate(['/etudiant/mes-courriels']);
+  }
 }
