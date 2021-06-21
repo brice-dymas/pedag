@@ -1,11 +1,11 @@
-id;libelle;mois;annee
-1;e-commerce Frozen;JANVIER;23978
-2;Consultant Granite cyan;OCTOBRE;67911
-3;Cotton blue Berkshire;JANVIER;32214
-4;Bike Car;NOVEMBRE;11324
-5;static;MAI;3794
-6;payment navigating Jewelery;SEPTEMBRE;73350
-7;sticky Tuna;JANVIER;86086
-8;Generic payment a;SEPTEMBRE;75375
-9;Decentralized bypassing;JANVIER;77636
-10;a Chicken Chips;JUILLET;35746
+id;libelle;mois;annee;actif
+1;e-commerce Frozen;JANVIER;23978;true
+2;online Cambridgeshire USB;SEPTEMBRE;74686;false
+3;strategize;MARS;10662;false
+4;applications Graphic;MARS;66975;false
+5;Synergistic;JANVIER;29285;true
+6;utilize payment navigating;JANVIER;78288;false
+7;sensor cyan deposit;NOVEMBRE;81492;false
+8;c payment;NOVEMBRE;31726;true
+9;navigate Salad Licensed;OCTOBRE;75305;true
+10;platforms;AOUT;19656;true

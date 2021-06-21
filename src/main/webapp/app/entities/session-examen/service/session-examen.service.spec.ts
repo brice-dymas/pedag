@@ -26,6 +26,7 @@ describe('Service Tests', () => {
         libelle: 'AAAAAAA',
         mois: MoisAnnee.JANVIER,
         annee: 0,
+        actif: false,
       };
     });
 
@@ -64,6 +65,7 @@ describe('Service Tests', () => {
             libelle: 'BBBBBB',
             mois: 'BBBBBB',
             annee: 1,
+            actif: true,
           },
           elemDefault
         );
@@ -104,6 +106,7 @@ describe('Service Tests', () => {
             libelle: 'BBBBBB',
             mois: 'BBBBBB',
             annee: 1,
+            actif: true,
           },
           elemDefault
         );
@@ -155,7 +158,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique SessionExamen to an array', () => {
-          const sessionExamenArray: ISessionExamen[] = [{ id: 123 }, { id: 456 }, { id: 2584 }];
+          const sessionExamenArray: ISessionExamen[] = [{ id: 123 }, { id: 456 }, { id: 11313 }];
           const sessionExamenCollection: ISessionExamen[] = [{ id: 123 }];
           expectedResult = service.addSessionExamenToCollectionIfMissing(sessionExamenCollection, ...sessionExamenArray);
           expect(expectedResult).toHaveLength(3);

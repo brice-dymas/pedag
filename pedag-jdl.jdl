@@ -135,6 +135,7 @@ entity SessionExamen {
     libelle String
     mois MoisAnnee required
     annee Integer required min(2000)
+    actif Boolean
 }
 
 relationship ManyToOne {

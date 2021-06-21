@@ -20,6 +20,7 @@ export class SessionExamenUpdateComponent implements OnInit {
     libelle: [],
     mois: [null, [Validators.required]],
     annee: [null, [Validators.required, Validators.min(2000)]],
+    actif: [],
   });
 
   constructor(protected sessionExamenService: SessionExamenService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
@@ -69,6 +70,7 @@ export class SessionExamenUpdateComponent implements OnInit {
       libelle: sessionExamen.libelle,
       mois: sessionExamen.mois,
       annee: sessionExamen.annee,
+      actif: sessionExamen.actif,
     });
   }
 
@@ -79,6 +81,7 @@ export class SessionExamenUpdateComponent implements OnInit {
       libelle: this.editForm.get(['libelle'])!.value,
       mois: this.editForm.get(['mois'])!.value,
       annee: this.editForm.get(['annee'])!.value,
+      actif: this.editForm.get(['actif'])!.value,
     };
   }
 }
