@@ -200,10 +200,12 @@ public class NotesFiliereServiceImpl implements NotesFiliereService {
 
     private final String getObservation(Float moyenne) {
         String obs = "EL";
-        if (moyenne <= 9) {
-            obs = "NV";
-        } else {
-            obs = "VA";
+        if (moyenne != null) {
+            if (moyenne <= 9) {
+                obs = "NV";
+            } else {
+                obs = "VA";
+            }
         }
         return obs;
     }
