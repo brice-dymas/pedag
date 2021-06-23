@@ -2,20 +2,20 @@
   "pedagApp": {
     "inscription": {
       "home": {
-        "title": "Inscriptions",
+        "title": "Liste des Inscriptions",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Inscription",
-        "createOrEditLabel": "Créer ou éditer un Inscription",
-        "notFound": "Aucun Inscription trouvé"
+        "createLabel": "Nouvelle Inscription",
+        "createOrEditLabel": "Créer ou éditer une Inscription",
+        "notFound": "Aucune Inscription trouvée"
       },
-      "created": "Un nouveau Inscription a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Inscription avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Inscription avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Inscription a été créée avec l'identifiant {{ param }}",
+      "updated": "L'Inscription avec l'identifiant {{ param }} a été mise à jour",
+      "deleted": "L'Inscription avec l'identifiant {{ param }} a été supprimée",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Inscription {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer l'Inscription {{ id }} ?"
       },
       "detail": {
-        "title": "Inscription"
+        "title": "Details d'une Inscription"
       },
       "id": "ID",
       "date": "Date",

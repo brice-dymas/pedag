@@ -2,20 +2,20 @@
   "pedagApp": {
     "coursFiliere": {
       "home": {
-        "title": "CoursFilieres",
+        "title": "Matiere des Filieres",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Cours Filiere",
-        "createOrEditLabel": "Créer ou éditer un Cours Filiere",
-        "notFound": "Aucun Cours Filiere trouvé"
+        "createLabel": "Attribuer une Matiere",
+        "createOrEditLabel": "Assigner une Matiere a une FIliere",
+        "notFound": "Aucune matiere assignée trouvée"
       },
-      "created": "Un nouveau Cours Filiere a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Cours Filiere avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Cours Filiere avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une Matiere a été assignéé avec l'identifiant {{ param }}",
+      "updated": "L'assignation avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'assignation' avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Cours Filiere {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer l'assignation {{ id }} ?"
       },
       "detail": {
-        "title": "Cours Filiere"
+        "title": "Details matiere assignée"
       },
       "id": "ID",
       "quotaHoraire": "Quota Horaire",

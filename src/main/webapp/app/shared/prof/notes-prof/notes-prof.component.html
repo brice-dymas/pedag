@@ -57,7 +57,8 @@
             </div>
           </td>
           <td>{{ note.moyenne }}</td>
-          <td>{{ note.observation }}</td>
+          <span *ngIf="note.observation == 'VA'" class="badge badge-success">{{ 'VALIDE' }}</span>
+          <span *ngIf="note.observation == 'NV'" class="badge badge-danger">{{ 'NON VALIDE' }}</span>
           <td>
             <div *ngIf="note.sessionExamen">
               <a>{{ note.sessionExamen?.libelle }}</a>

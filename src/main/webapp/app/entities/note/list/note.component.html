@@ -37,9 +37,6 @@
           <th scope="col" jhiSortBy="observation">
             <span jhiTranslate="pedagApp.note.observation">Observation</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="creditMatiere">
-            <span jhiTranslate="pedagApp.note.creditMatiere">Credit Matiere</span> <fa-icon icon="sort"></fa-icon>
-          </th>
           <th scope="col" jhiSortBy="creditObtenu">
             <span jhiTranslate="pedagApp.note.creditObtenu">Credit Obtenu</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -49,8 +46,7 @@
           <th scope="col" jhiSortBy="etudiant.id">
             <span jhiTranslate="pedagApp.note.etudiant">Etudiant</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="examen.id"><span jhiTranslate="pedagApp.note.examen">Examen</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="matiere.id">
+          <th scope="col" jhiSortBy="examen.id">
             <span jhiTranslate="pedagApp.note.matiere">Matiere</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="enseignant.id">
@@ -65,49 +61,44 @@
             <a [routerLink]="['/note', note.id, 'view']">{{ note.id }}</a>
           </td>
           <td>{{ note.moyenne }}</td>
-          <td>{{ note.observation }}</td>
-          <td>{{ note.creditMatiere }}</td>
+          <span *ngIf="note.observation == 'VA'" class="badge badge-success">{{ 'VALIDE' }}</span>
+          <span *ngIf="note.observation == 'NV'" class="badge badge-danger">{{ 'NON VALIDE' }}</span>
           <td>{{ note.creditObtenu }}</td>
           <td>
             <div *ngIf="note.sessionExamen">
-              <a [routerLink]="['/session-examen', note.sessionExamen?.id, 'view']">{{ note.sessionExamen?.id }}</a>
+              <a [routerLink]="['/session-examen', note.sessionExamen?.id, 'view']">{{ note.sessionExamen?.libelle }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="note.etudiant">
-              <a [routerLink]="['/inscription', note.etudiant?.id, 'view']">{{ note.etudiant?.id }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="note.examen">
-              <a [routerLink]="['/examen', note.examen?.id, 'view']">{{ note.examen?.id }}</a>
+              <a [routerLink]="['/inscription', note.etudiant?.id, 'view']">{{ note.etudiant?.etudiant?.nom }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="note.matiere">
-              <a [routerLink]="['/matiere', note.matiere?.id, 'view']">{{ note.matiere?.id }}</a>
+              <a [routerLink]="['/matiere', note.matiere?.id, 'view']">{{ note.matiere?.libelle }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="note.enseignant">
-              <a [routerLink]="['/enseignant', note.enseignant?.id, 'view']">{{ note.enseignant?.id }}</a>
+              <a [routerLink]="['/enseignant', note.enseignant?.id, 'view']">{{ note.enseignant?.grade + ' ' + note.enseignant?.nom }}</a>
             </div>
           </td>
           <td class="text-right">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/note', note.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+              <!--<button type="submit" [routerLink]="['/note', note.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                 <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
+&lt;!&ndash;                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>&ndash;&gt;
+              </button>&nbsp;-->
 
               <button type="submit" [routerLink]="['/note', note.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </button>
+                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>--></button
+              >&nbsp;
 
               <button type="submit" (click)="delete(note)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
               </button>
             </div>
           </td>
@@ -116,21 +107,28 @@
     </table>
   </div>
 
-  <div *ngIf="notes && notes.length > 0">
-    <div class="row justify-content-center">
-      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+  <div *ngIf="notes && notes.length">
+    <hr />
+    <div class="row">
+      <div class="col-6">
+        <div class="text-sm font-weight-bold">
+          <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="pagination-sm float-right">
+          <ngb-pagination
+            [collectionSize]="totalItems"
+            [(page)]="ngbPaginationPage"
+            [pageSize]="itemsPerPage"
+            [maxSize]="5"
+            [rotate]="true"
+            [boundaryLinks]="true"
+            (pageChange)="loadPage($event)"
+          ></ngb-pagination>
+        </div>
+      </div>
     </div>
-
-    <div class="row justify-content-center">
-      <ngb-pagination
-        [collectionSize]="totalItems"
-        [(page)]="ngbPaginationPage"
-        [pageSize]="itemsPerPage"
-        [maxSize]="5"
-        [rotate]="true"
-        [boundaryLinks]="true"
-        (pageChange)="loadPage($event)"
-      ></ngb-pagination>
-    </div>
+    <hr />
   </div>
 </div>

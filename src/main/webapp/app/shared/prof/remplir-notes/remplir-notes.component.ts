@@ -109,7 +109,7 @@ export class RemplirNotesComponent implements OnInit {
     });
   }
 
-  getObs(moyenne: number): string {
+  /* getObs(moyenne: number): string {
     return moyenne <= 9 ? 'NV' : 'VA';
   }
 
@@ -122,7 +122,7 @@ export class RemplirNotesComponent implements OnInit {
         const obs = this.getObs(moyenne);
         this.notes.at(pos).get('observation')!.setValue(obs);
       });
-  }
+  }*/
 
   save(): void {
     const formHeader = this.editForm.value;

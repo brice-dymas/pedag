@@ -95,7 +95,7 @@
               [ngValue]="moduleOption.id === editForm.get('module')!.value?.id ? editForm.get('module')!.value : moduleOption"
               *ngFor="let moduleOption of modulesSharedCollection; trackBy: trackModuleById"
             >
-              {{ moduleOption.id }}
+              {{ moduleOption.libelle }}
             </option>
           </select>
         </div>

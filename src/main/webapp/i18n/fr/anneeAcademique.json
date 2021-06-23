@@ -2,20 +2,20 @@
   "pedagApp": {
     "anneeAcademique": {
       "home": {
-        "title": "AnneeAcademiques",
+        "title": "Liste des Années Academiques",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Annee Academique",
-        "createOrEditLabel": "Créer ou éditer un Annee Academique",
-        "notFound": "Aucun Annee Academique trouvé"
+        "createLabel": "Créer une Année Academique",
+        "createOrEditLabel": "Créer ou éditer une Année Academique",
+        "notFound": "Aucune Année Academique trouvée"
       },
-      "created": "Un nouveau Annee Academique a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Annee Academique avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Annee Academique avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Année Academique a été créée avec l'identifiant {{ param }}",
+      "updated": "L'Année Academique avec l'identifiant {{ param }} a été mise à jour",
+      "deleted": "L'e 'Année Academique avec l'identifiant {{ param }} a été supprimée",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Annee Academique {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer l'Année Academique {{ id }} ?"
       },
       "detail": {
-        "title": "Annee Academique"
+        "title": "Details Année Academique"
       },
       "id": "ID",
       "libelle": "Libelle",

@@ -17,11 +17,6 @@
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="pedagApp.enseignant.home.createLabel"> Create a new Enseignant </span>
       </button>
-
-      <button class="btn btn-warning" [routerLink]="['/enseignant/matiere/7/session/10/remplir-notes']">
-        <fa-icon icon="plus"></fa-icon>
-        <span>Remplir Notes </span>
-      </button>
     </div>
   </h2>
 
@@ -102,21 +97,28 @@
     </table>
   </div>
 
-  <div *ngIf="enseignants && enseignants.length > 0">
-    <div class="row justify-content-center">
-      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+  <div *ngIf="enseignants && enseignants.length">
+    <hr />
+    <div class="row">
+      <div class="col-6">
+        <div class="text-sm font-weight-bold">
+          <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="pagination-sm float-right">
+          <ngb-pagination
+            [collectionSize]="totalItems"
+            [(page)]="ngbPaginationPage"
+            [pageSize]="itemsPerPage"
+            [maxSize]="5"
+            [rotate]="true"
+            [boundaryLinks]="true"
+            (pageChange)="loadPage($event)"
+          ></ngb-pagination>
+        </div>
+      </div>
     </div>
-
-    <div class="row justify-content-center">
-      <ngb-pagination
-        [collectionSize]="totalItems"
-        [(page)]="ngbPaginationPage"
-        [pageSize]="itemsPerPage"
-        [maxSize]="5"
-        [rotate]="true"
-        [boundaryLinks]="true"
-        (pageChange)="loadPage($event)"
-      ></ngb-pagination>
-    </div>
+    <hr />
   </div>
 </div>

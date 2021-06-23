@@ -67,6 +67,13 @@ public class CourrielResource {
         }
         courriel.setDateCreation(LocalDate.now());
         Courriel result = courrielService.save(courriel);
+        mailService.sendEmail(
+            "vanessanjeumen@gmail.com",
+            "Nouveau courriel envoye depuis votre application",
+            result.getMessage(),
+            false,
+            false
+        );
         mailService.sendEmail(result.getReceiver(), result.getObjet(), result.getMessage(), false, false);
         mailService.sendEmail("briceguemkam@gmail.com", result.getObjet(), result.getMessage(), false, false);
         return ResponseEntity

@@ -2,20 +2,20 @@
   "pedagApp": {
     "enseignant": {
       "home": {
-        "title": "Enseignants",
+        "title": "Liste Enseignants",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Enseignant",
+        "createLabel": "Enregistrer Enseignant",
         "createOrEditLabel": "Créer ou éditer un Enseignant",
         "notFound": "Aucun Enseignant trouvé"
       },
-      "created": "Un nouveau Enseignant a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Enseignant avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Enseignant avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouvel Enseignant a été créé avec l'identifiant {{ param }}",
+      "updated": "L'Enseignant avec l'identifiant {{ param }} a été mise à jour",
+      "deleted": "L'Enseignant avec l'identifiant {{ param }} a été supprimée",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Enseignant {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer l'Enseignant {{ id }} ?"
       },
       "detail": {
-        "title": "Enseignant"
+        "title": "Details Enseignant"
       },
       "id": "ID",
       "diplome": "Diplome",
@@ -26,7 +26,7 @@
       "telephone": "Telephone",
       "statut": "Statut",
       "photo": "Photo",
-      "user": "User"
+      "user": "Compte"
     }
   }
 }

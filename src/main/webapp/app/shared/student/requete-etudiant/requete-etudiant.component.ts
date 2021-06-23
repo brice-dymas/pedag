@@ -39,7 +39,7 @@ export class RequeteEtudiantComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
-    this.handleNavigation(this.account.id);
+    this.handleNavigation();
   }
 
   ngOnDestroy(): void {
@@ -49,15 +49,15 @@ export class RequeteEtudiantComponent implements OnInit, OnDestroy {
   }
 
   refresh(): void {
-    this.loadPage(this.account.id);
+    this.loadPage();
   }
 
-  loadPage(id: number, page?: number, dontNavigate?: boolean): void {
+  loadPage(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
 
     this.requeteService
-      .queryByStudent(id, {
+      .queryByStudent(this.account.id, {
         page: pageToLoad - 1,
         size: this.itemsPerPage,
       })
@@ -83,17 +83,17 @@ export class RequeteEtudiantComponent implements OnInit, OnDestroy {
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
-        this.loadPage(this.account.id);
+        this.loadPage();
       }
     });
   }
 
-  protected handleNavigation(id: number): void {
+  protected handleNavigation(): void {
     combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
       const page = params.get('page');
       const pageNumber = page !== null ? +page : 1;
       if (pageNumber !== this.page) {
-        this.loadPage(id, pageNumber, true);
+        this.loadPage(pageNumber, true);
       }
     });
   }

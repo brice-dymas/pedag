@@ -2,20 +2,20 @@
   "pedagApp": {
     "matiere": {
       "home": {
-        "title": "Matieres",
+        "title": "Liste des Matieres",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Matiere",
-        "createOrEditLabel": "Créer ou éditer un Matiere",
-        "notFound": "Aucun Matiere trouvé"
+        "createLabel": "Nouvelle Matiere",
+        "createOrEditLabel": "Créer ou éditer une Matiere",
+        "notFound": "Aucune Matiere trouvée"
       },
-      "created": "Un nouveau Matiere a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Matiere avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Matiere avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Matiere a été créée avec l'identifiant {{ param }}",
+      "updated": "La Matiere avec l'identifiant {{ param }} a été mise à jour",
+      "deleted": "La Matiere avec l'identifiant {{ param }} a été supprimée",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Matiere {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer la Matiere {{ id }} ?"
       },
       "detail": {
-        "title": "Matiere"
+        "title": "Details Matiere"
       },
       "id": "ID",
       "libelle": "Libelle",

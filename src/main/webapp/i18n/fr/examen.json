@@ -4,22 +4,22 @@
       "home": {
         "title": "Examen",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Examen",
+        "createLabel": "Créer un Examen",
         "createOrEditLabel": "Créer ou éditer un Examen",
         "notFound": "Aucun Examen trouvé"
       },
-      "created": "Un nouveau Examen a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Examen avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Examen avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouvel Examen a été créé avec l'identifiant {{ param }}",
+      "updated": "L'Examen avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'Examen avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Examen {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer l'Examen {{ id }} ?"
       },
       "detail": {
-        "title": "Examen"
+        "title": "Details Examen"
       },
       "id": "ID",
       "dateExamen": "Date Examen",
-      "type": "Type",
+      "type": "Type Examen",
       "semestre": "Semestre"
     }
   }
