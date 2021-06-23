@@ -1,11 +1,11 @@
 id;libelle;code;credit;module_id
-1;Checking mobile;markets To;8455;1
-2;interactive Handcrafted;Metal b pa;99650;2
-3;b Tenge USB;Lesotho c ;5828;3
-4;repurpose;c input;7400;4
-5;well-modulated B2B;Balboa inv;94397;5
-6;model;engineer C;34522;6
-7;Handcrafted deposit;Fully-conf;55426;7
-8;Secured neural cross-platform;Saint-Domi;12617;8
-9;sticky Ball;Fresh Spec;99547;9
-10;Lorraine Account c;robust Bor;44251;10
+1;Expression Francaise;UV001;2;1
+2;Expression Anglaise;UV002;2;1
+3;Algebre Lineaire;UV003;4;2
+4;Probabilites et Statistiques;UV004;6;2
+5;Initiation a l'Algorithmique;UV005;4;3
+6;Structure de donnees;UV006;6;3
+7;Structures de donnees avancees;UV007;6;3
+8;Programmation Java;UV008;4;4
+9;Fiscalite;UV009;6;9
+10;Taxation et Impots;UV010;9;9

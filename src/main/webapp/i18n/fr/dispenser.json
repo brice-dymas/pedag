@@ -2,20 +2,20 @@
   "pedagApp": {
     "dispenser": {
       "home": {
-        "title": "Dispensers",
+        "title": "Matiere des profs",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Dispenser",
-        "createOrEditLabel": "Créer ou éditer un Dispenser",
-        "notFound": "Aucun Dispenser trouvé"
+        "createLabel": "Assigner une Matiere a un prof",
+        "createOrEditLabel": "Assigner une Matiere a un enseignant",
+        "notFound": "Aucune Matiere assignee a enseignant trouvée"
       },
-      "created": "Un nouveau Dispenser a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Dispenser avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Dispenser avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouvelle Matiere assignee a enseignant avec l'identifiant {{ param }}",
+      "updated": "La Matiere assignee a enseignant avec l'identifiant {{ param }} a été mise à jour",
+      "deleted": "La Matiere assignee a enseignant avec l'identifiant {{ param }} a été supprimée",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Dispenser {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer ceci {{ id }} ?"
       },
       "detail": {
-        "title": "Dispenser"
+        "title": "Details Matiere assignee a enseignant"
       },
       "id": "ID",
       "semestre": "Semestre",

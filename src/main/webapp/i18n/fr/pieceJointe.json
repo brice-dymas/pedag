@@ -2,20 +2,20 @@
   "pedagApp": {
     "pieceJointe": {
       "home": {
-        "title": "PieceJointes",
+        "title": "Liste Pieces Jointes",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Piece Jointe",
-        "createOrEditLabel": "Créer ou éditer un Piece Jointe",
-        "notFound": "Aucun Piece Jointe trouvé"
+        "createLabel": "Nouvelle Piece Jointe",
+        "createOrEditLabel": "Créer ou éditer une Piece Jointe",
+        "notFound": "Aucune Piece Jointe trouvé"
       },
-      "created": "Un nouveau Piece Jointe a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Piece Jointe avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Piece Jointe avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Piece Jointe a été créée avec l'identifiant {{ param }}",
+      "updated": "La Piece Jointe avec l'identifiant {{ param }} a été mise à jour",
+      "deleted": "La Piece Jointe avec l'identifiant {{ param }} a été supprimée",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Piece Jointe {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer la Piece Jointe {{ id }} ?"
       },
       "detail": {
-        "title": "Piece Jointe"
+        "title": "Details Piece Jointe"
       },
       "id": "ID",
       "libelle": "Libelle",

@@ -54,20 +54,20 @@
           <td>{{ module.credit }}</td>
           <td>
             <div *ngIf="module.filiere">
-              <a [routerLink]="['/filiere', module.filiere?.id, 'view']">{{ module.filiere?.id }}</a>
+              <a [routerLink]="['/filiere', module.filiere?.id, 'view']">{{ module.filiere?.libelle }}</a>
             </div>
           </td>
           <td class="text-right">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/module', module.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                 <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span></button
+              >&nbsp;
 
               <button type="submit" [routerLink]="['/module', module.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </button>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span></button
+              >&nbsp;
 
               <button type="submit" (click)="delete(module)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
@@ -80,21 +80,28 @@
     </table>
   </div>
 
-  <div *ngIf="modules && modules.length > 0">
-    <div class="row justify-content-center">
-      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+  <div *ngIf="modules && modules.length">
+    <hr />
+    <div class="row">
+      <div class="col-6">
+        <div class="text-sm font-weight-bold">
+          <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="pagination-sm float-right">
+          <ngb-pagination
+            [collectionSize]="totalItems"
+            [(page)]="ngbPaginationPage"
+            [pageSize]="itemsPerPage"
+            [maxSize]="5"
+            [rotate]="true"
+            [boundaryLinks]="true"
+            (pageChange)="loadPage($event)"
+          ></ngb-pagination>
+        </div>
+      </div>
     </div>
-
-    <div class="row justify-content-center">
-      <ngb-pagination
-        [collectionSize]="totalItems"
-        [(page)]="ngbPaginationPage"
-        [pageSize]="itemsPerPage"
-        [maxSize]="5"
-        [rotate]="true"
-        [boundaryLinks]="true"
-        (pageChange)="loadPage($event)"
-      ></ngb-pagination>
-    </div>
+    <hr />
   </div>
 </div>

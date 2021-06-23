@@ -35,11 +35,11 @@ export class NotesEtudiantComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
-    this.handleNavigation(this.account.id);
+    this.handleNavigation();
   }
 
   refresh(): void {
-    this.handleNavigation(this.account.id);
+    this.handleNavigation();
   }
   ngOnDestroy(): void {
     if (this.authSubscription) {
@@ -47,12 +47,12 @@ export class NotesEtudiantComponent implements OnInit, OnDestroy {
     }
   }
 
-  loadPage(id: any, page?: number, dontNavigate?: boolean): void {
+  loadPage(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
 
     this.noteService
-      .queryByStudent(id, {
+      .queryByStudent(this.account.id, {
         page: pageToLoad - 1,
         size: this.itemsPerPage,
       })
@@ -72,12 +72,12 @@ export class NotesEtudiantComponent implements OnInit, OnDestroy {
     return item.id!;
   }
 
-  protected handleNavigation(id: any): void {
+  protected handleNavigation(): void {
     combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
       const page = params.get('page');
       const pageNumber = page !== null ? +page : 1;
       if (pageNumber !== this.page) {
-        this.loadPage(id, pageNumber, true);
+        this.loadPage(pageNumber, true);
       }
     });
   }

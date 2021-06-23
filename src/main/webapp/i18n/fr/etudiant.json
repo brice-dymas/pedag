@@ -2,20 +2,20 @@
   "pedagApp": {
     "etudiant": {
       "home": {
-        "title": "Etudiants",
+        "title": "Liste Etudiants",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Etudiant",
+        "createLabel": "Enregistrer Etudiant",
         "createOrEditLabel": "Créer ou éditer un Etudiant",
         "notFound": "Aucun Etudiant trouvé"
       },
-      "created": "Un nouveau Etudiant a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Etudiant avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Etudiant avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouvel Etudiant a été créé avec l'identifiant {{ param }}",
+      "updated": "L'Etudiant avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'Etudiant avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Etudiant {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer l'Etudiant {{ id }} ?"
       },
       "detail": {
-        "title": "Etudiant"
+        "title": "Details Etudiant"
       },
       "id": "ID",
       "matricule": "Matricule",
@@ -25,7 +25,7 @@
       "email": "Email",
       "telephone": "Telephone",
       "photo": "Photo",
-      "user": "User"
+      "user": "Compte"
     }
   }
 }
