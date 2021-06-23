@@ -32,7 +32,7 @@
         <dt><span jhiTranslate="pedagApp.pieceJointe.matiere">Matiere</span></dt>
         <dd>
           <div *ngIf="pieceJointe.matiere">
-            <a [routerLink]="['/matiere', pieceJointe.matiere?.id, 'view']">{{ pieceJointe.matiere?.id }}</a>
+            <a [routerLink]="['/matiere', pieceJointe.matiere?.id, 'view']">{{ pieceJointe.matiere?.libelle }}</a>
           </div>
         </dd>
       </dl>

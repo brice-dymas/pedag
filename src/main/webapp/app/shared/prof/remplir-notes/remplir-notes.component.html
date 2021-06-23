@@ -61,7 +61,6 @@
             <th style="width: 40%"><span>Nom de l'etudiant</span></th>
             <th style="width: 40%"><span>Filiere</span></th>
             <th style="width: 15%"><span>Note obtenu</span></th>
-            <th style="width: 5%"><span>OBS</span></th>
           </tr>
         </thead>
         <tbody *ngFor="let item of notes.controls; let i = index">
@@ -83,17 +82,6 @@
                 required
                 min="0"
                 max="20"
-                (ngModelChange)="onValueMoyenneChange(i)"
-              />
-            </td>
-            <td>
-              <input
-                placeholder="Observation"
-                class="form-control-sm"
-                name="observation"
-                id="observation"
-                formControlName="observation"
-                readonly
               />
             </td>
           </tr>

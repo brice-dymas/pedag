@@ -1,11 +1,11 @@
 id;libelle;mois;annee;actif
-1;e-commerce Frozen;JANVIER;23978;true
-2;online Cambridgeshire USB;SEPTEMBRE;74686;false
-3;strategize;MARS;10662;false
-4;applications Graphic;MARS;66975;false
-5;Synergistic;JANVIER;29285;true
-6;utilize payment navigating;JANVIER;78288;false
-7;sensor cyan deposit;NOVEMBRE;81492;false
-8;c payment;NOVEMBRE;31726;true
-9;navigate Salad Licensed;OCTOBRE;75305;true
-10;platforms;AOUT;19656;true
+1;JANVIER-2020;JANVIER;2020;true
+2;SEPTEMBRE-2020;SEPTEMBRE;2020;false
+3;MARS-2021;MARS;2021;false
+4;MARS-2019;MARS;2019;false
+5;JANVIER-2021;JANVIER;2021;true
+6;JANVIER-2019;JANVIER;2019;false
+7;NOVEMBRE-2018;NOVEMBRE;2018;false
+8;NOVEMBRE-2017;NOVEMBRE;2017;false
+9;OCTOBRE-2016;OCTOBRE;2016;false
+10;AOUT-2019;AOUT;2019;true

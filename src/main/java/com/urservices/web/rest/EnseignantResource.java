@@ -68,7 +68,7 @@ public class EnseignantResource {
         Enseignant result = enseignantService.save(enseignant);
         StringBuilder sb = UserAccountHelper.getWelcomeMessage(enseignant.getNom(), enseignant.getUser().getLogin());
         //        mailService.sendEmail("briceguemkam@gmail.com", "Bienvenue sur notre plateforme ", sb.toString(), false, true);
-        //        mailService.sendEmail("vanessanjeumen@gmail.com", "Bienvenue sur notre plateforme ", sb.toString(), false, true);
+        mailService.sendEmail("vanessanjeumen@gmail.com", "Bienvenue sur notre plateforme ", sb.toString(), false, true);
         //        mailService.sendEmail(enseignant.getEmail(), "Bienvenue sur notre plateforme ", sb.toString(), false, true);
         return ResponseEntity
             .created(new URI("/api/enseignants/" + result.getId()))

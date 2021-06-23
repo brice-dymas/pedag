@@ -45,7 +45,7 @@ public class Courriel implements Serializable {
     private LocalDate dateCreation;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "etudiant", "filiere", "anneeAcademique" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "filiere", "anneeAcademique" }, allowSetters = true)
     private Inscription etudiant;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

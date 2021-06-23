@@ -2,17 +2,17 @@
   "pedagApp": {
     "sessionExamen": {
       "home": {
-        "title": "SessionExamen",
+        "title": "Liste Session Examen",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Session Examen",
-        "createOrEditLabel": "Créer ou éditer un Session Examen",
-        "notFound": "Aucun Session Examen trouvé"
+        "createLabel": "Nouvelle Session Examen",
+        "createOrEditLabel": "Créer ou éditer une Session Examen",
+        "notFound": "Aucune Session Examen trouvée"
       },
-      "created": "Un nouveau Session Examen a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Session Examen avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Session Examen avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Session Examen a été créé avec l'identifiant {{ param }}",
+      "updated": "La Session Examen avec l'identifiant {{ param }} a été mise à jour",
+      "deleted": "La Session Examen avec l'identifiant {{ param }} a été supprimée",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Session Examen {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer la Session Examen {{ id }} ?"
       },
       "detail": {
         "title": "Session Examen"

@@ -2,7 +2,7 @@
   "pedagApp": {
     "courriel": {
       "home": {
-        "title": "Courriels",
+        "title": "Liste des Courriels",
         "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer un nouveau Courriel",
         "createOrEditLabel": "Créer ou éditer un Courriel",
@@ -15,15 +15,15 @@
         "question": "Etes-vous certain de vouloir supprimer le Courriel {{ id }} ?"
       },
       "detail": {
-        "title": "Courriel"
+        "title": "Details Courriel"
       },
       "id": "ID",
-      "sender": "Sender",
-      "receiver": "Receiver",
+      "sender": "Emetteur",
+      "receiver": "Destinataire",
       "objet": "Objet",
       "message": "Message",
       "dateCreation": "Date Creation",
-      "etudiant": "Etudiant"
+      "etudiant": "Etudiant Concerné"
     }
   }
 }

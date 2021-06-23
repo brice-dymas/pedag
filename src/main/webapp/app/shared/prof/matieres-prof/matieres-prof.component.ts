@@ -7,7 +7,6 @@ import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { AccountService } from 'app/core/auth/account.service';
 import { IDispenser } from 'app/entities/dispenser/dispenser.model';
 import { DispenserService } from 'app/entities/dispenser/service/dispenser.service';
-import { IMatiere } from 'app/entities/matiere/matiere.model';
 import { RequeteDeleteDialogComponent } from 'app/entities/requete/delete/requete-delete-dialog.component';
 import { SessionExamenService } from 'app/entities/session-examen/service/session-examen.service';
 import { ISessionExamen } from 'app/entities/session-examen/session-examen.model';
@@ -51,8 +50,8 @@ export class MatieresProfComponent implements OnInit, OnDestroy {
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => {
       this.account = account;
       this.loadDatas();
+      this.handleNavigation();
     });
-    this.handleNavigation(this.account.id);
   }
 
   ngOnDestroy(): void {
@@ -78,21 +77,19 @@ export class MatieresProfComponent implements OnInit, OnDestroy {
 
   save(): void {
     const formvalues = this.editForm.value;
-    // eslint-disable-next-line no-console
-    console.log('formvalues', formvalues);
     this.router.navigate(['/enseignant/matiere', formvalues.matiere.id, 'session', formvalues.sessionExamen.id, 'remplir-notes']);
   }
 
   refresh(): void {
-    this.loadPage(this.account.id);
+    this.loadPage();
   }
 
-  loadPage(id: number, page?: number, dontNavigate?: boolean): void {
+  loadPage(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
 
     this.dispenserService
-      .queryByTeacher(id, {
+      .queryByTeacher(this.account.id, {
         page: pageToLoad - 1,
         size: this.itemsPerPage,
       })
@@ -118,17 +115,17 @@ export class MatieresProfComponent implements OnInit, OnDestroy {
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
-        this.loadPage(this.account.id);
+        this.loadPage();
       }
     });
   }
 
-  protected handleNavigation(id: number): void {
+  protected handleNavigation(): void {
     combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
       const page = params.get('page');
       const pageNumber = page !== null ? +page : 1;
       if (pageNumber !== this.page) {
-        this.loadPage(id, pageNumber, true);
+        this.loadPage(pageNumber, true);
       }
     });
   }

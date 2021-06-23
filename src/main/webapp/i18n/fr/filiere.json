@@ -2,20 +2,20 @@
   "pedagApp": {
     "filiere": {
       "home": {
-        "title": "Filieres",
+        "title": "Liste Filieres",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Filiere",
-        "createOrEditLabel": "Créer ou éditer un Filiere",
-        "notFound": "Aucun Filiere trouvé"
+        "createLabel": "Enregistrer Filiere",
+        "createOrEditLabel": "Créer ou éditer une Filiere",
+        "notFound": "Aucune Filiere trouvée"
       },
-      "created": "Un nouveau Filiere a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Filiere avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Filiere avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Filiere a été créée avec l'identifiant {{ param }}",
+      "updated": "La Filiere avec l'identifiant {{ param }} a été mise à jour",
+      "deleted": "La Filiere avec l'identifiant {{ param }} a été supprimée",
       "delete": {
-        "question": "Etes-vous certain de vouloir supprimer le Filiere {{ id }} ?"
+        "question": "Etes-vous certain de vouloir supprimer la Filiere {{ id }} ?"
       },
       "detail": {
-        "title": "Filiere"
+        "title": "Details Filiere"
       },
       "id": "ID",
       "libelle": "Libelle",
