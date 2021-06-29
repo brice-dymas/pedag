@@ -50,6 +50,12 @@ class RequeteResourceIT {
     private static final LocalDate DEFAULT_DATE_MODIFICATION = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE_MODIFICATION = LocalDate.now(ZoneId.systemDefault());
 
+    private static final Float DEFAULT_NOTE_ATTENDUE = 0F;
+    private static final Float UPDATED_NOTE_ATTENDUE = 1F;
+
+    private static final Float DEFAULT_NOTE_OBTENUE = 1F;
+    private static final Float UPDATED_NOTE_OBTENUE = 2F;
+
     private static final String ENTITY_API_URL = "/api/requetes";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -80,7 +86,9 @@ class RequeteResourceIT {
             .statut(DEFAULT_STATUT)
             .traiter(DEFAULT_TRAITER)
             .dateCreation(DEFAULT_DATE_CREATION)
-            .dateModification(DEFAULT_DATE_MODIFICATION);
+            .dateModification(DEFAULT_DATE_MODIFICATION)
+            .noteAttendue(DEFAULT_NOTE_ATTENDUE)
+            .noteObtenue(DEFAULT_NOTE_OBTENUE);
         return requete;
     }
 
@@ -97,7 +105,9 @@ class RequeteResourceIT {
             .statut(UPDATED_STATUT)
             .traiter(UPDATED_TRAITER)
             .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .dateModification(UPDATED_DATE_MODIFICATION)
+            .noteAttendue(UPDATED_NOTE_ATTENDUE)
+            .noteObtenue(UPDATED_NOTE_OBTENUE);
         return requete;
     }
 
@@ -125,6 +135,8 @@ class RequeteResourceIT {
         assertThat(testRequete.getTraiter()).isEqualTo(DEFAULT_TRAITER);
         assertThat(testRequete.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
         assertThat(testRequete.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
+        assertThat(testRequete.getNoteAttendue()).isEqualTo(DEFAULT_NOTE_ATTENDUE);
+        assertThat(testRequete.getNoteObtenue()).isEqualTo(DEFAULT_NOTE_OBTENUE);
     }
 
     @Test
@@ -181,6 +193,23 @@ class RequeteResourceIT {
 
     @Test
     @Transactional
+    void checkNoteAttendueIsRequired() throws Exception {
+        int databaseSizeBeforeTest = requeteRepository.findAll().size();
+        // set the field null
+        requete.setNoteAttendue(null);
+
+        // Create the Requete, which fails.
+
+        restRequeteMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(requete)))
+            .andExpect(status().isBadRequest());
+
+        List<Requete> requeteList = requeteRepository.findAll();
+        assertThat(requeteList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllRequetes() throws Exception {
         // Initialize the database
         requeteRepository.saveAndFlush(requete);
@@ -196,7 +225,9 @@ class RequeteResourceIT {
             .andExpect(jsonPath("$.[*].statut").value(hasItem(DEFAULT_STATUT.toString())))
             .andExpect(jsonPath("$.[*].traiter").value(hasItem(DEFAULT_TRAITER.booleanValue())))
             .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.toString())));
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.toString())))
+            .andExpect(jsonPath("$.[*].noteAttendue").value(hasItem(DEFAULT_NOTE_ATTENDUE.doubleValue())))
+            .andExpect(jsonPath("$.[*].noteObtenue").value(hasItem(DEFAULT_NOTE_OBTENUE.doubleValue())));
     }
 
     @Test
@@ -216,7 +247,9 @@ class RequeteResourceIT {
             .andExpect(jsonPath("$.statut").value(DEFAULT_STATUT.toString()))
             .andExpect(jsonPath("$.traiter").value(DEFAULT_TRAITER.booleanValue()))
             .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()))
-            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.toString()));
+            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.toString()))
+            .andExpect(jsonPath("$.noteAttendue").value(DEFAULT_NOTE_ATTENDUE.doubleValue()))
+            .andExpect(jsonPath("$.noteObtenue").value(DEFAULT_NOTE_OBTENUE.doubleValue()));
     }
 
     @Test
@@ -244,7 +277,9 @@ class RequeteResourceIT {
             .statut(UPDATED_STATUT)
             .traiter(UPDATED_TRAITER)
             .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .dateModification(UPDATED_DATE_MODIFICATION)
+            .noteAttendue(UPDATED_NOTE_ATTENDUE)
+            .noteObtenue(UPDATED_NOTE_OBTENUE);
 
         restRequeteMockMvc
             .perform(
@@ -264,6 +299,8 @@ class RequeteResourceIT {
         assertThat(testRequete.getTraiter()).isEqualTo(UPDATED_TRAITER);
         assertThat(testRequete.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
         assertThat(testRequete.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
+        assertThat(testRequete.getNoteAttendue()).isEqualTo(UPDATED_NOTE_ATTENDUE);
+        assertThat(testRequete.getNoteObtenue()).isEqualTo(UPDATED_NOTE_OBTENUE);
     }
 
     @Test
@@ -334,7 +371,7 @@ class RequeteResourceIT {
         Requete partialUpdatedRequete = new Requete();
         partialUpdatedRequete.setId(requete.getId());
 
-        partialUpdatedRequete.statut(UPDATED_STATUT).traiter(UPDATED_TRAITER);
+        partialUpdatedRequete.statut(UPDATED_STATUT).traiter(UPDATED_TRAITER).noteObtenue(UPDATED_NOTE_OBTENUE);
 
         restRequeteMockMvc
             .perform(
@@ -354,6 +391,8 @@ class RequeteResourceIT {
         assertThat(testRequete.getTraiter()).isEqualTo(UPDATED_TRAITER);
         assertThat(testRequete.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
         assertThat(testRequete.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
+        assertThat(testRequete.getNoteAttendue()).isEqualTo(DEFAULT_NOTE_ATTENDUE);
+        assertThat(testRequete.getNoteObtenue()).isEqualTo(UPDATED_NOTE_OBTENUE);
     }
 
     @Test
@@ -374,7 +413,9 @@ class RequeteResourceIT {
             .statut(UPDATED_STATUT)
             .traiter(UPDATED_TRAITER)
             .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .dateModification(UPDATED_DATE_MODIFICATION)
+            .noteAttendue(UPDATED_NOTE_ATTENDUE)
+            .noteObtenue(UPDATED_NOTE_OBTENUE);
 
         restRequeteMockMvc
             .perform(
@@ -394,6 +435,8 @@ class RequeteResourceIT {
         assertThat(testRequete.getTraiter()).isEqualTo(UPDATED_TRAITER);
         assertThat(testRequete.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
         assertThat(testRequete.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
+        assertThat(testRequete.getNoteAttendue()).isEqualTo(UPDATED_NOTE_ATTENDUE);
+        assertThat(testRequete.getNoteObtenue()).isEqualTo(UPDATED_NOTE_OBTENUE);
     }
 
     @Test

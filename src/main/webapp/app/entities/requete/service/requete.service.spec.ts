@@ -33,6 +33,8 @@ describe('Service Tests', () => {
         traiter: false,
         dateCreation: currentDate,
         dateModification: currentDate,
+        noteAttendue: 0,
+        noteObtenue: 0,
       };
     });
 
@@ -88,6 +90,8 @@ describe('Service Tests', () => {
             traiter: true,
             dateCreation: currentDate.format(DATE_FORMAT),
             dateModification: currentDate.format(DATE_FORMAT),
+            noteAttendue: 1,
+            noteObtenue: 1,
           },
           elemDefault
         );
@@ -112,6 +116,7 @@ describe('Service Tests', () => {
           {
             statut: 'BBBBBB',
             traiter: true,
+            noteObtenue: 1,
           },
           new Requete()
         );
@@ -143,6 +148,8 @@ describe('Service Tests', () => {
             traiter: true,
             dateCreation: currentDate.format(DATE_FORMAT),
             dateModification: currentDate.format(DATE_FORMAT),
+            noteAttendue: 1,
+            noteObtenue: 1,
           },
           elemDefault
         );
@@ -200,7 +207,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Requete to an array', () => {
-          const requeteArray: IRequete[] = [{ id: 123 }, { id: 456 }, { id: 13133 }];
+          const requeteArray: IRequete[] = [{ id: 123 }, { id: 456 }, { id: 48205 }];
           const requeteCollection: IRequete[] = [{ id: 123 }];
           expectedResult = service.addRequeteToCollectionIfMissing(requeteCollection, ...requeteArray);
           expect(expectedResult).toHaveLength(3);

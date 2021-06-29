@@ -30,6 +30,17 @@
     {
       "fieldName": "dateModification",
       "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "noteAttendue",
+      "fieldType": "Float",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMin": 0,
+      "fieldValidateRulesMax": "20"
+    },
+    {
+      "fieldName": "noteObtenue",
+      "fieldType": "Float"
     }
   ],
   "relationships": [
@@ -44,6 +55,12 @@
       "otherEntityName": "administrateur",
       "otherEntityRelationshipName": "requete",
       "relationshipName": "validateur"
+    },
+    {
+      "relationshipName": "note",
+      "otherEntityName": "note",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
     }
   ],
   "entityTableName": "requete",

@@ -1,6 +1,7 @@
 import * as dayjs from 'dayjs';
 import { IInscription } from 'app/entities/inscription/inscription.model';
 import { IAdministrateur } from 'app/entities/administrateur/administrateur.model';
+import { INote } from 'app/entities/note/note.model';
 import { StatutRequete } from 'app/entities/enumerations/statut-requete.model';
 
 export interface IRequete {
@@ -11,9 +12,11 @@ export interface IRequete {
   traiter?: boolean | null;
   dateCreation?: dayjs.Dayjs | null;
   dateModification?: dayjs.Dayjs | null;
+  noteAttendue?: number;
+  noteObtenue?: number | null;
   etudiant?: IInscription | null;
   validateur?: IAdministrateur | null;
-  userId?: number | null;
+  note?: INote | null;
 }
 
 export class Requete implements IRequete {
@@ -25,9 +28,11 @@ export class Requete implements IRequete {
     public traiter?: boolean | null,
     public dateCreation?: dayjs.Dayjs | null,
     public dateModification?: dayjs.Dayjs | null,
+    public noteAttendue?: number,
+    public noteObtenue?: number | null,
     public etudiant?: IInscription | null,
     public validateur?: IAdministrateur | null,
-    public userId?: number | null
+    public note?: INote | null
   ) {
     this.traiter = this.traiter ?? false;
   }
