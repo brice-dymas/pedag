@@ -1,0 +1,31 @@
+{
+  "pedagApp": {
+    "deliberation": {
+      "home": {
+        "title": "Deliberations",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Deliberation",
+        "createOrEditLabel": "Créer ou éditer un Deliberation",
+        "notFound": "Aucun Deliberation trouvé"
+      },
+      "created": "Un nouveau Deliberation a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Deliberation avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Deliberation avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Deliberation {{ id }} ?"
+      },
+      "detail": {
+        "title": "Deliberation"
+      },
+      "id": "ID",
+      "critereSelection": "Critere Selection",
+      "valeurSelectionDebut": "Valeur Selection Debut",
+      "valeurSelectionFin": "Valeur Selection Fin",
+      "critereAppliquer": "Critere Appliquer",
+      "valeurAppliquer": "Valeur Appliquer",
+      "dateDeliberation": "Date Deliberation",
+      "sessionExamen": "Session Examen",
+      "filiere": "Filiere"
+    }
+  }
+}

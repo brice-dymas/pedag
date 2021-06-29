@@ -84,6 +84,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'pedagApp.sessionExamen.home.title' },
         loadChildren: () => import('./session-examen/session-examen.module').then(m => m.SessionExamenModule),
       },
+      {
+        path: 'deliberation',
+        data: { pageTitle: 'pedagApp.deliberation.home.title' },
+        loadChildren: () => import('./deliberation/deliberation.module').then(m => m.DeliberationModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

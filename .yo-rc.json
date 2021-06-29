@@ -61,8 +61,9 @@
       "AnneeAcademique",
       "CoursFiliere",
       "Module",
-      "SessionExamen"
+      "SessionExamen",
+      "Deliberation"
     ],
-    "lastLiquibaseTimestamp": 1623805016000
+    "lastLiquibaseTimestamp": 1624951099000
   }
 }

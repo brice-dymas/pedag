@@ -17,6 +17,7 @@ export interface IRequete {
   etudiant?: IInscription | null;
   validateur?: IAdministrateur | null;
   note?: INote | null;
+  userId?: number | null;
 }
 
 export class Requete implements IRequete {
@@ -32,7 +33,8 @@ export class Requete implements IRequete {
     public noteObtenue?: number | null,
     public etudiant?: IInscription | null,
     public validateur?: IAdministrateur | null,
-    public note?: INote | null
+    public note?: INote | null,
+    public userId?: number | null
   ) {
     this.traiter = this.traiter ?? false;
   }

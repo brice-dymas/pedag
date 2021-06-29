@@ -1,0 +1,10 @@
+{
+  "pedagApp": {
+    "ConditionAppliquer": {
+      "null": "",
+      "AJOUTER": "AJOUTER",
+      "RETRANCHER": "RETRANCHER",
+      "DEFINIR_VALEUR_A": "DEFINIR_VALEUR_A"
+    }
+  }
+}
