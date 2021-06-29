@@ -34,7 +34,7 @@ public class EtudiantServiceImpl implements EtudiantService {
     @Override
     public Etudiant save(Etudiant etudiant) {
         log.debug("Request to save Etudiant : {}", etudiant);
-        etudiant.setUser(userService.createNewUser(setUpStudentrAccount(etudiant), etudiant.getMatricule().toUpperCase()));
+        etudiant.setUser(userService.createNewUser(setUpStudentrAccount(etudiant), "123456"));
         return etudiantRepository.save(etudiant);
     }
 
