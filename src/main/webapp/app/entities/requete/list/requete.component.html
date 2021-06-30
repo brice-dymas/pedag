@@ -43,7 +43,7 @@
           <th scope="col" jhiSortBy="etudiant.id">
             <span jhiTranslate="pedagApp.requete.etudiant">Etudiant</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="note.id"><span>Session Examen</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="note.sessionExamen.id"><span>Session Examen</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col">Note Attendue</th>
           <th scope="col">Note Obtenue</th>
           <th scope="col"></th>
@@ -104,7 +104,7 @@
                 data-bs-placement="top"
                 title="Valider la requete"
                 *ngIf="canValidate(requete)"
-                (click)="valider(requete)"
+                (click)="validerRequete(requete)"
                 class="btn btn-success btn-sm"
                 data-cy="entityDetailsButton"
               >
@@ -117,12 +117,11 @@
                 data-bs-placement="top"
                 title="Rejeter la requete"
                 *ngIf="canValidate(requete)"
-                (click)="rejeter(requete)"
+                (click)="rejeterRequete(requete)"
                 class="btn btn-warning btn-sm"
                 data-cy="entityEditButton"
               >
-                <fa-icon icon="ban"></fa-icon>
-                <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>--></button
+                <fa-icon icon="ban"></fa-icon></button
               >&nbsp;
 
               <button

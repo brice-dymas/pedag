@@ -1,0 +1,32 @@
+<form *ngIf="requete" name="rejeterForm" (ngSubmit)="confirmValidation(requete)">
+  <div class="modal-header bg-primary">
+    <h4 class="modal-title font-weight-bold text-uppercase center">Confirmez la validation</h4>
+
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <jhi-alert-error></jhi-alert-error>
+
+    <p class="font-weight-bold">Voulez vous vraiment valider cette requete ?</p>
+    <div>
+      Objet : {{ requete.objet }} <br />
+      Description : {{ requete.description }} <br />
+      Etudiant : {{ requete.etudiant?.etudiant?.prenom + ' ' + requete.etudiant?.etudiant?.nom }} <br />
+    </div>
+    <br />
+    <p *ngIf="requete.note">
+      Note Attendue : {{ requete.noteAttendue }} <br />
+      Note Obtenue : {{ requete.note?.moyenne }} <br />
+      Session Examen : {{ requete.note?.sessionExamen?.type + ' ' + requete.note?.sessionExamen?.libelle }} <br />
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button type="submit" class="btn btn-success"><fa-icon icon="check"></fa-icon>&nbsp;<span>Valider Requete</span></button>
+  </div>
+</form>

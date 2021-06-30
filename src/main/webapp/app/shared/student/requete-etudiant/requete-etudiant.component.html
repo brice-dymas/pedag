@@ -61,14 +61,14 @@
             </button>
             <button
               *ngIf="requete.statut == statutFonde"
-              class="badge badge-xs badge-success"
+              class="badge-sm badge-success"
               jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
             >
               {{ requete.statut }}
             </button>
             <button
               *ngIf="requete.statut == statutNonFonde"
-              class="btn btn-danger"
+              class="btn-sm btn-danger"
               jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
             >
               {{ requete.statut }}

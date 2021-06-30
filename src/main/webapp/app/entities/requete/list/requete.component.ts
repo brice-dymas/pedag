@@ -5,6 +5,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { StatutRequete } from 'app/entities/enumerations/statut-requete.model';
+import { RejeterRequeteDialogComponent } from 'app/entities/requete/rejeter/rejeter-requete-dialog/rejeter-requete-dialog.component';
+import { ValiderRequeteDialogComponent } from 'app/entities/requete/valider/valider-requete-dialog/valider-requete-dialog.component';
 import * as dayjs from 'dayjs';
 import { combineLatest } from 'rxjs';
 import { RequeteDeleteDialogComponent } from '../delete/requete-delete-dialog.component';
@@ -97,6 +99,28 @@ export class RequeteComponent implements OnInit {
 
   delete(requete: IRequete): void {
     const modalRef = this.modalService.open(RequeteDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.requete = requete;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'deleted') {
+        this.loadPage();
+      }
+    });
+  }
+
+  rejeterRequete(requete: IRequete): void {
+    const modalRef = this.modalService.open(RejeterRequeteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.requete = requete;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'deleted') {
+        this.loadPage();
+      }
+    });
+  }
+
+  validerRequete(requete: IRequete): void {
+    const modalRef = this.modalService.open(ValiderRequeteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.requete = requete;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {

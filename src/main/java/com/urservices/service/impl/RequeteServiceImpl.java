@@ -1,14 +1,15 @@
 package com.urservices.service.impl;
 
 import com.urservices.domain.Inscription;
+import com.urservices.domain.Note;
 import com.urservices.domain.Requete;
 import com.urservices.domain.enumeration.StatutRequete;
 import com.urservices.repository.InscriptionRepository;
+import com.urservices.repository.NoteRepository;
 import com.urservices.repository.RequeteRepository;
 import com.urservices.service.RequeteService;
 import com.urservices.service.dto.NewRequeteDTO;
 import com.urservices.utils.RequeteHelper;
-import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +28,16 @@ public class RequeteServiceImpl implements RequeteService {
     private final Logger log = LoggerFactory.getLogger(RequeteServiceImpl.class);
 
     private final RequeteRepository requeteRepository;
+    private final NoteRepository noteRepository;
     private final InscriptionRepository inscriptionRepository;
 
-    public RequeteServiceImpl(RequeteRepository requeteRepository, InscriptionRepository inscriptionRepository) {
+    public RequeteServiceImpl(
+        RequeteRepository requeteRepository,
+        NoteRepository noteRepository,
+        InscriptionRepository inscriptionRepository
+    ) {
         this.requeteRepository = requeteRepository;
+        this.noteRepository = noteRepository;
         this.inscriptionRepository = inscriptionRepository;
     }
 
@@ -63,6 +70,28 @@ public class RequeteServiceImpl implements RequeteService {
         return requeteRepository.save(req);
     }
 
+    private final String getObservation(Float moyenne) {
+        String obs = "EL";
+        if (moyenne != null) {
+            if (moyenne <= 9) {
+                obs = "NV";
+            } else {
+                obs = "VA";
+            }
+        }
+        return obs;
+    }
+
+    void updateStudentNote(Requete requete) {
+        if (requete.getNote() != null && requete.getStatut().equals(StatutRequete.FONDE)) {
+            Note note = requete.getNote();
+            note.setMoyenne(requete.getNoteAttendue());
+            note.setCreditObtenu(note.getMoyenne() < 10 ? 0 : note.getMatiere().getCredit());
+            note.setObservation(getObservation(note.getMoyenne()));
+            noteRepository.save(note);
+        }
+    }
+
     @Override
     public Optional<Requete> partialUpdate(Requete requete) {
         log.debug("Request to partially update Requete : {}", requete);
@@ -89,7 +118,7 @@ public class RequeteServiceImpl implements RequeteService {
                     if (requete.getDateModification() != null) {
                         existingRequete.setDateModification(requete.getDateModification());
                     }
-
+                    updateStudentNote(existingRequete);
                     return existingRequete;
                 }
             )
