@@ -26,6 +26,13 @@ export class RequeteService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  createForEtudiant(requete: IRequete, id: number): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(requete);
+    return this.http
+      .post<IRequete>(`${this.resourceUrl}/${id}`, copy, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
   createSimple(requete: IRequete): Observable<EntityResponseType> {
     return this.http
       .post<IRequete>(`${this.resourceUrl}/simple`, requete, { observe: 'response' })

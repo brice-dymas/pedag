@@ -56,13 +56,13 @@ public class RequeteResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new requete, or with status {@code 400 (Bad Request)} if the requete has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/requetes")
-    public ResponseEntity<Requete> createRequete(@Valid @RequestBody Requete requete) throws URISyntaxException {
+    @PostMapping("/requetes/{id}")
+    public ResponseEntity<Requete> createRequete(@PathVariable Long id, @Valid @RequestBody Requete requete) throws URISyntaxException {
         log.debug("REST request to save Requete : {}", requete);
         if (requete.getId() != null) {
             throw new BadRequestAlertException("A new requete cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Requete result = requeteService.save(requete);
+        Requete result = requeteService.save(requete, id);
         return ResponseEntity
             .created(new URI("/api/requetes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))

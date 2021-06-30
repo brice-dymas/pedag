@@ -32,46 +32,71 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="dateCreation">
+            <span jhiTranslate="pedagApp.requete.dateCreation">Date Creation</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="objet"><span jhiTranslate="pedagApp.requete.objet">Objet</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="description">
             <span jhiTranslate="pedagApp.requete.description">Description</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="statut"><span jhiTranslate="pedagApp.requete.statut">Statut</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="dateCreation">
-            <span jhiTranslate="pedagApp.requete.dateCreation">Date Creation</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <!--<th scope="col" jhiSortBy="etudiant.id">
+          <th scope="col" jhiSortBy="etudiant.id">
             <span jhiTranslate="pedagApp.requete.etudiant">Etudiant</span> <fa-icon icon="sort"></fa-icon>
-          </th>-->
+          </th>
+          <th scope="col" jhiSortBy="note.id"><span>Session Examen</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col">Note Attendue</th>
+          <th scope="col">Note Obtenue</th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let requete of requetes; trackBy: trackId" data-cy="entityTable">
+          <td>{{ requete.dateCreation | formatMediumDate }}</td>
           <td>{{ requete.objet }}</td>
           <td>{{ requete.description }}</td>
-          <td
-            *ngIf="requete.statut == statutAttente"
-            class="badge badge-xs badge-warning"
-            jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
-          >
-            {{ requete.statut }}
+          <td>
+            <span
+              *ngIf="requete.statut == statutAttente"
+              class="btn btn-sm btn-warning"
+              jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
+            >
+              {{ requete.statut }}
+            </span>
+            <span
+              *ngIf="requete.statut == statutFonde"
+              class="btn btn-sm btn-success"
+              jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
+            >
+              {{ requete.statut }}
+            </span>
+            <span
+              *ngIf="requete.statut == statutNonFonde"
+              class="btn btn-sm btn-danger"
+              jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
+            >
+              {{ requete.statut }}
+            </span>
           </td>
-          <td
-            *ngIf="requete.statut == statutFonde"
-            class="badge badge-xs badge-success"
-            jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
-          >
-            {{ requete.statut }}
+          <td>
+            <div *ngIf="requete.etudiant">
+              <span>{{ requete.etudiant?.etudiant?.prenom + ' ' + requete.etudiant?.etudiant?.nom }}</span>
+            </div>
           </td>
-          <td
-            *ngIf="requete.statut == statutNonFonde"
-            class="badge badge-xs badge-danger"
-            jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
-          >
-            {{ requete.statut }}
+          <td>
+            <div *ngIf="requete.note">
+              <span>{{ requete.note?.sessionExamen?.type + ' ' + requete.note?.sessionExamen?.libelle }}</span>
+            </div>
           </td>
-          <td>{{ requete.dateCreation | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="requete.note">
+              <span>{{ requete.noteAttendue }}</span>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="requete.note">
+              <span>{{ requete.note?.moyenne }}</span>
+            </div>
+          </td>
           <td class="text-right">
             <div class="btn-group">
               <button

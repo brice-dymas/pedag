@@ -57,7 +57,7 @@ public class Requete implements Serializable {
     private Float noteObtenue;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "etudiant", "filiere", "anneeAcademique" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "anneeAcademique" }, allowSetters = true)
     private Inscription etudiant;
 
     @ManyToOne
@@ -65,7 +65,7 @@ public class Requete implements Serializable {
     private Administrateur validateur;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "sessionExamen", "etudiant", "examen", "matiere", "enseignant" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "etudiant", "examen", "matiere", "enseignant" }, allowSetters = true)
     private Note note;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

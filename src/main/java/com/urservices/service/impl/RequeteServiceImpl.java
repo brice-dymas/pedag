@@ -35,8 +35,18 @@ public class RequeteServiceImpl implements RequeteService {
     }
 
     @Override
+    public Requete save(Requete requete, Long id) {
+        final Inscription inscription = inscriptionRepository.findEtudiantByUserId(id);
+        requete.setEtudiant(inscription);
+        requete.setStatut(StatutRequete.EN_ATTENTE);
+        log.debug("Request to save Requete : {}", requete);
+        return requeteRepository.save(requete);
+    }
+
+    @Override
     public Requete save(Requete requete) {
         log.debug("Request to save Requete : {}", requete);
+        if (requete.getId() == null) requete.setStatut(StatutRequete.EN_ATTENTE);
         return requeteRepository.save(requete);
     }
 

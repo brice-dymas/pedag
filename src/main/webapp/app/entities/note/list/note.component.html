@@ -43,6 +43,9 @@
           <th scope="col" jhiSortBy="sessionExamen.id">
             <span jhiTranslate="pedagApp.note.sessionExamen">Session Examen</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="sessionExamen.type">
+            <span jhiTranslate="pedagApp.examen.type">Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="etudiant.id">
             <span jhiTranslate="pedagApp.note.etudiant">Etudiant</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -67,6 +70,11 @@
           <td>
             <div *ngIf="note.sessionExamen">
               <a [routerLink]="['/session-examen', note.sessionExamen?.id, 'view']">{{ note.sessionExamen?.libelle }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="note.sessionExamen">
+              <span jhiTranslate="{{ 'pedagApp.TypeExamen.' + note.sessionExamen?.type }}">{{ note.sessionExamen?.type }}</span>
             </div>
           </td>
           <td>

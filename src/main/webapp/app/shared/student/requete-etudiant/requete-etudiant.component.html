@@ -51,42 +51,44 @@
           </td>
           <td>{{ requete.objet }}</td>
           <td>{{ requete.description }}</td>
-          <td
-            *ngIf="requete.statut == statutAttente"
-            class="badge badge-xs badge-warning"
-            jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
-          >
-            {{ requete.statut }}
-          </td>
-          <td
-            *ngIf="requete.statut == statutFonde"
-            class="badge badge-xs badge-success"
-            jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
-          >
-            {{ requete.statut }}
-          </td>
-          <td
-            *ngIf="requete.statut == statutFonde"
-            class="badge badge-xs badge-danger"
-            jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
-          >
-            {{ requete.statut }}
+          <td class="btn-group">
+            <button
+              *ngIf="requete.statut == statutAttente"
+              class="btn-sm btn-warning"
+              jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
+            >
+              {{ requete.statut }}
+            </button>
+            <button
+              *ngIf="requete.statut == statutFonde"
+              class="badge badge-xs badge-success"
+              jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
+            >
+              {{ requete.statut }}
+            </button>
+            <button
+              *ngIf="requete.statut == statutNonFonde"
+              class="btn btn-danger"
+              jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
+            >
+              {{ requete.statut }}
+            </button>
           </td>
           <td>{{ requete.dateCreation | formatMediumDate }}</td>
           <td class="text-right">
             <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/requete', requete.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <!--              <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>--></button
-              >&nbsp;
+              <!--              <button-->
+              <!--                type="submit"-->
+              <!--                [routerLink]="['/requete', requete.id, 'view']"-->
+              <!--                class="btn btn-info btn-sm"-->
+              <!--                data-cy="entityDetailsButton"-->
+              <!--              >-->
+              <!--                <fa-icon icon="eye"></fa-icon>-->
+              <!--                &lt;!&ndash;              <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>&ndash;&gt;</button-->
+              <!--              >&nbsp;-->
 
               <button
-                *ngIf="requete.statut == statutAttente"
+                *ngIf="requete.statut == statutAttente && !requete.note"
                 type="submit"
                 [routerLink]="['/requete', requete.id, 'edit']"
                 class="btn btn-primary btn-sm"

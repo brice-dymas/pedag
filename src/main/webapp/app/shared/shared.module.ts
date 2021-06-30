@@ -21,6 +21,7 @@ import { NotesProfComponent } from './prof/notes-prof/notes-prof.component';
 import { MatieresProfComponent } from './prof/matieres-prof/matieres-prof.component';
 import { RemplirNotesComponent } from './prof/remplir-notes/remplir-notes.component';
 import { CourrielEtudiantComponent } from './student/courriel-etudiant/courriel-etudiant.component';
+import { NewRequeteNoteComponent } from './student/new-requete-note/new-requete-note.component';
 
 @NgModule({
   imports: [SharedLibsModule, RouterModule],
@@ -45,6 +46,7 @@ import { CourrielEtudiantComponent } from './student/courriel-etudiant/courriel-
     MatieresProfComponent,
     RemplirNotesComponent,
     CourrielEtudiantComponent,
+    NewRequeteNoteComponent,
   ],
   exports: [
     SharedLibsModule,

@@ -24,6 +24,13 @@ public interface RequeteService {
      * @param requete the entity to save.
      * @return the persisted entity.
      */
+    Requete save(Requete requete, Long id);
+    /**
+     * Save a requete.
+     *
+     * @param requete the entity to save.
+     * @return the persisted entity.
+     */
     Requete save(NewRequeteDTO requete);
 
     /**

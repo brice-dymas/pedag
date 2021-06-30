@@ -50,6 +50,8 @@ export class RequeteComponent implements OnInit {
       })
       .subscribe(
         (res: HttpResponse<IRequete[]>) => {
+          // eslint-disable-next-line no-console
+          console.log('requete ::::::::::::', res);
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
         },

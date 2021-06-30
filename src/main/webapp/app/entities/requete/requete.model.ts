@@ -1,8 +1,8 @@
-import * as dayjs from 'dayjs';
-import { IInscription } from 'app/entities/inscription/inscription.model';
 import { IAdministrateur } from 'app/entities/administrateur/administrateur.model';
-import { INote } from 'app/entities/note/note.model';
 import { StatutRequete } from 'app/entities/enumerations/statut-requete.model';
+import { IInscription } from 'app/entities/inscription/inscription.model';
+import { INote } from 'app/entities/note/note.model';
+import * as dayjs from 'dayjs';
 
 export interface IRequete {
   id?: number;
@@ -37,6 +37,7 @@ export class Requete implements IRequete {
     public userId?: number | null
   ) {
     this.traiter = this.traiter ?? false;
+    this.noteAttendue = this.noteAttendue ?? 0;
   }
 }
 
