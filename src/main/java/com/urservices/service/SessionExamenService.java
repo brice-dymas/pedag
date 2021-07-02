@@ -1,6 +1,7 @@
 package com.urservices.service;
 
 import com.urservices.domain.SessionExamen;
+import com.urservices.domain.enumeration.TypeExamen;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -55,4 +56,6 @@ public interface SessionExamenService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    Page<SessionExamen> findByActifTrueAndTypeIsNot(TypeExamen typeExamen, Pageable pageable);
 }

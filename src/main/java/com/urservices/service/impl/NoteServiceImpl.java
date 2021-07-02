@@ -1,6 +1,9 @@
 package com.urservices.service.impl;
 
+import com.urservices.domain.Filiere;
 import com.urservices.domain.Note;
+import com.urservices.domain.SessionExamen;
+import com.urservices.domain.enumeration.TypeExamen;
 import com.urservices.repository.NoteRepository;
 import com.urservices.service.NoteService;
 import java.util.List;
@@ -97,5 +100,22 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public Page<Note> findByEnseignantId(Long id, Pageable pageable) {
         return noteRepository.findByEnseignantUserIdOrderByIdDesc(id, pageable);
+    }
+
+    @Override
+    public List<Note> findBySessionExamenAndMoyenneAndExamenType(SessionExamen sessionExamen, Float moyenne, TypeExamen typeExamen) {
+        //        return noteRepository.findBySessionExamenIdAndMoyenneEqualsAndSessionExamenType(sessionExamen.getId(), moyenne, typeExamen);
+        return null;
+    }
+
+    @Override
+    public List<Note> findBySessionExamenAndMoyenneAndExamenTypeAndFiliere(
+        SessionExamen sessionExamen,
+        Float moyenne,
+        TypeExamen typeExamen,
+        Filiere filiere
+    ) {
+        //        return noteRepository.findBySessionExamenIdAndMoyenneEqualsAndSessionExamenTypeAndEtudiantFiliere(sessionExamen.getId(), moyenne, typeExamen, filiere.getId());
+        return null;
     }
 }

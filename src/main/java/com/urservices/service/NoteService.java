@@ -1,6 +1,9 @@
 package com.urservices.service;
 
+import com.urservices.domain.Filiere;
 import com.urservices.domain.Note;
+import com.urservices.domain.SessionExamen;
+import com.urservices.domain.enumeration.TypeExamen;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -64,4 +67,12 @@ public interface NoteService {
      * @return the list of notes.
      */
     Page<Note> findByEnseignantId(Long id, Pageable pageable);
+
+    List<Note> findBySessionExamenAndMoyenneAndExamenType(SessionExamen sessionExamen, Float moyenne, TypeExamen typeExamen);
+    List<Note> findBySessionExamenAndMoyenneAndExamenTypeAndFiliere(
+        SessionExamen sessionExamen,
+        Float moyenne,
+        TypeExamen typeExamen,
+        Filiere filiere
+    );
 }

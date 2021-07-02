@@ -4,6 +4,7 @@ import com.urservices.domain.*;
 import com.urservices.repository.*;
 import com.urservices.service.NotesFiliereService;
 import com.urservices.service.dto.NotesFiliereDTO;
+import com.urservices.utils.RequeteHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -64,7 +65,7 @@ public class NotesFiliereServiceImpl implements NotesFiliereService {
             assert dispenser != null;
             note.setEnseignant(dispenser.getEnseignant());
             note.setMatiere(dispenser.getMatiere());
-            note.setObservation(getObservation(note.getMoyenne()));
+            note.setObservation(RequeteHelper.getObservationNote(note.getMoyenne()));
             note.setEtudiant(inscriptionRepository.findById(note.getEtudiant().getId()).orElse(null));
             note.setMoyenne(note.getMoyenne());
             note.setSessionExamen(sessionExamen);
@@ -196,17 +197,5 @@ public class NotesFiliereServiceImpl implements NotesFiliereService {
     @Override
     public Page<NotesFiliereDTO> findByEnseignantAndMatiere(Long idEnseignant, Long idMatiere, Pageable pageable) {
         return null;
-    }
-
-    private final String getObservation(Float moyenne) {
-        String obs = "EL";
-        if (moyenne != null) {
-            if (moyenne <= 9) {
-                obs = "NV";
-            } else {
-                obs = "VA";
-            }
-        }
-        return obs;
     }
 }

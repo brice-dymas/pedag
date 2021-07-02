@@ -1,6 +1,7 @@
 package com.urservices.web.rest;
 
 import com.urservices.domain.SessionExamen;
+import com.urservices.domain.enumeration.TypeExamen;
 import com.urservices.repository.SessionExamenRepository;
 import com.urservices.service.SessionExamenService;
 import com.urservices.web.rest.errors.BadRequestAlertException;
@@ -148,6 +149,20 @@ public class SessionExamenResource {
     public ResponseEntity<List<SessionExamen>> getAllSessionExamen(Pageable pageable) {
         log.debug("REST request to get a page of SessionExamen");
         Page<SessionExamen> page = sessionExamenService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /session-examen/deliberation} : get all the sessionExamen.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of sessionExamen in body.
+     */
+    @GetMapping("/session-examen/deliberation")
+    public ResponseEntity<List<SessionExamen>> getAllSessionExamenDeliberation(Pageable pageable) {
+        log.debug("REST request to get a page of SessionExamen for Deliberation");
+        Page<SessionExamen> page = sessionExamenService.findByActifTrueAndTypeIsNot(TypeExamen.CONTROLE, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

@@ -17,259 +17,278 @@
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.deliberation.critereSelection" for="field_critereSelection"
-            >Critere Selection</label
-          >
-          <select
-            class="form-control"
-            name="critereSelection"
-            formControlName="critereSelection"
-            id="field_critereSelection"
-            data-cy="critereSelection"
-          >
-            <option [ngValue]="null">{{ 'pedagApp.ConditionSelection.null' | translate }}</option>
-            <option value="MOYENNE_EGALE_A">{{ 'pedagApp.ConditionSelection.MOYENNE_EGALE_A' | translate }}</option>
-            <option value="MOYENNE_INFERIEURE_A">{{ 'pedagApp.ConditionSelection.MOYENNE_INFERIEURE_A' | translate }}</option>
-            <option value="MOYENNE_COMPRISE_ENTRE">{{ 'pedagApp.ConditionSelection.MOYENNE_COMPRISE_ENTRE' | translate }}</option>
-          </select>
-          <div
-            *ngIf="
-              editForm.get('critereSelection')!.invalid &&
-              (editForm.get('critereSelection')!.dirty || editForm.get('critereSelection')!.touched)
-            "
-          >
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('critereSelection')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.deliberation.valeurSelectionDebut" for="field_valeurSelectionDebut"
-            >Valeur Selection Debut</label
-          >
-          <input
-            type="number"
-            class="form-control"
-            name="valeurSelectionDebut"
-            id="field_valeurSelectionDebut"
-            data-cy="valeurSelectionDebut"
-            formControlName="valeurSelectionDebut"
-          />
-          <div
-            *ngIf="
-              editForm.get('valeurSelectionDebut')!.invalid &&
-              (editForm.get('valeurSelectionDebut')!.dirty || editForm.get('valeurSelectionDebut')!.touched)
-            "
-          >
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('valeurSelectionDebut')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('valeurSelectionDebut')?.errors?.min"
-              jhiTranslate="entity.validation.min"
-              [translateValues]="{ min: 0 }"
-            >
-              This field should be at least 0.
-            </small>
-            <small
-              class="form-text text-danger"
-              [hidden]="!editForm.get('valeurSelectionDebut')?.errors?.number"
-              jhiTranslate="entity.validation.number"
-            >
-              This field should be a number.
-            </small>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.deliberation.valeurSelectionFin" for="field_valeurSelectionFin"
-            >Valeur Selection Fin</label
-          >
-          <input
-            type="number"
-            class="form-control"
-            name="valeurSelectionFin"
-            id="field_valeurSelectionFin"
-            data-cy="valeurSelectionFin"
-            formControlName="valeurSelectionFin"
-          />
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.deliberation.critereAppliquer" for="field_critereAppliquer"
-            >Critere Appliquer</label
-          >
-          <select
-            class="form-control"
-            name="critereAppliquer"
-            formControlName="critereAppliquer"
-            id="field_critereAppliquer"
-            data-cy="critereAppliquer"
-          >
-            <option [ngValue]="null">{{ 'pedagApp.ConditionAppliquer.null' | translate }}</option>
-            <option value="AJOUTER">{{ 'pedagApp.ConditionAppliquer.AJOUTER' | translate }}</option>
-            <option value="RETRANCHER">{{ 'pedagApp.ConditionAppliquer.RETRANCHER' | translate }}</option>
-            <option value="DEFINIR_VALEUR_A">{{ 'pedagApp.ConditionAppliquer.DEFINIR_VALEUR_A' | translate }}</option>
-          </select>
-          <div
-            *ngIf="
-              editForm.get('critereAppliquer')!.invalid &&
-              (editForm.get('critereAppliquer')!.dirty || editForm.get('critereAppliquer')!.touched)
-            "
-          >
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('critereAppliquer')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.deliberation.valeurAppliquer" for="field_valeurAppliquer"
-            >Valeur Appliquer</label
-          >
-          <input
-            type="number"
-            class="form-control"
-            name="valeurAppliquer"
-            id="field_valeurAppliquer"
-            data-cy="valeurAppliquer"
-            formControlName="valeurAppliquer"
-          />
-          <div
-            *ngIf="
-              editForm.get('valeurAppliquer')!.invalid &&
-              (editForm.get('valeurAppliquer')!.dirty || editForm.get('valeurAppliquer')!.touched)
-            "
-          >
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('valeurAppliquer')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('valeurAppliquer')?.errors?.min"
-              jhiTranslate="entity.validation.min"
-              [translateValues]="{ min: 0 }"
-            >
-              This field should be at least 0.
-            </small>
-            <small
-              class="form-text text-danger"
-              [hidden]="!editForm.get('valeurAppliquer')?.errors?.number"
-              jhiTranslate="entity.validation.number"
-            >
-              This field should be a number.
-            </small>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.deliberation.dateDeliberation" for="field_dateDeliberation"
-            >Date Deliberation</label
-          >
-          <div class="input-group">
-            <input
-              id="field_dateDeliberation"
-              data-cy="dateDeliberation"
-              type="text"
-              class="form-control"
-              name="dateDeliberation"
-              ngbDatepicker
-              #dateDeliberationDp="ngbDatepicker"
-              formControlName="dateDeliberation"
-            />
-            <span class="input-group-append">
-              <button type="button" class="btn btn-secondary" (click)="dateDeliberationDp.toggle()">
-                <fa-icon icon="calendar-alt"></fa-icon>
-              </button>
-            </span>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.deliberation.sessionExamen" for="field_sessionExamen"
-            >Session Examen</label
-          >
-          <select
-            class="form-control"
-            id="field_sessionExamen"
-            data-cy="sessionExamen"
-            name="sessionExamen"
-            formControlName="sessionExamen"
-          >
-            <option *ngIf="!editForm.get('sessionExamen')!.value" [ngValue]="null" selected></option>
-            <option
-              [ngValue]="
-                sessionExamenOption.id === editForm.get('sessionExamen')!.value?.id
-                  ? editForm.get('sessionExamen')!.value
-                  : sessionExamenOption
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.deliberation.sessionExamen" for="field_sessionExamen"
+                >Session Examen</label
+              >
+              <select
+                class="form-control"
+                id="field_sessionExamen"
+                data-cy="sessionExamen"
+                name="sessionExamen"
+                formControlName="sessionExamen"
+              >
+                <option *ngIf="!editForm.get('sessionExamen')!.value" [ngValue]="null" selected></option>
+                <option
+                  [ngValue]="
+                    sessionExamenOption.id === editForm.get('sessionExamen')!.value?.id
+                      ? editForm.get('sessionExamen')!.value
+                      : sessionExamenOption
+                  "
+                  *ngFor="let sessionExamenOption of sessionExamenSharedCollection; trackBy: trackSessionExamenById"
+                >
+                  {{ sessionExamenOption.type + ' ' + sessionExamenOption.libelle }}
+                </option>
+              </select>
+            </div>
+            <div
+              *ngIf="
+                editForm.get(['sessionExamen'])!.invalid &&
+                (editForm.get(['sessionExamen'])!.dirty || editForm.get(['sessionExamen'])!.touched)
               "
-              *ngFor="let sessionExamenOption of sessionExamenSharedCollection; trackBy: trackSessionExamenById"
             >
-              {{ sessionExamenOption.id }}
-            </option>
-          </select>
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get(['sessionExamen'])?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.deliberation.filiere" for="field_filiere">Filiere</label>
+              <select class="form-control" id="field_filiere" data-cy="filiere" name="filiere" formControlName="filiere">
+                <option [ngValue]="null"></option>
+                <option
+                  [ngValue]="filiereOption.id === editForm.get('filiere')!.value?.id ? editForm.get('filiere')!.value : filiereOption"
+                  *ngFor="let filiereOption of filieresSharedCollection; trackBy: trackFiliereById"
+                >
+                  {{ filiereOption.libelle }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.deliberation.dateDeliberation" for="field_dateDeliberation"
+                >Date Deliberation</label
+              >
+              <div class="input-group">
+                <input
+                  id="field_dateDeliberation"
+                  data-cy="dateDeliberation"
+                  type="text"
+                  class="form-control"
+                  name="dateDeliberation"
+                  ngbDatepicker
+                  #dateDeliberationDp="ngbDatepicker"
+                  formControlName="dateDeliberation"
+                />
+                <span class="input-group-append">
+                  <button type="button" class="btn btn-secondary" (click)="dateDeliberationDp.toggle()">
+                    <fa-icon icon="calendar-alt"></fa-icon>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div
-          *ngIf="
-            editForm.get(['sessionExamen'])!.invalid && (editForm.get(['sessionExamen'])!.dirty || editForm.get(['sessionExamen'])!.touched)
-          "
-        >
-          <small
-            class="form-text text-danger"
-            *ngIf="editForm.get(['sessionExamen'])?.errors?.required"
-            jhiTranslate="entity.validation.required"
+
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.deliberation.critereSelection" for="field_critereSelection"
+                >Critere Selection</label
+              >
+              <select
+                class="form-control"
+                name="critereSelection"
+                formControlName="critereSelection"
+                id="field_critereSelection"
+                data-cy="critereSelection"
+              >
+                <option [ngValue]="null">{{ 'pedagApp.ConditionSelection.null' | translate }}</option>
+                <option value="MOYENNE_EGALE_A">{{ 'pedagApp.ConditionSelection.MOYENNE_EGALE_A' | translate }}</option>
+                <option value="MOYENNE_INFERIEURE_A">{{ 'pedagApp.ConditionSelection.MOYENNE_INFERIEURE_A' | translate }}</option>
+                <option value="MOYENNE_COMPRISE_ENTRE">{{ 'pedagApp.ConditionSelection.MOYENNE_COMPRISE_ENTRE' | translate }}</option>
+              </select>
+              <div
+                *ngIf="
+                  editForm.get('critereSelection')!.invalid &&
+                  (editForm.get('critereSelection')!.dirty || editForm.get('critereSelection')!.touched)
+                "
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('critereSelection')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.deliberation.valeurSelectionDebut" for="field_valeurSelectionDebut"
+                >Valeur Selection Debut</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                name="valeurSelectionDebut"
+                id="field_valeurSelectionDebut"
+                data-cy="valeurSelectionDebut"
+                formControlName="valeurSelectionDebut"
+              />
+              <div
+                *ngIf="
+                  editForm.get('valeurSelectionDebut')!.invalid &&
+                  (editForm.get('valeurSelectionDebut')!.dirty || editForm.get('valeurSelectionDebut')!.touched)
+                "
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('valeurSelectionDebut')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('valeurSelectionDebut')?.errors?.min"
+                  jhiTranslate="entity.validation.min"
+                  [translateValues]="{ min: 0 }"
+                >
+                  This field should be at least 0.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  [hidden]="!editForm.get('valeurSelectionDebut')?.errors?.number"
+                  jhiTranslate="entity.validation.number"
+                >
+                  This field should be a number.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.deliberation.valeurSelectionFin" for="field_valeurSelectionFin"
+                >Valeur Selection Fin</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                name="valeurSelectionFin"
+                id="field_valeurSelectionFin"
+                data-cy="valeurSelectionFin"
+                formControlName="valeurSelectionFin"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.deliberation.critereAppliquer" for="field_critereAppliquer"
+                >Critere Appliquer</label
+              >
+              <select
+                class="form-control"
+                name="critereAppliquer"
+                formControlName="critereAppliquer"
+                id="field_critereAppliquer"
+                data-cy="critereAppliquer"
+              >
+                <option [ngValue]="null">{{ 'pedagApp.ConditionAppliquer.null' | translate }}</option>
+                <option value="AJOUTER">{{ 'pedagApp.ConditionAppliquer.AJOUTER' | translate }}</option>
+                <option value="RETRANCHER">{{ 'pedagApp.ConditionAppliquer.RETRANCHER' | translate }}</option>
+                <option value="DEFINIR_VALEUR_A">{{ 'pedagApp.ConditionAppliquer.DEFINIR_VALEUR_A' | translate }}</option>
+              </select>
+              <div
+                *ngIf="
+                  editForm.get('critereAppliquer')!.invalid &&
+                  (editForm.get('critereAppliquer')!.dirty || editForm.get('critereAppliquer')!.touched)
+                "
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('critereAppliquer')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="pedagApp.deliberation.valeurAppliquer" for="field_valeurAppliquer"
+                >Valeur Appliquer</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                name="valeurAppliquer"
+                id="field_valeurAppliquer"
+                data-cy="valeurAppliquer"
+                formControlName="valeurAppliquer"
+              />
+              <div
+                *ngIf="
+                  editForm.get('valeurAppliquer')!.invalid &&
+                  (editForm.get('valeurAppliquer')!.dirty || editForm.get('valeurAppliquer')!.touched)
+                "
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('valeurAppliquer')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('valeurAppliquer')?.errors?.min"
+                  jhiTranslate="entity.validation.min"
+                  [translateValues]="{ min: 0 }"
+                >
+                  This field should be at least 0.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  [hidden]="!editForm.get('valeurAppliquer')?.errors?.number"
+                  jhiTranslate="entity.validation.number"
+                >
+                  This field should be a number.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4"></div>
+        </div>
+
+        <div>
+          <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+          </button>
+
+          <button
+            type="submit"
+            id="save-entity"
+            data-cy="entityCreateSaveButton"
+            [disabled]="editForm.invalid || isSaving"
+            class="btn btn-primary"
           >
-            This field is required.
-          </small>
+            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+          </button>
         </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pedagApp.deliberation.filiere" for="field_filiere">Filiere</label>
-          <select class="form-control" id="field_filiere" data-cy="filiere" name="filiere" formControlName="filiere">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="filiereOption.id === editForm.get('filiere')!.value?.id ? editForm.get('filiere')!.value : filiereOption"
-              *ngFor="let filiereOption of filieresSharedCollection; trackBy: trackFiliereById"
-            >
-              {{ filiereOption.id }}
-            </option>
-          </select>
-        </div>
-      </div>
-
-      <div>
-        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
-
-        <button
-          type="submit"
-          id="save-entity"
-          data-cy="entityCreateSaveButton"
-          [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
-        >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-        </button>
       </div>
     </form>
   </div>

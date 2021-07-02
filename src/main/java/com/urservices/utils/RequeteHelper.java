@@ -13,6 +13,18 @@ import java.time.LocalDate;
  */
 public class RequeteHelper {
 
+    public static final String getObservationNote(Float moyenne) {
+        String obs = "EL";
+        if (moyenne != null) {
+            if (moyenne <= 9) {
+                obs = "NV";
+            } else {
+                obs = "VA";
+            }
+        }
+        return obs;
+    }
+
     public static Requete newRequeteDtoToRequetePost(NewRequeteDTO param, Inscription inscription) {
         var req = new Requete();
         req.setId(param.getId());

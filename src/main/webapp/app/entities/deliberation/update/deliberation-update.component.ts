@@ -116,7 +116,7 @@ export class DeliberationUpdateComponent implements OnInit {
 
   protected loadRelationshipsOptions(): void {
     this.sessionExamenService
-      .query()
+      .queryDeliberation()
       .pipe(map((res: HttpResponse<ISessionExamen[]>) => res.body ?? []))
       .pipe(
         map((sessionExamen: ISessionExamen[]) =>
