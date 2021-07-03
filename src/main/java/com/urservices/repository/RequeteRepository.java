@@ -27,10 +27,6 @@ public interface RequeteRepository extends JpaRepository<Requete, Long> {
 
     Page<Requete> findByEtudiantIdAndNoteIsNullOrderByIdDesc(Long id, Pageable pageable);
 
-    Page<Requete> findByEtudiantIdAndNoteIsNotNullAndNoteSessionExamenTypeExamenOrderByIdDesc(
-        Long id,
-        TypeExamen typeExamen,
-        Pageable pageable
-    );
+    Page<Requete> findByEtudiantIdAndNoteIsNotNullAndNoteSessionExamenTypeOrderByIdDesc(Long id, TypeExamen typeExamen, Pageable pageable);
     //    Page<Note> findByEtudiantIdAndSessionExamenTypeOrderBySessionExamenDesc(Long inscription, TypeExamen typeExamen, Pageable pageable);
 }

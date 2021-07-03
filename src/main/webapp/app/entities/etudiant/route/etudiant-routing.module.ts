@@ -9,8 +9,11 @@ import { NotesControleComponent } from 'app/shared/student/notes-controle/notes-
 import { NotesEtudiantComponent } from 'app/shared/student/notes-etudiant/notes-etudiant.component';
 import { NotesRattrapageComponent } from 'app/shared/student/notes-rattrapage/notes-rattrapage.component';
 import { NotesSemestreComponent } from 'app/shared/student/notes-semestre/notes-semestre.component';
+import { RequeteControleComponent } from 'app/shared/student/requete-controle/requete-controle.component';
 import { RequeteEtudiantComponent } from 'app/shared/student/requete-etudiant/requete-etudiant.component';
 import { RequeteNoteResolveService } from 'app/shared/student/requete-note-resolve.service';
+import { RequeteSemestrielComponent } from 'app/shared/student/requete-semestriel/requete-semestriel.component';
+import { RequeteSimpleComponent } from 'app/shared/student/requete-simple/requete-simple.component';
 import { EtudiantComponent } from '../list/etudiant.component';
 import { EtudiantDetailComponent } from '../detail/etudiant-detail.component';
 import { EtudiantUpdateComponent } from '../update/etudiant-update.component';
@@ -31,6 +34,21 @@ const etudiantRoute: Routes = [
     data: {
       defaultSort: 'id,asc',
     },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'requetes-controle',
+    component: RequeteControleComponent,
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'requetes-semestre',
+    component: RequeteSemestrielComponent,
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'requetes-simple',
+    component: RequeteSimpleComponent,
     canActivate: [UserRouteAccessService],
   },
   {

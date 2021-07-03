@@ -25,6 +25,9 @@ import { NewRequeteNoteComponent } from './student/new-requete-note/new-requete-
 import { NotesControleComponent } from './student/notes-controle/notes-controle.component';
 import { NotesSemestreComponent } from './student/notes-semestre/notes-semestre.component';
 import { NotesRattrapageComponent } from './student/notes-rattrapage/notes-rattrapage.component';
+import { RequeteSimpleComponent } from './student/requete-simple/requete-simple.component';
+import { RequeteControleComponent } from './student/requete-controle/requete-controle.component';
+import { RequeteSemestrielComponent } from './student/requete-semestriel/requete-semestriel.component';
 
 @NgModule({
   imports: [SharedLibsModule, RouterModule],
@@ -53,6 +56,9 @@ import { NotesRattrapageComponent } from './student/notes-rattrapage/notes-rattr
     NotesControleComponent,
     NotesSemestreComponent,
     NotesRattrapageComponent,
+    RequeteSimpleComponent,
+    RequeteControleComponent,
+    RequeteSemestrielComponent,
   ],
   exports: [
     SharedLibsModule,

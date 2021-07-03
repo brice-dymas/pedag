@@ -189,6 +189,36 @@ public class RequeteResource {
     }
 
     /**
+     * {@code GET  /requetes/student:id} : get all the student's requetes.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of requetes in body.
+     */
+    @GetMapping("/requetes/student/{id}/type/{type}")
+    public ResponseEntity<List<Requete>> getAllStudentRequetesByType(@PathVariable Long id, @PathVariable Integer type, Pageable pageable) {
+        log.debug("REST request to get a page of Requetes for Student {} and type {}", id, type);
+        Page<Requete> page = (type > 1)
+            ? requeteService.findByEtudiantIdAndNoteIsNull(id, pageable)
+            : requeteService.findByEtudiantIdAndSessionExamen(id, type, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /requetes/student:id} : get all the student's requetes.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of requetes in body.
+     */
+    @GetMapping("/requetes/statut/{id}")
+    public ResponseEntity<List<Requete>> getAllRequetesByStatut(@PathVariable Integer id, Pageable pageable) {
+        log.debug("REST request to get a page of Requetes for statut {}", id);
+        Page<Requete> page = requeteService.findByStatut(id, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
      * {@code GET  /requetes/:id} : get the "id" requete.
      *
      * @param id the id of the requete to retrieve.

@@ -4,6 +4,7 @@ import com.urservices.domain.Inscription;
 import com.urservices.domain.Note;
 import com.urservices.domain.Requete;
 import com.urservices.domain.enumeration.StatutRequete;
+import com.urservices.domain.enumeration.TypeExamen;
 import com.urservices.repository.InscriptionRepository;
 import com.urservices.repository.NoteRepository;
 import com.urservices.repository.RequeteRepository;
@@ -171,17 +172,43 @@ public class RequeteServiceImpl implements RequeteService {
     }
 
     @Override
-    public Page<Requete> findByStatut(StatutRequete statutRequete, Pageable pageable) {
-        return null;
+    public Page<Requete> findByStatut(int statutRequete, Pageable pageable) {
+        switch (statutRequete) {
+            case 0:
+                return requeteRepository.findByStatutOrderByIdDesc(StatutRequete.EN_ATTENTE, pageable);
+            case 1:
+                return requeteRepository.findByStatutOrderByIdDesc(StatutRequete.FONDE, pageable);
+            default:
+                return requeteRepository.findByStatutOrderByIdDesc(StatutRequete.NON_FONDE, pageable);
+        }
     }
 
     @Override
     public Page<Requete> findByEtudiantIdAndNoteIsNull(Long id, Pageable pageable) {
-        return null;
+        return requeteRepository.findByEtudiantIdAndNoteIsNullOrderByIdDesc(id, pageable);
     }
 
     @Override
     public Page<Requete> findByEtudiantIdAndSessionExamen(Long id, int typeExamen, Pageable pageable) {
-        return null;
+        switch (typeExamen) {
+            case 0:
+                return requeteRepository.findByEtudiantIdAndNoteIsNotNullAndNoteSessionExamenTypeOrderByIdDesc(
+                    id,
+                    TypeExamen.CONTROLE,
+                    pageable
+                );
+            case 1:
+                return requeteRepository.findByEtudiantIdAndNoteIsNotNullAndNoteSessionExamenTypeOrderByIdDesc(
+                    id,
+                    TypeExamen.SEMESTRIEL,
+                    pageable
+                );
+            default:
+                return requeteRepository.findByEtudiantIdAndNoteIsNotNullAndNoteSessionExamenTypeOrderByIdDesc(
+                    id,
+                    TypeExamen.RATTRAPAGE,
+                    pageable
+                );
+        }
     }
 }

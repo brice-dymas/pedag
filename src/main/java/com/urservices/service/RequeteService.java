@@ -82,7 +82,7 @@ public interface RequeteService {
      */
     Page<Requete> findAllByEtudiant_id(Long id, Pageable pageable);
 
-    Page<Requete> findByStatut(StatutRequete statutRequete, Pageable pageable);
+    Page<Requete> findByStatut(int statutRequete, Pageable pageable);
 
     Page<Requete> findByEtudiantIdAndNoteIsNull(Long id, Pageable pageable);
 

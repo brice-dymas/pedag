@@ -56,4 +56,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   openNotesRattrapage(): void {
     this.router.navigate(['/etudiant/notes-rattrapage']);
   }
+
+  openRequetesControle(): void {
+    this.router.navigate(['/etudiant/requetes-controle']);
+  }
+
+  openRequetesSemestre(): void {
+    this.router.navigate(['/etudiant/requetes-semestre']);
+  }
+
+  openRequetesSimple(): void {
+    this.router.navigate(['/etudiant/requetes-simple']);
+  }
 }
