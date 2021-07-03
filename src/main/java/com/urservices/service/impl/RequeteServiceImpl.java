@@ -169,4 +169,19 @@ public class RequeteServiceImpl implements RequeteService {
         log.debug("Request to get all Requete of student : {}", id);
         return requeteRepository.findByEtudiant_Etudiant_UserId(id, pageable);
     }
+
+    @Override
+    public Page<Requete> findByStatut(StatutRequete statutRequete, Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public Page<Requete> findByEtudiantIdAndNoteIsNull(Long id, Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public Page<Requete> findByEtudiantIdAndSessionExamen(Long id, int typeExamen, Pageable pageable) {
+        return null;
+    }
 }

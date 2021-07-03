@@ -56,4 +56,6 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
         TypeExamen typeExamen,
         Long filiere
     );
+
+    Page<Note> findByEtudiantIdAndSessionExamenTypeOrderBySessionExamenDesc(Long inscription, TypeExamen typeExamen, Pageable pageable);
 }

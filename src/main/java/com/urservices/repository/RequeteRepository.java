@@ -1,6 +1,9 @@
 package com.urservices.repository;
 
+import com.urservices.domain.Note;
 import com.urservices.domain.Requete;
+import com.urservices.domain.enumeration.StatutRequete;
+import com.urservices.domain.enumeration.TypeExamen;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -19,4 +22,15 @@ public interface RequeteRepository extends JpaRepository<Requete, Long> {
     Page<Requete> rechercherParEtudiant(Long id, Pageable pageable);
 
     Page<Requete> findByEtudiant_Etudiant_UserId(Long id, Pageable pageable);
+
+    Page<Requete> findByStatutOrderByIdDesc(StatutRequete statutRequete, Pageable pageable);
+
+    Page<Requete> findByEtudiantIdAndNoteIsNullOrderByIdDesc(Long id, Pageable pageable);
+
+    Page<Requete> findByEtudiantIdAndNoteIsNotNullAndNoteSessionExamenTypeExamenOrderByIdDesc(
+        Long id,
+        TypeExamen typeExamen,
+        Pageable pageable
+    );
+    //    Page<Note> findByEtudiantIdAndSessionExamenTypeOrderBySessionExamenDesc(Long inscription, TypeExamen typeExamen, Pageable pageable);
 }

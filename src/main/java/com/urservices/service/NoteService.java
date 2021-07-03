@@ -75,4 +75,6 @@ public interface NoteService {
         TypeExamen typeExamen,
         Filiere filiere
     );
+
+    Page<Note> findByEtudiantAndSessionExamenType(Long inscription, int type, Pageable pageable);
 }

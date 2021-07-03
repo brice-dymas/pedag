@@ -22,6 +22,9 @@ import { MatieresProfComponent } from './prof/matieres-prof/matieres-prof.compon
 import { RemplirNotesComponent } from './prof/remplir-notes/remplir-notes.component';
 import { CourrielEtudiantComponent } from './student/courriel-etudiant/courriel-etudiant.component';
 import { NewRequeteNoteComponent } from './student/new-requete-note/new-requete-note.component';
+import { NotesControleComponent } from './student/notes-controle/notes-controle.component';
+import { NotesSemestreComponent } from './student/notes-semestre/notes-semestre.component';
+import { NotesRattrapageComponent } from './student/notes-rattrapage/notes-rattrapage.component';
 
 @NgModule({
   imports: [SharedLibsModule, RouterModule],
@@ -47,6 +50,9 @@ import { NewRequeteNoteComponent } from './student/new-requete-note/new-requete-
     RemplirNotesComponent,
     CourrielEtudiantComponent,
     NewRequeteNoteComponent,
+    NotesControleComponent,
+    NotesSemestreComponent,
+    NotesRattrapageComponent,
   ],
   exports: [
     SharedLibsModule,
