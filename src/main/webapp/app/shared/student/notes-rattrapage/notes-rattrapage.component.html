@@ -29,11 +29,7 @@
           <th scope="col"><span jhiTranslate="pedagApp.matiere.code">code</span></th>
           <th scope="col"><span jhiTranslate="pedagApp.note.moyenne">Moyenne</span></th>
           <th scope="col"><span>Credit Obtenu</span></th>
-          <th scope="col">
-            <span jhiTranslate="pedagApp.note.observation">Observation</span>
-          </th>
           <th scope="col"><span jhiTranslate="pedagApp.note.sessionExamen">session Examen</span></th>
-          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -63,23 +59,16 @@
               <a>{{ note.matiere?.code }}</a>
             </div>
           </td>
-          <td>{{ note.moyenne }}</td>
-          <td>{{ note.creditObtenu }}</td>
-          <td>
+          <td class="font-weight-bold">{{ note.moyenne }}</td>
+          <td class="font-weight-bold">
+            {{ '0' + note.creditObtenu }}
+            &nbsp;&nbsp;
             <span *ngIf="note.observation == 'VA'" class="badge badge-success">{{ 'VALIDE' }}</span>
             <span *ngIf="note.observation == 'NV'" class="badge badge-danger">{{ 'NON VALIDE' }}</span>
           </td>
           <td>
             <div *ngIf="note.sessionExamen">
               <a>{{ note.sessionExamen?.libelle }}</a>
-            </div>
-          </td>
-          <td>
-            <div class="btn-group">
-              <button type="submit" [routerLink]="['/etudiant', note.id, 'new-requete-note']" class="btn btn-primary btn-sm">
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">Contester</span></button
-              >&nbsp;
             </div>
           </td>
         </tr>

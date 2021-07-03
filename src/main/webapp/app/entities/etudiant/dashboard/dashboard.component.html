@@ -7,12 +7,19 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4"></div>
   <div class="col-md-4">
-    <div (click)="openMesNotes()" class="card bg-success mb-3" style="max-width: 50rem">
-      <div class="card-header text-center font-weight-bold" jhiTranslate="dashboard.notes.title">Mes Notes</div>
+    <div (click)="openMesCours()" class="card bg-success mb-3" style="max-width: 50rem">
+      <div class="card-header text-center font-weight-bold" jhiTranslate="dashboard.cours.title">Mes Cours</div>
       <div class="card-body">
-        <p class="card-text font-italic" jhiTranslate="dashboard.notes.content">content.</p>
+        <p class="card-text font-italic" jhiTranslate="dashboard.cours.content">content.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div (click)="openMesCourriels()" class="card bg-success mb-3" style="max-width: 50rem">
+      <div class="card-header text-center font-weight-bold" jhiTranslate="dashboard.courriel.title">Mes courriel</div>
+      <div class="card-body">
+        <p class="card-text font-italic" jhiTranslate="dashboard.courriel.content">content.</p>
       </div>
     </div>
   </div>
@@ -60,36 +67,20 @@
       <div class="card-header text-center font-weight-bold">Requetes Notes Semestrielles</div>
       <div class="card-body">
         <p class="card-text font-italic">
-          Vous trouverez ici l'ensemble de vos requetes portant sur les notes obtenus lors des examens de session normale
+          Vous trouverez ici l'ensemble de vos requetes portant sur les notes obtenus que vous avez obtenu lors des examens de session
+          normale
         </p>
       </div>
     </div>
   </div>
   <div class="col-md-4">
     <div (click)="openRequetesSimple()" class="card bg-light mb-3" style="max-width: 50rem">
-      <div class="card-header text-center font-weight-bold">Requetes sujets divers Notes de rattrapage</div>
+      <div class="card-header text-center font-weight-bold">Requetes sujets divers</div>
       <div class="card-body">
         <p class="card-text font-italic">
-          Vous trouverez ici l'ensemble de vos requetes portant sur des sujets divers, tels que le changement de nom, la modification d'une
-          information personnelle
+          Vous trouverez ici l'ensemble de vos requetes portant sur des sujets divers, tels que la modification d'une information
+          personnelle
         </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div (click)="openMesCours()" class="card bg-primary mb-3" style="max-width: 50rem">
-      <div class="card-header text-center font-weight-bold" jhiTranslate="dashboard.cours.title">Mes Cours</div>
-      <div class="card-body">
-        <p class="card-text font-italic" jhiTranslate="dashboard.cours.content">content.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4"></div>
-  <div class="col-md-4">
-    <div (click)="openMesCourriels()" class="card bg-primary mb-3" style="max-width: 50rem">
-      <div class="card-header text-center font-weight-bold" jhiTranslate="dashboard.courriel.title">Mes courriel</div>
-      <div class="card-body">
-        <p class="card-text font-italic" jhiTranslate="dashboard.courriel.content">content.</p>
       </div>
     </div>
   </div>
