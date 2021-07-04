@@ -1,0 +1,2 @@
+user_id;id;diplome;nom;prenom;grade;email;telephone;statut;photo;photo_content_type
+3;1;Master professionnel;Lee;Stan;Ing;Garnier.Vasseur@gmail.com;+33 286204837;VACATAIRE;../fake-data/blob/hipster.png;image/png

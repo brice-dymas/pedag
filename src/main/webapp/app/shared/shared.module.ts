@@ -28,6 +28,7 @@ import { NotesRattrapageComponent } from './student/notes-rattrapage/notes-rattr
 import { RequeteSimpleComponent } from './student/requete-simple/requete-simple.component';
 import { RequeteControleComponent } from './student/requete-controle/requete-controle.component';
 import { RequeteSemestrielComponent } from './student/requete-semestriel/requete-semestriel.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   imports: [SharedLibsModule, RouterModule],
@@ -59,6 +60,7 @@ import { RequeteSemestrielComponent } from './student/requete-semestriel/requete
     RequeteSimpleComponent,
     RequeteControleComponent,
     RequeteSemestrielComponent,
+    AdminDashboardComponent,
   ],
   exports: [
     SharedLibsModule,
@@ -82,6 +84,7 @@ import { RequeteSemestrielComponent } from './student/requete-semestriel/requete
     MatieresProfComponent,
     RemplirNotesComponent,
     CourrielEtudiantComponent,
+    AdminDashboardComponent,
   ],
 })
 export class SharedModule {}

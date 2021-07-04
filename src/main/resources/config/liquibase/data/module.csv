@@ -1,0 +1,11 @@
+id;libelle;code;credit;filiere_id
+1;Langue et Expression;LANGEXPR;4;2
+2;Mathematiques;MATHS;10;2
+3;Algorithmique;ALGO;16;2
+4;Programmation;PROG;4;2
+5;Entrepreunariat;ENTR;0;2
+6;Analyse et Conception;CONCEP;0;2
+7;Economie;SECO;0;7
+8;Comptabilite;COMPTA;0;7
+9;Fiscalite;FISC;15;7
+10;Techniques de Gestion;TQG;0;7

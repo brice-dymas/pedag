@@ -1,11 +1,2 @@
-id;objet;description;statut;traiter;date_creation;date_modification;note_attendue;note_obtenue
-1;enterprise best-of-breed;Bedfordshire b;NON_FONDE;true;2021-06-05;2021-06-05;4;68763
-2;c Roumanie;Limousin;EN_ATTENTE;true;2021-06-05;2021-06-05;17;48989
-3;SQL Berkshire;deposit Frozen Malte;EN_ATTENTE;false;2021-06-05;2021-06-05;10;97158
-4;parsing optical;Nord-Pas-de-Calais Pants;NON_FONDE;true;2021-06-05;2021-06-05;14;45309
-5;Bedfordshire Azerbaïdjan holistic;customized Mauritius;EN_ATTENTE;false;2021-06-06;2021-06-05;5;47708
-6;digital c;cX;EN_ATTENTE;false;2021-06-05;2021-06-06;13;23788
-7;matrix Belgique protocol;Streamlined;NON_FONDE;false;2021-06-05;2021-06-05;13;6644
-8;aXXX;Fantastic de;EN_ATTENTE;false;2021-06-06;2021-06-05;7;64588
-9;cXXX;Frozen Bhoutan Computers;EN_ATTENTE;false;2021-06-05;2021-06-05;10;64935
-10;Gourde SDD;Visionary Handcrafted;EN_ATTENTE;false;2021-06-05;2021-06-05;19;54035
+id;objet;description;statut;traiter;date_creation;date_modification;etudiant_id
+1;Erreur sur nom;Mon nom est mal ecrit;EN_ATTENTE;false;2021-06-05;2021-06-05;1
