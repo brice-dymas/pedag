@@ -1,6 +1,9 @@
 package com.urservices.repository;
 
+import com.urservices.domain.Filiere;
 import com.urservices.domain.Note;
+import com.urservices.domain.SessionExamen;
+import com.urservices.domain.enumeration.TypeExamen;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,4 +26,36 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
     Page<Note> findByEtudiant_EtudiantUserIdOrderByIdDesc(Long id, Pageable pageable);
 
     Page<Note> findByEnseignantUserIdOrderByIdDesc(Long id, Pageable pageable);
+
+    List<Note> findBySessionExamenIdAndMoyenneEqualsAndSessionExamenTypeIsNot(Long sessionExamen, Float moyenne, TypeExamen typeExamen);
+    List<Note> findBySessionExamenIdAndMoyenneEqualsAndSessionExamenTypeIsNotAndEtudiantFiliere(
+        Long sessionExamen,
+        Float moyenne,
+        TypeExamen typeExamen,
+        Long filiere
+    );
+
+    List<Note> findBySessionExamenIdAndMoyenneLessThanAndSessionExamenTypeIsNot(Long sessionExamen, Float moyenne, TypeExamen typeExamen);
+    List<Note> findBySessionExamenIdAndMoyenneLessThanAndSessionExamenTypeIsNotAndEtudiantFiliere(
+        Long sessionExamen,
+        Float moyenne,
+        TypeExamen typeExamen,
+        Long filiere
+    );
+
+    List<Note> findBySessionExamenIdAndMoyenneBetweenAndSessionExamenTypeIsNot(
+        Long sessionExamen,
+        Float moyenne1,
+        Float moyenne2,
+        TypeExamen typeExamen
+    );
+    List<Note> findBySessionExamenIdAndMoyenneBetweenAndSessionExamenTypeIsNotAndEtudiantFiliere(
+        Long sessionExamen,
+        Float moyenne1,
+        Float moyenne2,
+        TypeExamen typeExamen,
+        Long filiere
+    );
+
+    Page<Note> findByEtudiantIdAndSessionExamenTypeOrderBySessionExamenDesc(Long inscription, TypeExamen typeExamen, Pageable pageable);
 }

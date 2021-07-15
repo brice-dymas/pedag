@@ -1,6 +1,7 @@
 package com.urservices.domain;
 
 import com.urservices.domain.enumeration.MoisAnnee;
+import com.urservices.domain.enumeration.TypeExamen;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -34,6 +35,11 @@ public class SessionExamen implements Serializable {
     @Min(value = 2000)
     @Column(name = "annee", nullable = false)
     private Integer annee;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
+    private TypeExamen type;
 
     @Column(name = "actif")
     private Boolean actif;
@@ -91,6 +97,19 @@ public class SessionExamen implements Serializable {
         this.annee = annee;
     }
 
+    public TypeExamen getType() {
+        return this.type;
+    }
+
+    public SessionExamen type(TypeExamen type) {
+        this.type = type;
+        return this;
+    }
+
+    public void setType(TypeExamen type) {
+        this.type = type;
+    }
+
     public Boolean getActif() {
         return this.actif;
     }
@@ -131,6 +150,7 @@ public class SessionExamen implements Serializable {
             ", libelle='" + getLibelle() + "'" +
             ", mois='" + getMois() + "'" +
             ", annee=" + getAnnee() +
+            ", type='" + getType() + "'" +
             ", actif='" + getActif() + "'" +
             "}";
     }

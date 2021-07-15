@@ -27,7 +27,7 @@
         </a>
       </li>
       <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-      <li
+      <!--  <li
         *jhiHasAnyAuthority="'ROLE_ADMIN'"
         ngbDropdown
         class="nav-item dropdown pointer"
@@ -42,7 +42,7 @@
           </span>
         </a>
         <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-          <!--<li>
+          &lt;!&ndash;<li>
             <a
               class="dropdown-item"
               routerLink="administrateur"
@@ -53,7 +53,7 @@
               <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
               <span jhiTranslate="global.menu.entities.administrateur">Administrateur</span>
             </a>
-          </li>-->
+          </li>&ndash;&gt;
           <li>
             <a
               class="dropdown-item"
@@ -234,9 +234,21 @@
               <span jhiTranslate="global.menu.entities.sessionExamen">Session Examen</span>
             </a>
           </li>
-          <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="deliberation"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.entities.deliberation">Deliberation</span>
+            </a>
+          </li>
+          &lt;!&ndash; jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here &ndash;&gt;
         </ul>
-      </li>
+      </li>-->
       <li
         *jhiHasAnyAuthority="'ROLE_ADMIN'"
         ngbDropdown

@@ -47,13 +47,26 @@ public class Requete implements Serializable {
     @Column(name = "date_modification")
     private LocalDate dateModification;
 
+    @NotNull
+    @DecimalMin(value = "0")
+    @DecimalMax(value = "20")
+    @Column(name = "note_attendue", nullable = false)
+    private Float noteAttendue;
+
+    @Column(name = "note_obtenue")
+    private Float noteObtenue;
+
     @ManyToOne
-    @JsonIgnoreProperties(value = { "etudiant", "filiere", "anneeAcademique" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "anneeAcademique" }, allowSetters = true)
     private Inscription etudiant;
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
     private Administrateur validateur;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "etudiant", "examen", "matiere", "enseignant" }, allowSetters = true)
+    private Note note;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -147,6 +160,32 @@ public class Requete implements Serializable {
         this.dateModification = dateModification;
     }
 
+    public Float getNoteAttendue() {
+        return this.noteAttendue;
+    }
+
+    public Requete noteAttendue(Float noteAttendue) {
+        this.noteAttendue = noteAttendue;
+        return this;
+    }
+
+    public void setNoteAttendue(Float noteAttendue) {
+        this.noteAttendue = noteAttendue;
+    }
+
+    public Float getNoteObtenue() {
+        return this.noteObtenue;
+    }
+
+    public Requete noteObtenue(Float noteObtenue) {
+        this.noteObtenue = noteObtenue;
+        return this;
+    }
+
+    public void setNoteObtenue(Float noteObtenue) {
+        this.noteObtenue = noteObtenue;
+    }
+
     public Inscription getEtudiant() {
         return this.etudiant;
     }
@@ -171,6 +210,19 @@ public class Requete implements Serializable {
 
     public void setValidateur(Administrateur administrateur) {
         this.validateur = administrateur;
+    }
+
+    public Note getNote() {
+        return this.note;
+    }
+
+    public Requete note(Note note) {
+        this.setNote(note);
+        return this;
+    }
+
+    public void setNote(Note note) {
+        this.note = note;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -203,6 +255,8 @@ public class Requete implements Serializable {
             ", traiter='" + getTraiter() + "'" +
             ", dateCreation='" + getDateCreation() + "'" +
             ", dateModification='" + getDateModification() + "'" +
+            ", noteAttendue=" + getNoteAttendue() +
+            ", noteObtenue=" + getNoteObtenue() +
             "}";
     }
 }

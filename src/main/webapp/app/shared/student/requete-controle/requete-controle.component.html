@@ -1,0 +1,117 @@
+<div>
+  <h2 id="page-heading" data-cy="RequeteHeading">
+    <span>Requetes sur les notes de controle continu</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn b-sm btn-info mr-2" (click)="refresh()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="pedagApp.requete.home.refreshListLabel">Refresh List</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="requetes?.length === 0">
+    <span jhiTranslate="pedagApp.requete.home.notFound">No requetes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="requetes && requetes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="pedagApp.requete.dateCreation">Date Creation</span></th>
+          <th scope="col"><span jhiTranslate="pedagApp.requete.objet">Objet</span></th>
+          <th scope="col"><span>Matiere</span></th>
+          <th scope="col"><span>Note Attendue</span></th>
+          <th scope="col"><span>Note Obtenue</span></th>
+          <th scope="col"><span>OBS</span></th>
+          <th scope="col"><span jhiTranslate="pedagApp.requete.statut">Statut</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let requete of requetes; trackBy: trackId" data-cy="entityTable">
+          <td>{{ requete.dateCreation | formatMediumDate }}</td>
+          <td>{{ requete.objet }}</td>
+          <td>{{ requete.note?.matiere?.libelle }}</td>
+          <td>{{ requete.noteAttendue }}</td>
+          <td>{{ requete.noteObtenue }}</td>
+          <td>{{ requete.note?.observation }}</td>
+          <td class="btn-group">
+            <button
+              *ngIf="requete.statut == statutAttente"
+              class="btn-sm btn-warning"
+              jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
+            >
+              {{ requete.statut }}
+            </button>
+            <button
+              *ngIf="requete.statut == statutFonde"
+              class="badge-sm badge-success"
+              jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
+            >
+              {{ requete.statut }}
+            </button>
+            <button
+              *ngIf="requete.statut == statutNonFonde"
+              class="btn-sm btn-danger"
+              jhiTranslate="{{ 'pedagApp.StatutRequete.' + requete.statut }}"
+            >
+              {{ requete.statut }}
+            </button>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                *ngIf="requete.statut == statutAttente && !requete.note"
+                type="submit"
+                [routerLink]="['/requete', requete.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon></button
+              >&nbsp;
+
+              <button
+                *ngIf="requete.statut == statutAttente"
+                type="submit"
+                (click)="delete(requete)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="requetes && requetes.length">
+    <hr />
+    <div class="row">
+      <div class="col-6">
+        <div class="text-sm font-weight-bold">
+          <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="pagination-sm float-right">
+          <ngb-pagination
+            [collectionSize]="totalItems"
+            [(page)]="ngbPaginationPage"
+            [pageSize]="itemsPerPage"
+            [maxSize]="5"
+            [rotate]="true"
+            [boundaryLinks]="true"
+            (pageChange)="loadPage($event)"
+          ></ngb-pagination>
+        </div>
+      </div>
+    </div>
+    <hr />
+  </div>
+</div>

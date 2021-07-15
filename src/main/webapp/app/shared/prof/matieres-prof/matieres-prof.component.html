@@ -19,7 +19,7 @@
                 [ngValue]="session.id === editForm.get('sessionExamen')!.value?.id ? editForm.get('sessionExamen')!.value : session"
                 *ngFor="let session of activeSessions; trackBy: trackSessionExamenById"
               >
-                {{ session.libelle }}
+                {{ session.type + ' ' + session.libelle }}
               </option>
             </select>
           </div>
@@ -33,7 +33,7 @@
                 [ngValue]="dispenser.id === editForm.get('matiere')!.value?.id ? editForm.get('matiere')!.value : dispenser"
                 *ngFor="let dispenser of activeDipenser; trackBy: trackMatiereById"
               >
-                {{ dispenser.matiere?.libelle + ' ' + dispenser.matiere?.code + ' Module ' + dispenser.matiere?.module?.libelle }}
+                {{ dispenser.matiere?.libelle + ' Module ' + dispenser.matiere?.module?.libelle }}
               </option>
             </select>
           </div>

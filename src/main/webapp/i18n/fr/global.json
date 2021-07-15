@@ -23,6 +23,8 @@
         "coursFiliere": "Cours Filiere",
         "module": "Module",
         "sessionExamen": "Session Examen",
+        "dispenser": "Dispenser",
+        "deliberation": "Deliberation",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

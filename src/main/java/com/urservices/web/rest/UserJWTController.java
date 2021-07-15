@@ -48,9 +48,9 @@ public class UserJWTController {
             loginVM.getPassword()
         );
 
-        if (LocalDate.now().isAfter(LocalDate.of(2021, 6, 26))) {
-            authenticationToken = null;
-        }
+        //        if (LocalDate.now().isAfter(LocalDate.of(2021, 6, 26))) {
+        //            authenticationToken = null;
+        //        }
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.createToken(authentication, loginVM.isRememberMe());

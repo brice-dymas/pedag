@@ -1,0 +1,62 @@
+{
+  "name": "Deliberation",
+  "fields": [
+    {
+      "fieldName": "critereSelection",
+      "fieldType": "ConditionSelection",
+      "fieldValues": "MOYENNE_EGALE_A,MOYENNE_INFERIEURE_A,MOYENNE_COMPRISE_ENTRE",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "valeurSelectionDebut",
+      "fieldType": "Float",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "valeurSelectionFin",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "critereAppliquer",
+      "fieldType": "ConditionAppliquer",
+      "fieldValues": "AJOUTER,RETRANCHER,DEFINIR_VALEUR_A",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "valeurAppliquer",
+      "fieldType": "Float",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "dateDeliberation",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "sessionExamen",
+      "otherEntityRelationshipName": "deliberation",
+      "relationshipValidateRules": "required",
+      "relationshipName": "sessionExamen"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "filiere",
+      "otherEntityRelationshipName": "deliberation",
+      "relationshipName": "filiere"
+    }
+  ],
+  "entityTableName": "deliberation",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210629071819"
+}

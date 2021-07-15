@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.urservices.IntegrationTest;
 import com.urservices.domain.SessionExamen;
 import com.urservices.domain.enumeration.MoisAnnee;
+import com.urservices.domain.enumeration.TypeExamen;
 import com.urservices.repository.SessionExamenRepository;
 import java.util.List;
 import java.util.Random;
@@ -38,6 +39,9 @@ class SessionExamenResourceIT {
 
     private static final Integer DEFAULT_ANNEE = 2000;
     private static final Integer UPDATED_ANNEE = 2001;
+
+    private static final TypeExamen DEFAULT_TYPE = TypeExamen.CONTROLE;
+    private static final TypeExamen UPDATED_TYPE = TypeExamen.SEMESTRIEL;
 
     private static final Boolean DEFAULT_ACTIF = false;
     private static final Boolean UPDATED_ACTIF = true;
@@ -70,6 +74,7 @@ class SessionExamenResourceIT {
             .libelle(DEFAULT_LIBELLE)
             .mois(DEFAULT_MOIS)
             .annee(DEFAULT_ANNEE)
+            .type(DEFAULT_TYPE)
             .actif(DEFAULT_ACTIF);
         return sessionExamen;
     }
@@ -85,6 +90,7 @@ class SessionExamenResourceIT {
             .libelle(UPDATED_LIBELLE)
             .mois(UPDATED_MOIS)
             .annee(UPDATED_ANNEE)
+            .type(UPDATED_TYPE)
             .actif(UPDATED_ACTIF);
         return sessionExamen;
     }
@@ -110,6 +116,7 @@ class SessionExamenResourceIT {
         assertThat(testSessionExamen.getLibelle()).isEqualTo(DEFAULT_LIBELLE);
         assertThat(testSessionExamen.getMois()).isEqualTo(DEFAULT_MOIS);
         assertThat(testSessionExamen.getAnnee()).isEqualTo(DEFAULT_ANNEE);
+        assertThat(testSessionExamen.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testSessionExamen.getActif()).isEqualTo(DEFAULT_ACTIF);
     }
 
@@ -167,6 +174,23 @@ class SessionExamenResourceIT {
 
     @Test
     @Transactional
+    void checkTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = sessionExamenRepository.findAll().size();
+        // set the field null
+        sessionExamen.setType(null);
+
+        // Create the SessionExamen, which fails.
+
+        restSessionExamenMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sessionExamen)))
+            .andExpect(status().isBadRequest());
+
+        List<SessionExamen> sessionExamenList = sessionExamenRepository.findAll();
+        assertThat(sessionExamenList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllSessionExamen() throws Exception {
         // Initialize the database
         sessionExamenRepository.saveAndFlush(sessionExamen);
@@ -180,6 +204,7 @@ class SessionExamenResourceIT {
             .andExpect(jsonPath("$.[*].libelle").value(hasItem(DEFAULT_LIBELLE)))
             .andExpect(jsonPath("$.[*].mois").value(hasItem(DEFAULT_MOIS.toString())))
             .andExpect(jsonPath("$.[*].annee").value(hasItem(DEFAULT_ANNEE)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].actif").value(hasItem(DEFAULT_ACTIF.booleanValue())));
     }
 
@@ -198,6 +223,7 @@ class SessionExamenResourceIT {
             .andExpect(jsonPath("$.libelle").value(DEFAULT_LIBELLE))
             .andExpect(jsonPath("$.mois").value(DEFAULT_MOIS.toString()))
             .andExpect(jsonPath("$.annee").value(DEFAULT_ANNEE))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.actif").value(DEFAULT_ACTIF.booleanValue()));
     }
 
@@ -220,7 +246,7 @@ class SessionExamenResourceIT {
         SessionExamen updatedSessionExamen = sessionExamenRepository.findById(sessionExamen.getId()).get();
         // Disconnect from session so that the updates on updatedSessionExamen are not directly saved in db
         em.detach(updatedSessionExamen);
-        updatedSessionExamen.libelle(UPDATED_LIBELLE).mois(UPDATED_MOIS).annee(UPDATED_ANNEE).actif(UPDATED_ACTIF);
+        updatedSessionExamen.libelle(UPDATED_LIBELLE).mois(UPDATED_MOIS).annee(UPDATED_ANNEE).type(UPDATED_TYPE).actif(UPDATED_ACTIF);
 
         restSessionExamenMockMvc
             .perform(
@@ -237,6 +263,7 @@ class SessionExamenResourceIT {
         assertThat(testSessionExamen.getLibelle()).isEqualTo(UPDATED_LIBELLE);
         assertThat(testSessionExamen.getMois()).isEqualTo(UPDATED_MOIS);
         assertThat(testSessionExamen.getAnnee()).isEqualTo(UPDATED_ANNEE);
+        assertThat(testSessionExamen.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testSessionExamen.getActif()).isEqualTo(UPDATED_ACTIF);
     }
 
@@ -325,6 +352,7 @@ class SessionExamenResourceIT {
         assertThat(testSessionExamen.getLibelle()).isEqualTo(UPDATED_LIBELLE);
         assertThat(testSessionExamen.getMois()).isEqualTo(DEFAULT_MOIS);
         assertThat(testSessionExamen.getAnnee()).isEqualTo(UPDATED_ANNEE);
+        assertThat(testSessionExamen.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testSessionExamen.getActif()).isEqualTo(DEFAULT_ACTIF);
     }
 
@@ -340,7 +368,12 @@ class SessionExamenResourceIT {
         SessionExamen partialUpdatedSessionExamen = new SessionExamen();
         partialUpdatedSessionExamen.setId(sessionExamen.getId());
 
-        partialUpdatedSessionExamen.libelle(UPDATED_LIBELLE).mois(UPDATED_MOIS).annee(UPDATED_ANNEE).actif(UPDATED_ACTIF);
+        partialUpdatedSessionExamen
+            .libelle(UPDATED_LIBELLE)
+            .mois(UPDATED_MOIS)
+            .annee(UPDATED_ANNEE)
+            .type(UPDATED_TYPE)
+            .actif(UPDATED_ACTIF);
 
         restSessionExamenMockMvc
             .perform(
@@ -357,6 +390,7 @@ class SessionExamenResourceIT {
         assertThat(testSessionExamen.getLibelle()).isEqualTo(UPDATED_LIBELLE);
         assertThat(testSessionExamen.getMois()).isEqualTo(UPDATED_MOIS);
         assertThat(testSessionExamen.getAnnee()).isEqualTo(UPDATED_ANNEE);
+        assertThat(testSessionExamen.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testSessionExamen.getActif()).isEqualTo(UPDATED_ACTIF);
     }
 

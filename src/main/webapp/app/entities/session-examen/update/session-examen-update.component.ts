@@ -19,6 +19,7 @@ export class SessionExamenUpdateComponent implements OnInit {
     id: [],
     libelle: [],
     mois: [null, [Validators.required]],
+    type: [null, [Validators.required]],
     annee: [null, [Validators.required, Validators.min(2000)]],
     actif: [],
   });
@@ -38,6 +39,8 @@ export class SessionExamenUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const sessionExamen = this.createFromForm();
+    // eslint-disable-next-line no-console
+    console.log('sessionExamen', sessionExamen);
     if (sessionExamen.id !== undefined) {
       this.subscribeToSaveResponse(this.sessionExamenService.update(sessionExamen));
     } else {
@@ -70,6 +73,7 @@ export class SessionExamenUpdateComponent implements OnInit {
       libelle: sessionExamen.libelle,
       mois: sessionExamen.mois,
       annee: sessionExamen.annee,
+      type: sessionExamen.type,
       actif: sessionExamen.actif,
     });
   }
@@ -80,6 +84,7 @@ export class SessionExamenUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       libelle: this.editForm.get(['libelle'])!.value,
       mois: this.editForm.get(['mois'])!.value,
+      type: this.editForm.get(['type'])!.value,
       annee: this.editForm.get(['annee'])!.value,
       actif: this.editForm.get(['actif'])!.value,
     };

@@ -1,0 +1,231 @@
+application {
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName pedag
+    blueprints []
+    buildTool gradle
+    cacheProvider ehcache
+    clientFramework angularX
+    clientPackageManager npm
+    clientTheme united
+    clientThemeVariant primary
+    creationTimestamp 1622943371023
+    databaseType sql
+    devDatabaseType postgresql
+    dtoSuffix DTO
+    enableHibernateCache true
+    enableSwaggerCodegen false
+    enableTranslation true
+    jhiPrefix jhi
+    jhipsterVersion "7.0.1"
+    jwtSecretKey "NjMwYmVjNGUzODViZmY0YjRiZDJkNjAwNDVhZGQ3ODllY2YzNjFiZTFkYmZhMzZhNDdlMWQ1M2QxMzFmOTVhZGRkNDE4ZjBjM2U3YzM0NGM0MWZjM2U1NzQwN2NjNDlhYmI4MmE2N2NkYjNiYjdlMzIxNjQxMmFhMjlhYjJhZWM="
+    languages [fr, en]
+    messageBroker false
+    nativeLanguage fr
+    otherModules []
+    packageName com.urservices
+    prodDatabaseType postgresql
+    reactive false
+    searchEngine false
+    serverPort 8080
+    serviceDiscoveryType false
+    skipClient false
+    skipServer false
+    skipUserManagement false
+    testFrameworks []
+    websocket false
+    withAdminUi true
+  }
+
+  entities Administrateur, AnneeAcademique, Courriel, CoursFiliere, Dispenser, Enseignant, Etudiant, Examen, Filiere, Inscription, Matiere, Module, Note, PieceJointe, Requete, SessionExamen
+}
+
+entity Administrateur {
+  nom String required minlength(2)
+  prenom String
+  email String required
+  grade Grade required
+}
+entity AnneeAcademique {
+  libelle String required
+  current Boolean
+}
+entity Courriel {
+  sender String required
+  receiver String required
+  objet String required minlength(4) maxlength(70)
+  message String required minlength(2)
+  dateCreation LocalDate
+}
+entity CoursFiliere {
+  quotaHoraire Integer
+}
+entity Dispenser {
+  semestre Semestre required
+  actif Boolean
+}
+entity Enseignant {
+  diplome String required minlength(4) maxlength(70)
+  nom String required minlength(2)
+  prenom String
+  grade Grade required
+  email String required
+  telephone String required minlength(10) maxlength(15)
+  statut Statut required
+  photo ImageBlob
+}
+entity Etudiant {
+  matricule String required minlength(10) maxlength(12)
+  nom String required minlength(2)
+  dateNaissance LocalDate required
+  prenom String
+  email String required
+  telephone String required minlength(9) maxlength(15)
+  photo ImageBlob
+}
+entity Examen {
+  dateExamen LocalDate required
+  type TypeExamen required
+  semestre Semestre required
+}
+entity Filiere {
+  libelle String required minlength(7) maxlength(50)
+  sigle String required minlength(2) maxlength(4)
+}
+entity Inscription {
+  date LocalDate required
+}
+entity Matiere {
+  libelle String required minlength(3) maxlength(50)
+  code String required minlength(2) maxlength(10)
+  credit Integer min(1)
+}
+entity Module {
+  libelle String required
+  code String required
+  credit Integer min(1)
+}
+entity Note {
+  moyenne Float required
+  observation String
+  creditMatiere Integer
+  creditObtenu Integer
+}
+entity PieceJointe {
+  libelle String required minlength(3) maxlength(50)
+  contenu AnyBlob required
+  dateCreation LocalDate
+}
+entity Requete {
+  objet String required minlength(4) maxlength(70)
+  description String required minlength(2)
+  statut StatutRequete
+  traiter Boolean
+  dateCreation LocalDate
+  dateModification LocalDate
+  noteAttendue Float required min(0) max(20)
+  noteObtenue Float
+}
+entity SessionExamen {
+  libelle String
+  mois MoisAnnee required
+  annee Integer required min(2000)
+  type TypeExamen required
+  actif Boolean
+}
+enum Grade {
+  M (Monsieur),
+  Mme (Madame),
+  Mlle (Mademoiselle),
+  Ing (Ingenieur),
+  Dr (Docteur),
+  Pr (Professeur)
+}
+enum Semestre {
+  SEMESTRE1 (Semestre LMD 1),
+  SEMESTRE2 (Semestre LMD 2),
+  SEMESTRE3 (Semestre LMD 3),
+  SEMESTRE4 (Semestre LMD 4),
+  SEMESTRE5 (Semestre LMD 5),
+  SEMESTRE6 (Semestre LMD 6)
+}
+enum Statut {
+  VACATAIRE,
+  PERMANENT
+}
+enum TypeExamen {
+  CONTROLE,
+  SEMESTRIEL,
+  RATTRAPAGE
+}
+enum StatutRequete {
+  EN_ATTENTE (EN ATTENTE),
+  FONDE (FONDÉE),
+  NON_FONDE (NON FONDÉE)
+}
+entity Deliberation {
+  critereSelection ConditionSelection required
+  valeurSelectionDebut Float required min(0)
+  valeurSelectionFin Float
+  critereAppliquer ConditionAppliquer required
+  valeurAppliquer Float required min(0)
+  dateDeliberation LocalDate
+}
+enum ConditionSelection {
+  MOYENNE_EGALE_A,
+  MOYENNE_INFERIEURE_A,
+  MOYENNE_COMPRISE_ENTRE
+}
+enum ConditionAppliquer {
+  AJOUTER,
+  RETRANCHER,
+  DEFINIR_VALEUR_A
+}
+enum MoisAnnee {
+  JANVIER,
+  FEVRIER,
+  MARS,
+  AVRIL,
+  MAI,
+  JUIN,
+  JUILLET,
+  AOUT,
+  SEPTEMBRE,
+  OCTOBRE,
+  NOVEMBRE,
+  DECEMBRE
+}
+
+relationship OneToOne {
+  Administrateur{user} to User
+  Enseignant{user} to User
+  Etudiant{user} to User
+}
+relationship ManyToOne {
+  Deliberation{sessionExamen required} to SessionExamen
+  Deliberation{filiere} to Filiere
+  Courriel{etudiant} to Inscription
+  CoursFiliere{filiere} to Filiere
+  CoursFiliere{matiere} to Matiere
+  Dispenser{anneeAcademique} to AnneeAcademique
+  Dispenser{enseignant} to Enseignant
+  Dispenser{matiere} to Matiere
+  Inscription{etudiant} to Etudiant
+  Inscription{filiere} to Filiere
+  Inscription{anneeAcademique} to AnneeAcademique
+  Matiere{module required} to Module
+  Module{filiere required} to Filiere
+  Note{sessionExamen} to SessionExamen
+  Note{etudiant} to Inscription
+  Note{examen} to Examen
+  Note{matiere} to Matiere
+  Note{enseignant} to Enseignant
+  PieceJointe{matiere} to Matiere
+  Requete{etudiant} to Inscription
+  Requete{validateur} to Administrateur
+  Requete{note} to Note
+}
+
+paginate Administrateur, AnneeAcademique, Courriel, CoursFiliere, Dispenser, Enseignant, Etudiant, Examen, Filiere, Inscription, Matiere, Module, Note, PieceJointe, Requete, SessionExamen with pagination
+service Administrateur, AnneeAcademique, Courriel, CoursFiliere, Dispenser, Enseignant, Etudiant, Examen, Filiere, Inscription, Matiere, Module, Note, PieceJointe, Requete, SessionExamen with serviceImpl

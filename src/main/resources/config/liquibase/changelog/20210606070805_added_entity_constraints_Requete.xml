@@ -19,5 +19,11 @@
                                  constraintName="fk_requete__validateur_id"
                                  referencedColumnNames="id"
                                  referencedTableName="administrateur"/>
+
+        <addForeignKeyConstraint baseColumnNames="note_id"
+                                 baseTableName="requete"
+                                 constraintName="fk_requete__note_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="note"/>
     </changeSet>
 </databaseChangeLog>

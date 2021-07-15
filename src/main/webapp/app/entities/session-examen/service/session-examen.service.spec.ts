@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { MoisAnnee } from 'app/entities/enumerations/mois-annee.model';
+import { TypeExamen } from 'app/entities/enumerations/type-examen.model';
 import { ISessionExamen, SessionExamen } from '../session-examen.model';
 
 import { SessionExamenService } from './session-examen.service';
@@ -26,6 +27,7 @@ describe('Service Tests', () => {
         libelle: 'AAAAAAA',
         mois: MoisAnnee.JANVIER,
         annee: 0,
+        type: TypeExamen.CONTROLE,
         actif: false,
       };
     });
@@ -65,6 +67,7 @@ describe('Service Tests', () => {
             libelle: 'BBBBBB',
             mois: 'BBBBBB',
             annee: 1,
+            type: 'BBBBBB',
             actif: true,
           },
           elemDefault
@@ -106,6 +109,7 @@ describe('Service Tests', () => {
             libelle: 'BBBBBB',
             mois: 'BBBBBB',
             annee: 1,
+            type: 'BBBBBB',
             actif: true,
           },
           elemDefault
@@ -158,7 +162,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique SessionExamen to an array', () => {
-          const sessionExamenArray: ISessionExamen[] = [{ id: 123 }, { id: 456 }, { id: 11313 }];
+          const sessionExamenArray: ISessionExamen[] = [{ id: 123 }, { id: 456 }, { id: 99872 }];
           const sessionExamenCollection: ISessionExamen[] = [{ id: 123 }];
           expectedResult = service.addSessionExamenToCollectionIfMissing(sessionExamenCollection, ...sessionExamenArray);
           expect(expectedResult).toHaveLength(3);

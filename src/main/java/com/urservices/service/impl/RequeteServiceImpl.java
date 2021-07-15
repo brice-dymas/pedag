@@ -1,14 +1,16 @@
 package com.urservices.service.impl;
 
 import com.urservices.domain.Inscription;
+import com.urservices.domain.Note;
 import com.urservices.domain.Requete;
 import com.urservices.domain.enumeration.StatutRequete;
+import com.urservices.domain.enumeration.TypeExamen;
 import com.urservices.repository.InscriptionRepository;
+import com.urservices.repository.NoteRepository;
 import com.urservices.repository.RequeteRepository;
 import com.urservices.service.RequeteService;
 import com.urservices.service.dto.NewRequeteDTO;
 import com.urservices.utils.RequeteHelper;
-import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,16 +29,32 @@ public class RequeteServiceImpl implements RequeteService {
     private final Logger log = LoggerFactory.getLogger(RequeteServiceImpl.class);
 
     private final RequeteRepository requeteRepository;
+    private final NoteRepository noteRepository;
     private final InscriptionRepository inscriptionRepository;
 
-    public RequeteServiceImpl(RequeteRepository requeteRepository, InscriptionRepository inscriptionRepository) {
+    public RequeteServiceImpl(
+        RequeteRepository requeteRepository,
+        NoteRepository noteRepository,
+        InscriptionRepository inscriptionRepository
+    ) {
         this.requeteRepository = requeteRepository;
+        this.noteRepository = noteRepository;
         this.inscriptionRepository = inscriptionRepository;
+    }
+
+    @Override
+    public Requete save(Requete requete, Long id) {
+        final Inscription inscription = inscriptionRepository.findEtudiantByUserId(id);
+        requete.setEtudiant(inscription);
+        requete.setStatut(StatutRequete.EN_ATTENTE);
+        log.debug("Request to save Requete : {}", requete);
+        return requeteRepository.save(requete);
     }
 
     @Override
     public Requete save(Requete requete) {
         log.debug("Request to save Requete : {}", requete);
+        if (requete.getId() == null) requete.setStatut(StatutRequete.EN_ATTENTE);
         return requeteRepository.save(requete);
     }
 
@@ -51,6 +69,28 @@ public class RequeteServiceImpl implements RequeteService {
         final Inscription inscription = inscriptionRepository.findEtudiantByUserId(param.getUserId());
         var req = RequeteHelper.newRequeteDtoToRequetePost(param, inscription);
         return requeteRepository.save(req);
+    }
+
+    private final String getObservation(Float moyenne) {
+        String obs = "EL";
+        if (moyenne != null) {
+            if (moyenne <= 9) {
+                obs = "NV";
+            } else {
+                obs = "VA";
+            }
+        }
+        return obs;
+    }
+
+    void updateStudentNote(Requete requete) {
+        if (requete.getNote() != null && requete.getStatut().equals(StatutRequete.FONDE)) {
+            Note note = requete.getNote();
+            note.setMoyenne(requete.getNoteAttendue());
+            note.setCreditObtenu(note.getMoyenne() < 10 ? 0 : note.getMatiere().getCredit());
+            note.setObservation(getObservation(note.getMoyenne()));
+            noteRepository.save(note);
+        }
     }
 
     @Override
@@ -79,7 +119,7 @@ public class RequeteServiceImpl implements RequeteService {
                     if (requete.getDateModification() != null) {
                         existingRequete.setDateModification(requete.getDateModification());
                     }
-
+                    updateStudentNote(existingRequete);
                     return existingRequete;
                 }
             )
@@ -129,5 +169,46 @@ public class RequeteServiceImpl implements RequeteService {
     public Page<Requete> findAllByEtudiant_id(Long id, Pageable pageable) {
         log.debug("Request to get all Requete of student : {}", id);
         return requeteRepository.findByEtudiant_Etudiant_UserId(id, pageable);
+    }
+
+    @Override
+    public Page<Requete> findByStatut(int statutRequete, Pageable pageable) {
+        switch (statutRequete) {
+            case 0:
+                return requeteRepository.findByStatutOrderByIdDesc(StatutRequete.EN_ATTENTE, pageable);
+            case 1:
+                return requeteRepository.findByStatutOrderByIdDesc(StatutRequete.FONDE, pageable);
+            default:
+                return requeteRepository.findByStatutOrderByIdDesc(StatutRequete.NON_FONDE, pageable);
+        }
+    }
+
+    @Override
+    public Page<Requete> findByEtudiantIdAndNoteIsNull(Long id, Pageable pageable) {
+        return requeteRepository.findByEtudiantIdAndNoteIsNullOrderByIdDesc(id, pageable);
+    }
+
+    @Override
+    public Page<Requete> findByEtudiantIdAndSessionExamen(Long id, int typeExamen, Pageable pageable) {
+        switch (typeExamen) {
+            case 0:
+                return requeteRepository.findByEtudiantIdAndNoteIsNotNullAndNoteSessionExamenTypeOrderByIdDesc(
+                    id,
+                    TypeExamen.CONTROLE,
+                    pageable
+                );
+            case 1:
+                return requeteRepository.findByEtudiantIdAndNoteIsNotNullAndNoteSessionExamenTypeOrderByIdDesc(
+                    id,
+                    TypeExamen.SEMESTRIEL,
+                    pageable
+                );
+            default:
+                return requeteRepository.findByEtudiantIdAndNoteIsNotNullAndNoteSessionExamenTypeOrderByIdDesc(
+                    id,
+                    TypeExamen.RATTRAPAGE,
+                    pageable
+                );
+        }
     }
 }

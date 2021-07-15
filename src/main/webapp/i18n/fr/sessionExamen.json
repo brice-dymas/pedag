@@ -21,7 +21,8 @@
       "libelle": "Libelle",
       "mois": "Mois",
       "annee": "Annee",
-      "actif": "Actif"
+      "actif": "Actif",
+      "type": "Type Examen"
     }
   }
 }

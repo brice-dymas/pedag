@@ -136,10 +136,34 @@ entity SessionExamen {
     libelle String
     mois MoisAnnee required
     annee Integer required min(2000)
+    type TypeExamen required
     actif Boolean
 }
 
+entity Deliberation {
+  critereSelection ConditionSelection required
+  valeurSelectionDebut Float required min(0)
+  valeurSelectionFin Float
+  critereAppliquer ConditionAppliquer required
+  valeurAppliquer Float required min(0)
+  dateDeliberation LocalDate
+}
+
+enum ConditionSelection {
+  MOYENNE_EGALE_A,
+  MOYENNE_INFERIEURE_A,
+  MOYENNE_COMPRISE_ENTRE
+}
+
+enum ConditionAppliquer {
+  AJOUTER,
+  RETRANCHER,
+  DEFINIR_VALEUR_A
+}
+
 relationship ManyToOne {
+  Deliberation{sessionExamen required} to SessionExamen
+  Deliberation{filiere} to Filiere
   Matiere{module required} to Module
   Note{sessionExamen} to SessionExamen
   Module{filiere required} to Filiere

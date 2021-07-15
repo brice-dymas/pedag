@@ -21,6 +21,14 @@ import { NotesProfComponent } from './prof/notes-prof/notes-prof.component';
 import { MatieresProfComponent } from './prof/matieres-prof/matieres-prof.component';
 import { RemplirNotesComponent } from './prof/remplir-notes/remplir-notes.component';
 import { CourrielEtudiantComponent } from './student/courriel-etudiant/courriel-etudiant.component';
+import { NewRequeteNoteComponent } from './student/new-requete-note/new-requete-note.component';
+import { NotesControleComponent } from './student/notes-controle/notes-controle.component';
+import { NotesSemestreComponent } from './student/notes-semestre/notes-semestre.component';
+import { NotesRattrapageComponent } from './student/notes-rattrapage/notes-rattrapage.component';
+import { RequeteSimpleComponent } from './student/requete-simple/requete-simple.component';
+import { RequeteControleComponent } from './student/requete-controle/requete-controle.component';
+import { RequeteSemestrielComponent } from './student/requete-semestriel/requete-semestriel.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   imports: [SharedLibsModule, RouterModule],
@@ -45,6 +53,14 @@ import { CourrielEtudiantComponent } from './student/courriel-etudiant/courriel-
     MatieresProfComponent,
     RemplirNotesComponent,
     CourrielEtudiantComponent,
+    NewRequeteNoteComponent,
+    NotesControleComponent,
+    NotesSemestreComponent,
+    NotesRattrapageComponent,
+    RequeteSimpleComponent,
+    RequeteControleComponent,
+    RequeteSemestrielComponent,
+    AdminDashboardComponent,
   ],
   exports: [
     SharedLibsModule,
@@ -68,6 +84,7 @@ import { CourrielEtudiantComponent } from './student/courriel-etudiant/courriel-
     MatieresProfComponent,
     RemplirNotesComponent,
     CourrielEtudiantComponent,
+    AdminDashboardComponent,
   ],
 })
 export class SharedModule {}

@@ -56,13 +56,13 @@ public class RequeteResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new requete, or with status {@code 400 (Bad Request)} if the requete has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/requetes")
-    public ResponseEntity<Requete> createRequete(@Valid @RequestBody Requete requete) throws URISyntaxException {
+    @PostMapping("/requetes/{id}")
+    public ResponseEntity<Requete> createRequete(@PathVariable Long id, @Valid @RequestBody Requete requete) throws URISyntaxException {
         log.debug("REST request to save Requete : {}", requete);
         if (requete.getId() != null) {
             throw new BadRequestAlertException("A new requete cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Requete result = requeteService.save(requete);
+        Requete result = requeteService.save(requete, id);
         return ResponseEntity
             .created(new URI("/api/requetes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -184,6 +184,36 @@ public class RequeteResource {
         log.debug("REST request to get a page of Requetes for Student {}", id);
         Page<Requete> page = requeteService.findAllByEtudiant(id, pageable);
         //        Page<Requete> page = requeteService.findAllByEtudiant_id(id, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /requetes/student:id} : get all the student's requetes.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of requetes in body.
+     */
+    @GetMapping("/requetes/student/{id}/type/{type}")
+    public ResponseEntity<List<Requete>> getAllStudentRequetesByType(@PathVariable Long id, @PathVariable Integer type, Pageable pageable) {
+        log.debug("REST request to get a page of Requetes for Student {} and type {}", id, type);
+        Page<Requete> page = (type > 1)
+            ? requeteService.findByEtudiantIdAndNoteIsNull(id, pageable)
+            : requeteService.findByEtudiantIdAndSessionExamen(id, type, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /requetes/student:id} : get all the student's requetes.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of requetes in body.
+     */
+    @GetMapping("/requetes/statut/{id}")
+    public ResponseEntity<List<Requete>> getAllRequetesByStatut(@PathVariable Integer id, Pageable pageable) {
+        log.debug("REST request to get a page of Requetes for statut {}", id);
+        Page<Requete> page = requeteService.findByStatut(id, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

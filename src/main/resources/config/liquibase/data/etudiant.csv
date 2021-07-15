@@ -1,0 +1,2 @@
+user_id;id;matricule;nom;date_naissance;prenom;email;telephone;photo;photo_content_type
+4;1;2021IUT009;Banner;2021-06-06;bruce;Francine46@hotmail.fr;+33 582998287;../fake-data/blob/hipster.png;image/png

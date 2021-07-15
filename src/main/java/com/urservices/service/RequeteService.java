@@ -1,6 +1,8 @@
 package com.urservices.service;
 
 import com.urservices.domain.Requete;
+import com.urservices.domain.enumeration.StatutRequete;
+import com.urservices.domain.enumeration.TypeExamen;
 import com.urservices.service.dto.NewRequeteDTO;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +20,13 @@ public interface RequeteService {
      * @return the persisted entity.
      */
     Requete save(Requete requete);
+    /**
+     * Save a requete.
+     *
+     * @param requete the entity to save.
+     * @return the persisted entity.
+     */
+    Requete save(Requete requete, Long id);
     /**
      * Save a requete.
      *
@@ -72,4 +81,10 @@ public interface RequeteService {
      * @return all the request.
      */
     Page<Requete> findAllByEtudiant_id(Long id, Pageable pageable);
+
+    Page<Requete> findByStatut(int statutRequete, Pageable pageable);
+
+    Page<Requete> findByEtudiantIdAndNoteIsNull(Long id, Pageable pageable);
+
+    Page<Requete> findByEtudiantIdAndSessionExamen(Long id, int typeExamen, Pageable pageable);
 }

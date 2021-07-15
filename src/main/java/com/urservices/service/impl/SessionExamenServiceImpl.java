@@ -1,6 +1,7 @@
 package com.urservices.service.impl;
 
 import com.urservices.domain.SessionExamen;
+import com.urservices.domain.enumeration.TypeExamen;
 import com.urservices.repository.SessionExamenRepository;
 import com.urservices.service.SessionExamenService;
 import java.util.List;
@@ -87,5 +88,10 @@ public class SessionExamenServiceImpl implements SessionExamenService {
     public void delete(Long id) {
         log.debug("Request to delete SessionExamen : {}", id);
         sessionExamenRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<SessionExamen> findByActifTrueAndTypeIsNot(TypeExamen typeExamen, Pageable pageable) {
+        return sessionExamenRepository.findByActifTrueAndTypeIsNot(typeExamen, pageable);
     }
 }

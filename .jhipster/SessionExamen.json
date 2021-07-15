@@ -18,6 +18,12 @@
       "fieldValidateRulesMin": "2000"
     },
     {
+      "fieldName": "type",
+      "fieldType": "TypeExamen",
+      "fieldValues": "CONTROLE,SEMESTRIEL,RATTRAPAGE",
+      "fieldValidateRules": ["required"]
+    },
+    {
       "fieldName": "actif",
       "fieldType": "Boolean"
     }

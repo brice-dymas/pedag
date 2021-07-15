@@ -1,0 +1,134 @@
+<div>
+  <h2 id="page-heading" data-cy="DeliberationHeading">
+    <span jhiTranslate="pedagApp.deliberation.home.title">Deliberations</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="pedagApp.deliberation.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-deliberation"
+        [routerLink]="['/deliberation/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="pedagApp.deliberation.home.createLabel"> Create a new Deliberation </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="deliberations?.length === 0">
+    <span jhiTranslate="pedagApp.deliberation.home.notFound">No deliberations found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="deliberations && deliberations.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="critereSelection">
+            <span jhiTranslate="pedagApp.deliberation.critereSelection">Critere Selection</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="valeurSelectionDebut">
+            <span jhiTranslate="pedagApp.deliberation.valeurSelectionDebut">Valeur Selection Debut</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="valeurSelectionFin">
+            <span jhiTranslate="pedagApp.deliberation.valeurSelectionFin">Valeur Selection Fin</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="critereAppliquer">
+            <span jhiTranslate="pedagApp.deliberation.critereAppliquer">Critere Appliquer</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="valeurAppliquer">
+            <span jhiTranslate="pedagApp.deliberation.valeurAppliquer">Valeur Appliquer</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateDeliberation">
+            <span jhiTranslate="pedagApp.deliberation.dateDeliberation">Date Deliberation</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="sessionExamen.id">
+            <span jhiTranslate="pedagApp.deliberation.sessionExamen">Session Examen</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="filiere.id">
+            <span jhiTranslate="pedagApp.deliberation.filiere">Filiere</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let deliberation of deliberations; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/deliberation', deliberation.id, 'view']">{{ deliberation.id }}</a>
+          </td>
+          <td jhiTranslate="{{ 'pedagApp.ConditionSelection.' + deliberation.critereSelection }}">{{ deliberation.critereSelection }}</td>
+          <td>{{ deliberation.valeurSelectionDebut }}</td>
+          <td>{{ deliberation.valeurSelectionFin }}</td>
+          <td jhiTranslate="{{ 'pedagApp.ConditionAppliquer.' + deliberation.critereAppliquer }}">{{ deliberation.critereAppliquer }}</td>
+          <td>{{ deliberation.valeurAppliquer }}</td>
+          <td>{{ deliberation.dateDeliberation | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="deliberation.sessionExamen">
+              <a [routerLink]="['/session-examen', deliberation.sessionExamen?.id, 'view']">{{ deliberation.sessionExamen?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="deliberation.filiere">
+              <a [routerLink]="['/filiere', deliberation.filiere?.id, 'view']">{{ deliberation.filiere?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/deliberation', deliberation.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/deliberation', deliberation.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(deliberation)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="deliberations && deliberations.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

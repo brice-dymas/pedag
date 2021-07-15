@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="deliberation">
+      <h2 data-cy="deliberationDetailsHeading"><span jhiTranslate="pedagApp.deliberation.detail.title">Deliberation</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ deliberation.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.deliberation.critereSelection">Critere Selection</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'pedagApp.ConditionSelection.' + deliberation.critereSelection }}">{{
+            deliberation.critereSelection
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.deliberation.valeurSelectionDebut">Valeur Selection Debut</span></dt>
+        <dd>
+          <span>{{ deliberation.valeurSelectionDebut }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.deliberation.valeurSelectionFin">Valeur Selection Fin</span></dt>
+        <dd>
+          <span>{{ deliberation.valeurSelectionFin }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.deliberation.critereAppliquer">Critere Appliquer</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'pedagApp.ConditionAppliquer.' + deliberation.critereAppliquer }}">{{
+            deliberation.critereAppliquer
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.deliberation.valeurAppliquer">Valeur Appliquer</span></dt>
+        <dd>
+          <span>{{ deliberation.valeurAppliquer }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.deliberation.dateDeliberation">Date Deliberation</span></dt>
+        <dd>
+          <span>{{ deliberation.dateDeliberation | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.deliberation.sessionExamen">Session Examen</span></dt>
+        <dd>
+          <div *ngIf="deliberation.sessionExamen">
+            <a [routerLink]="['/session-examen', deliberation.sessionExamen?.id, 'view']">{{ deliberation.sessionExamen?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pedagApp.deliberation.filiere">Filiere</span></dt>
+        <dd>
+          <div *ngIf="deliberation.filiere">
+            <a [routerLink]="['/filiere', deliberation.filiere?.id, 'view']">{{ deliberation.filiere?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/deliberation', deliberation.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -25,7 +25,10 @@
       "dateCreation": "Date Creation",
       "dateModification": "Date Modification",
       "etudiant": "Etudiant",
-      "validateur": "Validateur"
+      "validateur": "Validateur",
+      "noteAttendue": "Note Attendue",
+      "noteObtenue": "Note Obtenue",
+      "note": "Note"
     }
   }
 }

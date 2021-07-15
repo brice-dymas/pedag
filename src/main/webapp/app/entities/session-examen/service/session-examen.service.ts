@@ -45,6 +45,11 @@ export class SessionExamenService {
     return this.http.get<ISessionExamen[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  queryDeliberation(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<ISessionExamen[]>(`${this.resourceUrl}/deliberation`, { params: options, observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

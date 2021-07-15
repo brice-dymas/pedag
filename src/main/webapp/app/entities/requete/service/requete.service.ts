@@ -26,6 +26,13 @@ export class RequeteService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  createForEtudiant(requete: IRequete, id: number): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(requete);
+    return this.http
+      .post<IRequete>(`${this.resourceUrl}/${id}`, copy, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
   createSimple(requete: IRequete): Observable<EntityResponseType> {
     return this.http
       .post<IRequete>(`${this.resourceUrl}/simple`, requete, { observe: 'response' })
@@ -63,6 +70,20 @@ export class RequeteService {
     const options = createRequestOption(req);
     return this.http
       .get<IRequete[]>(`${this.resourceUrl}/student/${id}`, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
+  queryByStudentByType(id: number, type: number, req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<IRequete[]>(`${this.resourceUrl}/student/${id}/type/${type}`, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
+  queryByStatut(id: number, type?: number, req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<IRequete[]>(`${this.resourceUrl}/statut/${id}`, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
